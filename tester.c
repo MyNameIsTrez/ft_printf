@@ -6,7 +6,7 @@
 /*   By: trez <trez@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/10 13:31:10 by trez          #+#    #+#                 */
-/*   Updated: 2022/01/10 15:36:05 by trez          ########   odam.nl         */
+/*   Updated: 2022/01/10 16:29:20 by trez          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,6 @@
 
 int	main(void)
 {
-	ft_printf_bonus();
+	ft_printf("foo");
 	return (EXIT_SUCCESS);
 }
