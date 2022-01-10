@@ -6,7 +6,7 @@
 /*   By: trez <trez@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/10 13:29:20 by trez          #+#    #+#                 */
-/*   Updated: 2022/01/10 16:37:59 by trez          ########   odam.nl         */
+/*   Updated: 2022/01/10 17:09:57 by trez          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,5 @@
  */
 int	ft_printf(const char *format, ...)
 {
-	printf("Hello World Bonus!\n");
-	(void)format;
-	return (0);
+	return (printf(format));
 }
