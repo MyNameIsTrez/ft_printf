@@ -6,7 +6,7 @@
 #    By: trez <trez@student.codam.nl>                 +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/01/10 13:54:36 by trez          #+#    #+#                  #
-#    Updated: 2022/01/10 16:02:56 by trez          ########   odam.nl          #
+#    Updated: 2022/01/10 16:32:43 by trez          ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,8 +54,6 @@ INCLUDES := $(addprefix -I, $(sort $(dir $(HEADERS))))
 
 
 all: $(NAME)
-	echo $(HEADERS)
-	echo $(INCLUDES)
 
 $(NAME): $(OBJECT_PATHS)
 	ar rcs $(NAME) $(OBJECT_PATHS)
