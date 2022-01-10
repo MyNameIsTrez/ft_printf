@@ -1,0 +1,1 @@
+* Do the common instructions for the bonus hold? I am not sure if the bonus rule is necessary, for example
