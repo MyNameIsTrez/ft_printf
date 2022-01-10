@@ -6,7 +6,7 @@
 #    By: trez <trez@student.codam.nl>                 +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/01/10 13:54:36 by trez          #+#    #+#                  #
-#    Updated: 2022/01/10 14:41:03 by trez          ########   odam.nl          #
+#    Updated: 2022/01/10 16:02:56 by trez          ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,24 +18,31 @@ NAME := libftprintf.a
 
 CC := cc
 
-SRC_DIR := src
-OBJ_DIR := obj
-
 CFLAGS := -Wall -Wextra -Werror
 
-SOURCES := src/ft_printf.c
+MANDATORY_SOURCES := 
 
-BONUS_SOURCES := src/ft_printf_bonus.c
-
-HEADERS := src/ft_printf.h
+BONUS_SOURCES := bonus/src/ft_printf_bonus.c
 
 
 ################################################################################################################################
 
 
 ifdef ADD_BONUS
+SRC_DIR := bonus/src
+OBJ_DIR := bonus/obj
 SOURCES := $(BONUS_SOURCES)
+else
+SRC_DIR := mandatory/src
+OBJ_DIR := mandatory/obj
+SOURCES := $(MANDATORY_SOURCES)
 endif
+
+HEADERS := $(SOURCES:.c=.h)
+
+
+################################################################################################################################
+
 
 OBJECT_PATHS := $(patsubst $(SRC_DIR)/%,$(OBJ_DIR)/%,$(SOURCES:.c=.o))
 
@@ -47,6 +54,8 @@ INCLUDES := $(addprefix -I, $(sort $(dir $(HEADERS))))
 
 
 all: $(NAME)
+	echo $(HEADERS)
+	echo $(INCLUDES)
 
 $(NAME): $(OBJECT_PATHS)
 	ar rcs $(NAME) $(OBJECT_PATHS)
@@ -72,12 +81,13 @@ re: fclean all
 
 tester: bonus
 	$(CC) $(CFLAGS) $(INCLUDES) $@.c $(NAME) -o $@
+	./tester
 
 
 ################################################################################################################################
 
 
-.PHONY: all debug bonus clean fclean re tester
+.PHONY: all bonus clean fclean re tester
 
 
 ################################################################################################################################

@@ -1,0 +1,17 @@
+# Ignore everything
+*
+
+# Allow folders
+!*/
+
+# Allow .c and .h files
+!*.[ch]
+
+# Disallow tester
+# tester.c
+
+# Allow Makefile
+!Makefile
+
+# Allow gitignore
+!.gitignore
