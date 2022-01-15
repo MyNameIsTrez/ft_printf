@@ -15,3 +15,6 @@
 
 # Allow gitignore
 !.gitignore
+
+# Disallow C playground
+# test.c

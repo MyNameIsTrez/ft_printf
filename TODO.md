@@ -1,1 +1,6 @@
-* Do the common instructions for the bonus hold? I am not sure if the bonus rule is necessary, for example
+# General
+* Is the bonus rule necessary?
+* Check that no forbidden functions are being used. Remove #includes accordingly as well.
+
+# Last moment
+* Copy the bonus files to the mandatory folder and trim the files.
