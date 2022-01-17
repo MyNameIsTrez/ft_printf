@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/15 13:05:05 by sbos          #+#    #+#                 */
-/*   Updated: 2022/01/15 19:00:28 by sbos          ########   odam.nl         */
+/*   Updated: 2022/01/17 17:03:08 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,12 @@
 void test(const char *format)
 {
 	// TODO: Check if the outputs to stdout are equal by piping to temporary files.
-	const int	number_of_characters_ft_printed = ft_printf("a: %s, b: %d, c: %c, d: %s");
-	const int	number_of_characters_libc_printed = printf("foo");
-	printf("Format: %s, ft: %d, libc: %d\n", format, number_of_characters_ft_printed, number_of_characters_libc_printed);
-	assert(number_of_characters_ft_printed == number_of_characters_libc_printed);
+	// const int	number_of_characters_ft_printed = ft_printf("a: %s, b: %d, c: %c", "foo", 42, 'x');
+	ft_printf("a: %s, b: %d, c: %c", "foo", 42, 'x');
+	// const int	number_of_characters_libc_printed = printf("foo");
+	(void)format;
+	// printf("Format: %s, ft: %d, libc: %d\n", format, number_of_characters_ft_printed, number_of_characters_libc_printed);
+	// assert(number_of_characters_ft_printed == number_of_characters_libc_printed);
 }
 
 int	main(void)

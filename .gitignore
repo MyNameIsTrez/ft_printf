@@ -16,5 +16,8 @@
 # Allow gitignore
 !.gitignore
 
-# Disallow C playground
-# test.c
+# Disallow experiment
+# experiment.c
+
+# Disallow example
+# jump_table_example.c
