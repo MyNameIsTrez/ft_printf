@@ -6,12 +6,41 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/15 13:05:22 by sbos          #+#    #+#                 */
-/*   Updated: 2022/01/15 18:20:17 by sbos          ########   odam.nl         */
+/*   Updated: 2022/01/18 17:29:33 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_BONUS_H
 # define FT_PRINTF_BONUS_H
+
+////////////////////////////////////////////////////////////////////////////////
+
+#include <stdbool.h>
+
+////////////////////////////////////////////////////////////////////////////////
+
+# define FLAGS " -+#0"
+# define CONVERSIONS "cspdiuxX%"
+
+////////////////////////////////////////////////////////////////////////////////
+
+typedef char	*(*t_conversion_function)(t_options *);
+
+typedef struct s_flags
+{
+	bool	alternate;
+	bool	zero_fill;
+	bool	aligned_left;
+	bool	plus_space;
+	bool	plus_sign;
+}	t_flags;
+
+typedef struct s_options
+{
+	t_flags	flags;
+	int		field_width;
+	int		precision;
+}	t_options;
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -24,7 +53,7 @@
  * It handles all the following flags: "# +" (yes, one of them is a space).
  *
  * @param format See "man 3 printf".
- * 
+ *
  * @return If successful, returns the number of characters printed
  * (excluding the null terminator).
  * If an output error is encountered, a negative value is returned.
