@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/15 13:05:27 by sbos          #+#    #+#                 */
-/*   Updated: 2022/01/18 17:46:24 by sbos          ########   odam.nl         */
+/*   Updated: 2022/01/18 17:58:53 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,12 @@ char	*get_unsigned(t_options *options);
 char	*get_hex_lower(t_options *options);
 char	*get_hex_upper(t_options *options);
 char	*get_percent(t_options *options);
+
+void	print_with_field_width(char *conversion_str, t_options *options,
+								int total_width)
+{
+
+}
 
 const t_conversion_function	*get_conversion_table(void)
 {
@@ -95,16 +101,16 @@ void	get_options(char **format, t_options *options)
 	fix_priorities(options);
 }
 
-int	print_argument(char *format, t_options *options)
+int	print_argument(char conversion_key, t_options *options)
 {
 	const t_conversion_function	*conversion_table = get_conversion_table();
-	char						*str;
-	int							chars_printed;
+	char						*conversion_str;
+	int							total_width;
 
-	chars_printed = 0;
-	str = conversion_table[*format](options);
-	chars_printed += ft_strlen(str);
-	return (chars_printed);
+	conversion_str = conversion_table[conversion_key](options);
+	total_width = ft_max(ft_strlen(conversion_str), options->field_width);
+	print_with_field_width(conversion_str, options, total_width);
+	return (total_width);
 }
 
 int	ft_printf(const char *format, ...)
@@ -118,7 +124,7 @@ int	ft_printf(const char *format, ...)
 		if (*format == '%')
 		{
 			get_options(&format, &options);
-			chars_printed += print_argument(format, &options);
+			chars_printed += print_argument(*format, &options);
 		}
 		format++;
 	}
