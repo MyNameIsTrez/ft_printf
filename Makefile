@@ -6,7 +6,7 @@
 #    By: trez <trez@student.codam.nl>                 +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/01/10 13:54:36 by trez          #+#    #+#                  #
-#    Updated: 2022/01/20 15:15:36 by sbos          ########   odam.nl          #
+#    Updated: 2022/01/20 15:48:01 by sbos          ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,12 +48,13 @@ INCLUDES := $(addprefix -I, $(sort $(dir $(HEADERS))))
 all: $(NAME)
 
 $(NAME): $(OBJECT_PATHS)
-	echo $(USE_BONUS)
 	ar rcs $(NAME) $(OBJECT_PATHS)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(HEADERS)
 	@mkdir -p $(@D)
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
+
+################################################################################
 
 bonus:
 	@$(MAKE) USE_BONUS=1 all

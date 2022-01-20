@@ -7,11 +7,14 @@
 # Allow .c and .h files
 !*.[ch]
 
+# Allow Makefile
+!Makefile
+
 # Disallow tester
 # tester.c
 
-# Allow Makefile
-!Makefile
+# Allow tester
+!tester.mk
 
 # Allow gitignore
 !.gitignore
