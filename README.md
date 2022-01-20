@@ -10,8 +10,8 @@ This is a recreation of printf() from libc.
 
 `make bonus`
 
-## How to run the tester
+## How to run my tests
 
 It always includes the bonuses.
 
-`make tester`
+`make -f tester.mk tester`

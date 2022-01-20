@@ -6,7 +6,7 @@
 #    By: trez <trez@student.codam.nl>                 +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/01/10 13:54:36 by trez          #+#    #+#                  #
-#    Updated: 2022/01/15 18:00:06 by sbos          ########   odam.nl          #
+#    Updated: 2022/01/20 15:15:36 by sbos          ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,13 +18,13 @@ CC := cc
 
 CFLAGS := -Wall -Wextra -Werror
 
-MANDATORY_SOURCES := 
+MANDATORY_SOURCES :=
 
 BONUS_SOURCES := bonus/src/ft_printf_bonus.c
 
 ################################################################################
 
-ifdef ADD_BONUS
+ifdef USE_BONUS
 SRC_DIR := bonus/src
 OBJ_DIR := bonus/obj
 SOURCES := $(BONUS_SOURCES)
@@ -48,6 +48,7 @@ INCLUDES := $(addprefix -I, $(sort $(dir $(HEADERS))))
 all: $(NAME)
 
 $(NAME): $(OBJECT_PATHS)
+	echo $(USE_BONUS)
 	ar rcs $(NAME) $(OBJECT_PATHS)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(HEADERS)
@@ -55,7 +56,7 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(HEADERS)
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 bonus:
-	@$(MAKE) ADD_BONUS=1 all
+	@$(MAKE) USE_BONUS=1 all
 
 clean:
 	rm -rf $(OBJ_DIR)/
@@ -67,12 +68,6 @@ re: fclean all
 
 ################################################################################
 
-tester: bonus
-	$(CC) $(CFLAGS) $(INCLUDES) $@.c $(NAME) -o $@
-	./tester
-
-################################################################################
-
-.PHONY: all bonus clean fclean re tester
+.PHONY: all bonus clean fclean re
 
 ################################################################################
