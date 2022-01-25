@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/20 11:34:27 by sbos          #+#    #+#                 */
-/*   Updated: 2022/01/24 17:28:03 by sbos          ########   odam.nl         */
+/*   Updated: 2022/01/25 17:18:19 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 
 void	test_fill_options(void)
 {
-	const char *format = "%+5d";
+	const char *format = "+5d";
 	t_options	options;
 
 	fill_options(&format, &options);

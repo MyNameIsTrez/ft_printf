@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/15 13:05:27 by sbos          #+#    #+#                 */
-/*   Updated: 2022/01/25 11:36:22 by sbos          ########   odam.nl         */
+/*   Updated: 2022/01/25 17:32:30 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 
-#include <unistd.h> // write, STDOUT_FILENO
-#include <stdarg.h> // va_start, va_arg, va_end, va_copy
+// #include <unistd.h> // write, STDOUT_FILENO
+// #include <stdarg.h> // va_start, va_arg, va_end, va_copy
 
-////////////////////////////////////////////////////////////////////////////////
+// ////////////////////////////////////////////////////////////////////////////////
 
 // char	*get_char(char **format, t_options *options);
 // char	*get_string(char **format, t_options *options);
@@ -66,10 +66,17 @@
 // 	int							total_width;
 
 // 	conversion_type = **format;
-// 	conversion_str = conversion_table[conversion_type](format, options);
-// 	total_width = ft_max(ft_strlen(conversion_str), options->field_width);
-// 	print_with_padding(conversion_str, options, total_width);
-// 	return (total_width);
+// 	if (ft_strchr(CONVERSION_TYPES, conversion_type) != NULL)
+// 	{
+// 		conversion_str = conversion_table[conversion_type](format, options);
+// 		total_width = ft_max(ft_strlen(conversion_str), options->field_width);
+// 		print_with_padding(conversion_str, options, total_width);
+// 		return (total_width);
+// 	}
+// 	else
+// 	{
+
+// 	}
 // }
 
 // void	fix_priorities(t_options *options)
@@ -121,7 +128,6 @@ void	initialize_options(t_options *options)
 
 void	fill_options(const char **format, t_options *options)
 {
-	(void)format;
 	initialize_options(options);
 	parse_flags(options, format);
 	// parse_field_width(options, format);
@@ -139,6 +145,7 @@ int	ft_printf(const char *format, ...)
 	{
 		if (*format == '%')
 		{
+			format++;
 			fill_options(&format, &options);
 			// chars_printed += print_argument(&format, &options);
 		}
