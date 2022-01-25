@@ -6,7 +6,7 @@
 #    By: trez <trez@student.codam.nl>                 +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/01/10 13:54:36 by trez          #+#    #+#                  #
-#    Updated: 2022/01/25 12:51:44 by sbos          ########   odam.nl          #
+#    Updated: 2022/01/25 15:22:23 by sbos          ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,15 +27,19 @@ FCLEANED_FILES := $(NAME)
 
 ################################################################################
 
+BONUS_DIR := bonus
+MANDATORY_DIR := mandatory
+
 ifdef USE_BONUS
-SRC_DIR := bonus/src
-OBJ_DIR := bonus/obj
+DIR := $(BONUS_DIR)
 SOURCES := $(BONUS_SOURCES)
 else
-SRC_DIR := mandatory/src
-OBJ_DIR := mandatory/obj
+DIR := $(MANDATORY_DIR)
 SOURCES := $(MANDATORY_SOURCES)
 endif
+
+SRC_DIR := $(DIR)/src
+OBJ_DIR := $(DIR)/obj
 
 ifdef DEBUG
 LIBS +=
@@ -75,10 +79,12 @@ bonus:
 	@$(MAKE) USE_BONUS=1 all
 
 clean:
-	rm -rf $(OBJ_DIR)/
+	rm -rf $(MANDATORY_DIR)/obj $(BONUS_DIR)/obj
+	@$(MAKE) -C $(dir $(LIBFT_PATH)) clean
 
 fclean: clean
 	rm -f $(FCLEANED_FILES)
+	@$(MAKE) -C $(dir $(LIBFT_PATH)) fclean
 
 re: fclean all
 
