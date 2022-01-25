@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/15 13:05:27 by sbos          #+#    #+#                 */
-/*   Updated: 2022/01/20 15:40:11 by sbos          ########   odam.nl         */
+/*   Updated: 2022/01/25 11:36:22 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,23 +90,23 @@
 
 // }
 
-// void	parse_flags(t_options *options, const char **format)
-// {
-// 	while (**format != '\0' && ft_strchr(FLAGS, **format) != NULL)
-// 	{
-// 		if (**format == '#')
-// 			options->flags.alternate = true;
-// 		if (**format == '0')
-// 			options->flags.zero_fill = true;
-// 		if (**format == '-')
-// 			options->flags.aligned_left = true;
-// 		if (**format == ' ')
-// 			options->flags.plus_space = true;
-// 		if (**format == '+')
-// 			options->flags.plus_sign = true;
-// 		(*format)++;
-// 	}
-// }
+void	parse_flags(t_options *options, const char **format)
+{
+	while (**format != '\0' && ft_strchr(FLAGS, **format) != NULL)
+	{
+		if (**format == '#')
+			options->flags.alternate = true;
+		if (**format == '0')
+			options->flags.zero_fill = true;
+		if (**format == '-')
+			options->flags.aligned_left = true;
+		if (**format == ' ')
+			options->flags.plus_space = true;
+		if (**format == '+')
+			options->flags.plus_sign = true;
+		(*format)++;
+	}
+}
 
 void	initialize_options(t_options *options)
 {
@@ -123,7 +123,7 @@ void	fill_options(const char **format, t_options *options)
 {
 	(void)format;
 	initialize_options(options);
-	// parse_flags(options, format);
+	parse_flags(options, format);
 	// parse_field_width(options, format);
 	// parse_precision(options, format);
 	// fix_priorities(options);

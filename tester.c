@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/15 13:05:05 by sbos          #+#    #+#                 */
-/*   Updated: 2022/01/20 15:36:29 by sbos          ########   odam.nl         */
+/*   Updated: 2022/01/24 17:28:27 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,16 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 
-#include <stdlib.h>
-
-////////////////////////////////////////////////////////////////////////////////
+void	run_tests(void)
+{
+	test_fill_options();
+}
 
 int	main(void)
 {
-	test_fill_options();
+	printf("Running tests...\n");
+	run_tests();
+	printf("Tests ran successfully!\n");
 	return (EXIT_SUCCESS);
 }
 

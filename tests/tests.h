@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/20 11:42:16 by sbos          #+#    #+#                 */
-/*   Updated: 2022/01/20 15:40:00 by sbos          ########   odam.nl         */
+/*   Updated: 2022/01/25 12:16:21 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,19 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 
+// TODO: Remove this include as it should already be added by the Makefile?
 # include "../bonus/src/ft_printf_bonus.h"
+
+////////////////////////////////////////////////////////////////////////////////
+
+# include <stdio.h>		// printf()
+# include <stdlib.h>	// EXIT_SUCCESS
+# include <assert.h>	// assert()
 
 ////////////////////////////////////////////////////////////////////////////////
 
 void	fill_options(const char **format, t_options *options);
 void	test_fill_options(void);
-
-////////////////////////////////////////////////////////////////////////////////
-
-# include <stdio.h>		// printf()
-// # include <assert.h>	// assert()
 
 ////////////////////////////////////////////////////////////////////////////////
 
