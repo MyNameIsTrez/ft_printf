@@ -21,7 +21,7 @@
 // 	const char *format = "42d";
 // 	t_options	options;
 
-// 	parse_field_width(&options, &format);
+// 	parse_field_width(&format, &options);
 
 // 	bool	tested_value;
 // 	bool	expected_value = 42;

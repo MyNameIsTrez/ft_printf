@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/15 13:05:27 by sbos          #+#    #+#                 */
-/*   Updated: 2022/01/26 12:18:41 by sbos          ########   odam.nl         */
+/*   Updated: 2022/01/26 12:21:17 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,17 +87,17 @@
 // 	}
 // }
 
-// void	parse_precision(t_options *options, const char **format)
+// void	parse_precision(const char **format)
 // {
 
 // }
 
-// void	parse_field_width(t_options *options, const char **format)
+// void	parse_field_width(const char **format)
 // {
 
 // }
 
-void	parse_flags(t_options *options, const char **format)
+void	parse_flags(const char **format, t_options *options)
 {
 	while (**format != '\0' && ft_strchr(FLAGS, **format) != NULL)
 	{
@@ -130,9 +130,9 @@ void	initialize_options(t_options *options)
 void	fill_options(const char **format, t_options *options)
 {
 	initialize_options(options);
-	parse_flags(options, format);
-	// parse_field_width(options, format);
-	// parse_precision(options, format);
+	parse_flags(format, options);
+	// parse_field_width(format, options);
+	// parse_precision(format, options);
 	// fix_priorities(options);
 }
 
