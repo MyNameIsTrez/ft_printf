@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/15 13:05:27 by sbos          #+#    #+#                 */
-/*   Updated: 2022/01/25 17:32:30 by sbos          ########   odam.nl         */
+/*   Updated: 2022/01/26 12:18:41 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,6 +126,7 @@ void	initialize_options(t_options *options)
 	options->precision = -1;
 }
 
+// TODO: Switch the arguments format and options around
 void	fill_options(const char **format, t_options *options)
 {
 	initialize_options(options);

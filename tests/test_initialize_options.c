@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   test_fill_options.c                                :+:    :+:            */
+/*   test_initialize_options.c                          :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/20 11:34:27 by sbos          #+#    #+#                 */
-/*   Updated: 2022/01/25 17:18:19 by sbos          ########   odam.nl         */
+/*   Updated: 2022/01/26 12:10:55 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,20 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void	test_fill_options(void)
+void	test_initialize_options(void)
 {
-	const char *format = "+5d";
 	t_options	options;
 
-	fill_options(&format, &options);
+	initialize_options(&options);
 
-	printf("options.flags.plus_sign is %d\n", options.flags.plus_sign);
-	bool	tested_value = options.flags.plus_sign;
-	bool	expected_value = true;
-	assert(tested_value == expected_value);
+	ASSERT_BOOL(options.flags.alternate, false);
+	ASSERT_BOOL(options.flags.zero_fill, false);
+	ASSERT_BOOL(options.flags.aligned_left, false);
+	ASSERT_BOOL(options.flags.plus_space, false);
+	ASSERT_BOOL(options.flags.plus_sign, false);
+
+	ASSERT_INT(options.field_width, 0);
+	ASSERT_INT(options.precision, -1);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
