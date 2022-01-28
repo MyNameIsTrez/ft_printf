@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/15 13:05:27 by sbos          #+#    #+#                 */
-/*   Updated: 2022/01/26 12:21:17 by sbos          ########   odam.nl         */
+/*   Updated: 2022/01/28 14:56:20 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 
-// #include <unistd.h> // write, STDOUT_FILENO
+#include <unistd.h> // write, STDOUT_FILENO
 // #include <stdarg.h> // va_start, va_arg, va_end, va_copy
 
 // ////////////////////////////////////////////////////////////////////////////////
@@ -87,15 +87,29 @@
 // 	}
 // }
 
-// void	parse_precision(const char **format)
-// {
+void	parse_precision(const char **format, t_options *options)
+{
+	if (**format == '.')
+	{
+		options->precision = 0;
+		(*format)++;
+	}
+	// TODO: Are these checks necessary?
+	if (**format != '\0' && ft_isdigit(**format))
+	{
+		options->precision = ft_atoi(*format);
+	}
+}
 
-// }
-
-// void	parse_field_width(const char **format)
-// {
-
-// }
+void	parse_field_width(const char **format, t_options *options)
+{
+	// TODO: Are these checks necessary?
+	// if (**format != '\0' && ft_isdigit(**format))
+	// {
+	options->field_width = ft_atoi(*format);
+	(*format) += ft_get_number_of_digits(options->field_width);
+	// }
+}
 
 void	parse_flags(const char **format, t_options *options)
 {
@@ -115,6 +129,10 @@ void	parse_flags(const char **format, t_options *options)
 	}
 }
 
+// precision is -1 by default instead of 0
+// as it signifies using the length of the number/string/etc.
+// printf("%d", 0) -> "0" but
+// printf("%.d", 0) -> "", printf("%.0d", 0) -> "" and printf("%.1d", 0) -> "0"
 void	initialize_options(t_options *options)
 {
 	options->flags.alternate = false;
@@ -131,8 +149,8 @@ void	fill_options(const char **format, t_options *options)
 {
 	initialize_options(options);
 	parse_flags(format, options);
-	// parse_field_width(format, options);
-	// parse_precision(format, options);
+	parse_field_width(format, options);
+	parse_precision(format, options);
 	// fix_priorities(options);
 }
 
@@ -152,6 +170,8 @@ int	ft_printf(const char *format, ...)
 		}
 		format++;
 	}
+	write(STDOUT_FILENO, "hello", 5);
+	return (5);
 	return (chars_printed);
 }
 
