@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/15 13:05:05 by sbos          #+#    #+#                 */
-/*   Updated: 2022/01/26 14:52:26 by sbos          ########   odam.nl         */
+/*   Updated: 2022/01/28 13:58:24 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	run_tests(void)
 	TEST(test_initialize_options);
 	TEST(test_parse_flags);
 	TEST(test_parse_field_width);
-	// TEST(test_parse_precision);
+	TEST(test_parse_precision);
 	// TEST(test_fix_priorities);
 	TEST(test_fill_options);
 }
@@ -40,6 +40,14 @@ void	run_tests(void)
 #include <stdlib.h> // tmp
 #include <assert.h> // tmp
 #include <sys/mman.h> // tmp
+long	get_file_size(int fd)
+{
+	FILE *f = fdopen(fd, "rw");
+
+	fseek(f, 0, SEEK_END);
+	return (ftell(f));
+}
+
 void q(void)
 {
 	int *glob_var_0 = mmap(NULL, sizeof(*glob_var_0), PROT_READ | PROT_WRITE,
@@ -47,54 +55,56 @@ void q(void)
 	int *glob_var_1 = mmap(NULL, sizeof(*glob_var_1), PROT_READ | PROT_WRITE,
                     MAP_SHARED | MAP_ANONYMOUS, -1, 0);
 
-	int ft_fd = open("/tmp/ft_printf_sbos", O_RDWR | O_CREAT, 0640);
-	int fd = open("/tmp/printf_sbos", O_RDWR | O_CREAT, 0640);
+	int ft_printf_fd = open("/tmp/ft_printf_sbos", O_RDWR | O_CREAT, 0640);
+	int printf_fd = open("/tmp/printf_sbos", O_RDWR | O_CREAT, 0640);
 
 	pid_t cpid = fork();
 	if (cpid == 0)
 	{
-		dup2(ft_fd, STDOUT_FILENO);
+		dup2(ft_printf_fd, STDOUT_FILENO);
 
 		*glob_var_0 = ft_printf("hello %s", "world");
-		*glob_var_1 = dprintf(fd, "hello %s", "world");
+		*glob_var_1 = dprintf(printf_fd, "hello %s", "world");
 
-		close(ft_fd);
-		close(fd);
+		close(ft_printf_fd);
+		close(printf_fd);
 
 		exit(EXIT_SUCCESS);
 	}
 	wait(NULL);
 
-	size_t ft_out = (size_t)*glob_var_0;
-	size_t out = (size_t)*glob_var_1;
-	// ASSERT_INT((int)ft_out, (int)out);
-	// dprintf(STDERR_FILENO, "ft_printf: %zu, printf: %zu\n", ft_out, out);
+	size_t ft_printf_return = (size_t)*glob_var_0;
+	size_t printf_return = (size_t)*glob_var_1;
 
-	lseek(ft_fd, 0, SEEK_SET);
-	lseek(fd, 0, SEEK_SET);
+	long file_size = get_file_size(ft_printf_fd);
 
-	char ft_buf[ft_out * 2 + 1];
-	ft_bzero(ft_buf, ft_out * 2 + 1);
-	read(ft_fd, ft_buf, ft_out * 2);
+	lseek(ft_printf_fd, 0, SEEK_SET);
+	lseek(printf_fd, 0, SEEK_SET);
 
-	char buf[out + 1];
-	buf[out] = '\0';
-	read(fd, buf, out);
-	ASSERT_STR(ft_buf, buf);
-	// dprintf(STDERR_FILENO, "ft_printf: <%s>, printf: <%s>\n", ft_buf, buf);
+	char ft_buf[file_size + 1];
+	ft_bzero(ft_buf, (size_t)file_size + 1);
+	read(ft_printf_fd, ft_buf, (size_t)file_size);
 
-	close(ft_fd);
-	close(fd);
+	char buf[printf_return + 1];
+	buf[printf_return] = '\0';
+	read(printf_fd, buf, printf_return);
+
+	close(ft_printf_fd);
+	close(printf_fd);
 
 	munmap(glob_var_0, sizeof(glob_var_0));
 	munmap(glob_var_1, sizeof(glob_var_1));
+
+	ASSERT_INT((int)ft_printf_return, (int)file_size); // check if return value correct with output
+	ASSERT_INT((int)ft_printf_return, (int)printf_return); // check if return value correct
+	ASSERT_STR(ft_buf, buf);
 }
 
 int	main(void)
 {
 	printf("Running tests...\n");
 	run_tests();
-	q();
+	// q();
 	printf("Tests ran successfully!\n");
 	return (EXIT_SUCCESS);
 }
