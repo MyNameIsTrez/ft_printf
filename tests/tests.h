@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/20 11:42:16 by sbos          #+#    #+#                 */
-/*   Updated: 2022/01/28 13:58:20 by sbos          ########   odam.nl         */
+/*   Updated: 2022/01/28 15:16:05 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,9 @@ void	test_parse_field_width(void);
 
 void	parse_precision(const char **format, t_options *options);
 void	test_parse_precision(void);
+
+void	fix_priorities(t_options *options);
+void	test_fix_priorities(void);
 
 void	fill_options(const char **format, t_options *options);
 void	test_fill_options(void);

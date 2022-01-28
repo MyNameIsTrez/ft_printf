@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/20 11:34:27 by sbos          #+#    #+#                 */
-/*   Updated: 2022/01/26 12:48:16 by sbos          ########   odam.nl         */
+/*   Updated: 2022/01/28 15:17:21 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,6 @@ void	test_parse_flags(void)
 		ASSERT_BOOL(options.flags.aligned_left, true);
 		ASSERT_BOOL(options.flags.plus_space, true);
 		ASSERT_BOOL(options.flags.plus_sign, true);
-	}
-
-	{
-
 	}
 }
 

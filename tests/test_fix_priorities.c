@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   test_initialize_options.c                          :+:    :+:            */
+/*   test_fix_priorities.c                              :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/20 11:34:27 by sbos          #+#    #+#                 */
-/*   Updated: 2022/01/28 15:17:16 by sbos          ########   odam.nl         */
+/*   Updated: 2022/01/28 15:27:18 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,21 +16,21 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void	test_initialize_options(void)
+void	test_fix_priorities(void)
 {
 	{
 		t_options	options;
 
 		initialize_options(&options);
 
-		ASSERT_BOOL(options.flags.alternate, false);
-		ASSERT_BOOL(options.flags.zero_fill, false);
-		ASSERT_BOOL(options.flags.aligned_left, false);
-		ASSERT_BOOL(options.flags.plus_space, false);
-		ASSERT_BOOL(options.flags.plus_sign, false);
+		options.flags.zero_fill = true;
+		options.precision = 3;
 
-		ASSERT_INT(options.field_width, 0);
-		ASSERT_INT(options.precision, -1);
+		fix_priorities(&options);
+
+		// printf("'%04d'\n", 42) -> '0042'
+		// printf("'%04.3d'\n", 42) -> ' 042'
+		ASSERT_INT(options.flags.zero_fill, false);
 	}
 }
 

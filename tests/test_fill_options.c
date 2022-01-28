@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/20 11:34:27 by sbos          #+#    #+#                 */
-/*   Updated: 2022/01/28 13:57:29 by sbos          ########   odam.nl         */
+/*   Updated: 2022/01/28 15:28:45 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,10 +80,6 @@ void	test_fill_options(void)
 
 		ASSERT_INT(options.field_width, 0);
 		ASSERT_INT(options.precision, -1);
-	}
-
-	{
-
 	}
 }
 

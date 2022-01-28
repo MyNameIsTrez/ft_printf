@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/15 13:05:05 by sbos          #+#    #+#                 */
-/*   Updated: 2022/01/28 13:58:24 by sbos          ########   odam.nl         */
+/*   Updated: 2022/01/28 15:25:40 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	run_tests(void)
 	TEST(test_parse_flags);
 	TEST(test_parse_field_width);
 	TEST(test_parse_precision);
-	// TEST(test_fix_priorities);
+	TEST(test_fix_priorities);
 	TEST(test_fill_options);
 }
 

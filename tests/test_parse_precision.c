@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/20 11:34:27 by sbos          #+#    #+#                 */
-/*   Updated: 2022/01/28 14:58:48 by sbos          ########   odam.nl         */
+/*   Updated: 2022/01/28 15:23:16 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ void	test_parse_precision(void)
 		initialize_options(&options);
 		parse_precision(&format, &options);
 
-		// printf("'%7.42d'\n",  0) -> "000000000000000000000000000000000000000000"
-		// printf("'%7.42d'\n", 42) -> "000000000000000000000000000000000000000042"
+		// printf("'%7.42d'\n",  0) -> '000000000000000000000000000000000000000000'
+		// printf("'%7.42d'\n", 42) -> '000000000000000000000000000000000000000042'
 		ASSERT_INT(options.precision, 42);
 	}
 
@@ -45,8 +45,8 @@ void	test_parse_precision(void)
 		initialize_options(&options);
 		parse_precision(&format, &options);
 
-		// printf("%.1d",  0) -> "0"
-		// printf("%.1d", 42) -> "42"
+		// printf("%.1d",  0) -> '0'
+		// printf("%.1d", 42) -> '42'
 		ASSERT_INT(options.precision, 1); // TODO: What should this be??
 	}
 
@@ -57,8 +57,8 @@ void	test_parse_precision(void)
 		initialize_options(&options);
 		parse_precision(&format, &options);
 
-		// printf("%.0d",  0) -> ""
-		// printf("%.0d", 42) -> "42"
+		// printf("%.0d",  0) -> ''
+		// printf("%.0d", 42) -> '42'
 		ASSERT_INT(options.precision, 0); // TODO: What should this be??
 	}
 
@@ -69,8 +69,8 @@ void	test_parse_precision(void)
 		initialize_options(&options);
 		parse_precision(&format, &options);
 
-		// printf("%.d",  0) -> ""
-		// printf("%.d", 42) -> "42"
+		// printf("%.d",  0) -> ''
+		// printf("%.d", 42) -> '42'
 		ASSERT_INT(options.precision, 0); // TODO: What should this be??
 	}
 
@@ -81,6 +81,8 @@ void	test_parse_precision(void)
 		initialize_options(&options);
 		parse_precision(&format, &options);
 
+		// printf("'%d'\n" , 0) -> '0'
+		// printf("'%.0d'\n", 0) -> ''
 		ASSERT_INT(options.precision, -1);
 	}
 }

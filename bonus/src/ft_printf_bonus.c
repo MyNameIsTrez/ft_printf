@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/15 13:05:27 by sbos          #+#    #+#                 */
-/*   Updated: 2022/01/28 15:14:51 by sbos          ########   odam.nl         */
+/*   Updated: 2022/01/28 15:25:16 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,13 +79,13 @@
 // 	}
 // }
 
-// void	fix_priorities(t_options *options)
-// {
-// 	if (options->flags.zero_fill && options->precision >= 0)
-// 	{
-// 		options->flags.zero_fill = false;
-// 	}
-// }
+void	fix_priorities(t_options *options)
+{
+	if (options->flags.zero_fill && options->precision >= 0)
+	{
+		options->flags.zero_fill = false;
+	}
+}
 
 void	parse_precision(const char **format, t_options *options)
 {
@@ -126,8 +126,8 @@ void	parse_flags(const char **format, t_options *options)
 
 // precision is -1 by default instead of 0
 // as it signifies using the length of the number/string/etc.
-// printf("%d", 0) -> "0" but
-// printf("%.d", 0) -> "", printf("%.0d", 0) -> "" and printf("%.1d", 0) -> "0"
+// printf("%d", 0) -> '0' but
+// printf("%.d", 0) -> '', printf("%.0d", 0) -> '' and printf("%.1d", 0) -> '0'
 void	initialize_options(t_options *options)
 {
 	options->flags.alternate = false;
@@ -146,7 +146,7 @@ void	fill_options(const char **format, t_options *options)
 	parse_flags(format, options);
 	parse_field_width(format, options);
 	parse_precision(format, options);
-	// fix_priorities(options);
+	fix_priorities(options);
 }
 
 int	ft_printf(const char *format, ...)
