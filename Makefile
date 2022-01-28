@@ -6,7 +6,7 @@
 #    By: trez <trez@student.codam.nl>                 +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/01/10 13:54:36 by trez          #+#    #+#                  #
-#    Updated: 2022/01/25 15:22:23 by sbos          ########   odam.nl          #
+#    Updated: 2022/01/28 19:08:07 by sbos          ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,9 +21,12 @@ CFLAGS := -Wall -Wextra -Werror
 
 MANDATORY_SOURCES :=
 
-BONUS_SOURCES := bonus/src/ft_printf_bonus.c
+BONUS_SOURCES := bonus/src/ft_printf_bonus.c bonus/src/get_type_strings/get_char.c
 
 FCLEANED_FILES := $(NAME)
+
+# HEADERS := libft/libft.h bonus/src/get_type_strings/get_type_strings.h
+HEADERS := bonus/src/get_type_strings/get_type_strings.h
 
 ################################################################################
 
@@ -43,13 +46,14 @@ OBJ_DIR := $(DIR)/obj
 
 ifdef DEBUG
 LIBS +=
-HEADERS := tests.h
+# HEADERS += tests.h
+HEADERS +=
 CFLAGS += -g3 -Wconversion
 # CFLAGS += -fsanitize=address
 FCLEANED_FILES += tester
 endif
 
-HEADERS := $(SOURCES:.c=.h)
+HEADERS += $(SOURCES:.c=.h)
 
 ################################################################################
 
