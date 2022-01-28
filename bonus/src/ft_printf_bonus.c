@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/15 13:05:27 by sbos          #+#    #+#                 */
-/*   Updated: 2022/01/28 14:56:20 by sbos          ########   odam.nl         */
+/*   Updated: 2022/01/28 15:14:51 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,6 @@ void	parse_precision(const char **format, t_options *options)
 		options->precision = 0;
 		(*format)++;
 	}
-	// TODO: Are these checks necessary?
 	if (**format != '\0' && ft_isdigit(**format))
 	{
 		options->precision = ft_atoi(*format);
@@ -103,12 +102,8 @@ void	parse_precision(const char **format, t_options *options)
 
 void	parse_field_width(const char **format, t_options *options)
 {
-	// TODO: Are these checks necessary?
-	// if (**format != '\0' && ft_isdigit(**format))
-	// {
 	options->field_width = ft_atoi(*format);
 	(*format) += ft_get_number_of_digits(options->field_width);
-	// }
 }
 
 void	parse_flags(const char **format, t_options *options)
