@@ -1,37 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   get_type_strings.h                                 :+:    :+:            */
+/*   get_string.c                                       :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2022/01/28 17:35:37 by sbos          #+#    #+#                 */
-/*   Updated: 2022/02/01 14:51:19 by sbos          ########   odam.nl         */
+/*   Created: 2022/01/18 16:43:29 by sbos          #+#    #+#                 */
+/*   Updated: 2022/02/01 15:06:14 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 ////////////////////////////////////////////////////////////////////////////////
 
-#ifndef GET_TYPE_STRINGS_H
-# define GET_TYPE_STRINGS_H
+#include "ft_printf_bonus.h"
 
 ////////////////////////////////////////////////////////////////////////////////
 
-typedef struct s_options	t_options;
+#include <unistd.h> // write, STDOUT_FILENO
 
 ////////////////////////////////////////////////////////////////////////////////
 
-char	*get_char(char **format, t_options *options);
-char	*get_string(char **format, t_options *options);
-char	*get_pointer(char **format, t_options *options);
-char	*get_decimal(char **format, t_options *options);
-char	*get_unsigned(char **format, t_options *options);
-char	*get_hex_lower(char **format, t_options *options);
-char	*get_hex_upper(char **format, t_options *options);
-char	*get_percent(char **format, t_options *options);
-
-////////////////////////////////////////////////////////////////////////////////
-
-#endif
+char	*get_string(char **format, t_options *options)
+{
+	(void)format;
+	(void)options;
+	return (NULL);
+}
 
 ////////////////////////////////////////////////////////////////////////////////

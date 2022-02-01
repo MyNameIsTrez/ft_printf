@@ -6,7 +6,7 @@
 #    By: trez <trez@student.codam.nl>                 +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/01/10 13:54:36 by trez          #+#    #+#                  #
-#    Updated: 2022/01/28 19:08:07 by sbos          ########   odam.nl          #
+#    Updated: 2022/02/01 15:12:41 by sbos          ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,13 +19,24 @@ CC := cc
 
 CFLAGS := -Wall -Wextra -Werror
 
-MANDATORY_SOURCES :=
+MANDATORY_SOURCES_WITH_HEADERS :=
+MANDATORY_SOURCES_WITHOUT_HEADERS :=
 
-BONUS_SOURCES := bonus/src/ft_printf_bonus.c bonus/src/get_type_strings/get_char.c
+BONUS_SOURCES_WITH_HEADERS := bonus/src/ft_printf_bonus.c
+BONUS_SOURCES_WITHOUT_HEADERS :=				\
+	bonus/src/get_type_strings/get_char.c		\
+	bonus/src/get_type_strings/get_decimal.c	\
+	bonus/src/get_type_strings/get_hex_lower.c	\
+	bonus/src/get_type_strings/get_hex_upper.c	\
+	bonus/src/get_type_strings/get_percent.c	\
+	bonus/src/get_type_strings/get_pointer.c	\
+	bonus/src/get_type_strings/get_string.c		\
+	bonus/src/get_type_strings/get_unsigned.c
 
 FCLEANED_FILES := $(NAME)
 
-# HEADERS := libft/libft.h bonus/src/get_type_strings/get_type_strings.h
+LIBFT_DIR := libft
+
 HEADERS := bonus/src/get_type_strings/get_type_strings.h
 
 ################################################################################
@@ -33,12 +44,17 @@ HEADERS := bonus/src/get_type_strings/get_type_strings.h
 BONUS_DIR := bonus
 MANDATORY_DIR := mandatory
 
+CLEANED_FILES := $(MANDATORY_DIR)/obj
+
 ifdef USE_BONUS
 DIR := $(BONUS_DIR)
-SOURCES := $(BONUS_SOURCES)
+HEADERS += $(BONUS_SOURCES_WITH_HEADERS:.c=.h)
+SOURCES := $(BONUS_SOURCES_WITH_HEADERS) $(BONUS_SOURCES_WITHOUT_HEADERS)
+CLEANED_FILES += $(BONUS_DIR)/obj
 else
 DIR := $(MANDATORY_DIR)
-SOURCES := $(MANDATORY_SOURCES)
+HEADERS += $(MANDATORY_SOURCES_WITH_HEADERS:.c=.h)
+SOURCES := $(MANDATORY_SOURCES_WITH_HEADERS) $(MANDATORY_SOURCES_WITHOUT_HEADERS)
 endif
 
 SRC_DIR := $(DIR)/src
@@ -52,8 +68,6 @@ CFLAGS += -g3 -Wconversion
 # CFLAGS += -fsanitize=address
 FCLEANED_FILES += tester
 endif
-
-HEADERS += $(SOURCES:.c=.h)
 
 ################################################################################
 
@@ -75,7 +89,7 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(HEADERS)
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 $(LIBFT_PATH):
-	$(MAKE) -C $(dir $(LIBFT_PATH))
+	$(MAKE) -C $(LIBFT_DIR)
 
 ################################################################################
 
@@ -83,12 +97,12 @@ bonus:
 	@$(MAKE) USE_BONUS=1 all
 
 clean:
-	rm -rf $(MANDATORY_DIR)/obj $(BONUS_DIR)/obj
-	@$(MAKE) -C $(dir $(LIBFT_PATH)) clean
+	rm -rf $(CLEANED_FILES)
+	@$(MAKE) -C $(LIBFT_DIR) clean
 
 fclean: clean
 	rm -f $(FCLEANED_FILES)
-	@$(MAKE) -C $(dir $(LIBFT_PATH)) fclean
+	@$(MAKE) -C $(LIBFT_DIR) fclean
 
 re: fclean all
 

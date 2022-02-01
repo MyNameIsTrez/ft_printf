@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/18 16:43:29 by sbos          #+#    #+#                 */
-/*   Updated: 2022/01/28 17:35:00 by sbos          ########   odam.nl         */
+/*   Updated: 2022/02/01 13:10:50 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,9 @@
 
 char	*get_char(char **format, t_options *options)
 {
+	(void)format;
+	(void)options;
+	return (NULL);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
