@@ -6,27 +6,29 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/15 13:05:27 by sbos          #+#    #+#                 */
-/*   Updated: 2022/01/28 19:01:35 by sbos          ########   odam.nl         */
+/*   Updated: 2022/02/01 17:33:34 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 ////////////////////////////////////////////////////////////////////////////////
 
-#include "get_type_strings/get_type_strings.h"
+// #include "get_type_strings/get_type_strings.h"
 #include "ft_printf_bonus.h"
 
 ////////////////////////////////////////////////////////////////////////////////
 
 #include <unistd.h> // write, STDOUT_FILENO
-// #include <stdarg.h> // va_start, va_arg, va_end, va_copy
 
 ////////////////////////////////////////////////////////////////////////////////
 
-// void	print_with_padding(char *conversion_str, t_options *options,
-// 								int total_width)
-// {
-// 	// write(STDOUT_FILENO, buffer, byte_count);
-// }
+void	print_with_padding(char *conversion_str, t_options *options,
+								int total_width)
+{
+	(void)conversion_str;
+	(void)options;
+	(void)total_width;
+	// write(STDOUT_FILENO, buffer, byte_count);
+}
 
 // TODO: Can this function get *conversion_table as an arg
 //       so the return doesn't need to make a copy of it constantly?
@@ -52,26 +54,25 @@ const t_conversion_function	*get_conversion_table(void)
 
 // TODO: Would making conversion_table here a static
 //       prevent calling get_conversion_table() a second time or help somehow?
-// int	print_argument(const char **format, t_options *options)
-// {
-// 	char						conversion_type;
-// 	const t_conversion_function	*conversion_table = get_conversion_table();
-// 	char						*conversion_str;
-// 	int							total_width;
+int	print_argument(unsigned char conversion_type, t_options *options, va_list *arg_ptr)
+{
+	const t_conversion_function	*conversion_table = get_conversion_table();
+	char						*conversion_str;
+	int							total_width;
 
-// 	conversion_type = **format;
-// 	if (ft_strchr(CONVERSION_TYPES, conversion_type) != NULL)
-// 	{
-// 		conversion_str = conversion_table[conversion_type](format, options);
-// 		total_width = ft_max(ft_strlen(conversion_str), options->field_width);
-// 		print_with_padding(conversion_str, options, total_width);
-// 		return (total_width);
-// 	}
-// 	else
-// 	{
-
-// 	}
-// }
+	if (ft_strchr(CONVERSION_TYPES, conversion_type) != NULL)
+	{
+		conversion_str = conversion_table[conversion_type](options, arg_ptr);
+		total_width = ft_max((int)ft_strlen(conversion_str),
+				options->field_width);
+		print_with_padding(conversion_str, options, total_width);
+		return (total_width);
+	}
+	else
+	{
+		return (42);
+	}
+}
 
 void	fix_priorities(t_options *options)
 {
@@ -145,20 +146,25 @@ void	fill_options(const char **format, t_options *options)
 
 int	ft_printf(const char *format, ...)
 {
-	t_options	options;
-	int			chars_printed;
+	t_options		options;
+	int				chars_printed;
+	va_list			arg_ptr;
+	unsigned char	conversion_type;
 
 	chars_printed = 0;
+	va_start(arg_ptr, format);
 	while (*format != '\0')
 	{
 		if (*format == '%')
 		{
 			format++;
 			fill_options(&format, &options);
-			// chars_printed += print_argument(&format, &options);
+			conversion_type = (unsigned char)*format;
+			// chars_printed += print_argument(conversion_type, &options, &arg_ptr);
 		}
 		format++;
 	}
+	va_end(arg_ptr);
 	write(STDOUT_FILENO, "hello", 5);
 	return (5);
 	return (chars_printed);

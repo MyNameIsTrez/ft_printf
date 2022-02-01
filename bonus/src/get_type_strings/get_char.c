@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/18 16:43:29 by sbos          #+#    #+#                 */
-/*   Updated: 2022/02/01 13:10:50 by sbos          ########   odam.nl         */
+/*   Updated: 2022/02/01 17:58:59 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,16 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 
-char	*get_char(char **format, t_options *options)
+char	*get_char(t_options *options, va_list *arg_ptr)
 {
-	(void)format;
+	const char	c = (char)va_arg(*arg_ptr, int);
+	char		*str;
+
 	(void)options;
-	return (NULL);
+	str = malloc(2);
+	str[2 - 1] = '\0';
+	str[0] = c;
+	return (str);
 }
 
 ////////////////////////////////////////////////////////////////////////////////

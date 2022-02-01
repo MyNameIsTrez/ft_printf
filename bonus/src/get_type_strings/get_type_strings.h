@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/28 17:35:37 by sbos          #+#    #+#                 */
-/*   Updated: 2022/02/01 14:51:19 by sbos          ########   odam.nl         */
+/*   Updated: 2022/02/01 16:55:32 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,18 +17,22 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 
+# include <stdarg.h>	// va_list
+
+////////////////////////////////////////////////////////////////////////////////
+
 typedef struct s_options	t_options;
 
 ////////////////////////////////////////////////////////////////////////////////
 
-char	*get_char(char **format, t_options *options);
-char	*get_string(char **format, t_options *options);
-char	*get_pointer(char **format, t_options *options);
-char	*get_decimal(char **format, t_options *options);
-char	*get_unsigned(char **format, t_options *options);
-char	*get_hex_lower(char **format, t_options *options);
-char	*get_hex_upper(char **format, t_options *options);
-char	*get_percent(char **format, t_options *options);
+char	*get_char(t_options *options, va_list *arg_ptr);
+char	*get_string(t_options *options, va_list *arg_ptr);
+char	*get_pointer(t_options *options, va_list *arg_ptr);
+char	*get_decimal(t_options *options, va_list *arg_ptr);
+char	*get_unsigned(t_options *options, va_list *arg_ptr);
+char	*get_hex_lower(t_options *options, va_list *arg_ptr);
+char	*get_hex_upper(t_options *options, va_list *arg_ptr);
+char	*get_percent(t_options *options, va_list *arg_ptr);
 
 ////////////////////////////////////////////////////////////////////////////////
 
