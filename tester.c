@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/15 13:05:05 by sbos          #+#    #+#                 */
-/*   Updated: 2022/01/28 15:25:40 by sbos          ########   odam.nl         */
+/*   Updated: 2022/02/01 16:05:16 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void	run_tests(void)
+void	test_fill_options_and_subfunctions(void)
 {
 	TEST(test_initialize_options);
 	TEST(test_parse_flags);
@@ -33,6 +33,21 @@ void	run_tests(void)
 	TEST(test_fix_priorities);
 	TEST(test_fill_options);
 }
+
+void	test_get_type_strings(void)
+{
+	TEST(test_get_char);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+void	run_tests(void)
+{
+	test_fill_options_and_subfunctions();
+	test_get_type_strings();
+}
+
+////////////////////////////////////////////////////////////////////////////////
 
 #include <unistd.h> // tmp
 #include <fcntl.h> // tmp
@@ -99,6 +114,8 @@ void q(void)
 	ASSERT_INT((int)ft_printf_return, (int)printf_return); // check if return value correct
 	ASSERT_STR(ft_buf, buf);
 }
+
+////////////////////////////////////////////////////////////////////////////////
 
 int	main(void)
 {

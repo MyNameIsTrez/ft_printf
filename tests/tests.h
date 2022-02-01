@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/20 11:42:16 by sbos          #+#    #+#                 */
-/*   Updated: 2022/01/28 15:16:05 by sbos          ########   odam.nl         */
+/*   Updated: 2022/02/01 16:06:21 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,10 @@ void	test_fix_priorities(void);
 
 void	fill_options(const char **format, t_options *options);
 void	test_fill_options(void);
+
+////////////////////////////////////////////////////////////////////////////////
+
+void	test_get_char(void);
 
 ////////////////////////////////////////////////////////////////////////////////
 
