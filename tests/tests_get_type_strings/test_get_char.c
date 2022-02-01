@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/20 11:34:27 by sbos          #+#    #+#                 */
-/*   Updated: 2022/02/01 18:07:27 by sbos          ########   odam.nl         */
+/*   Updated: 2022/02/01 18:08:34 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	test_get_char(void)
 		t_options	options;
 
 		initialize_options(&options);
-		test_get_char_helper(&options, "", 42, 'x');
+		test_get_char_helper(&options, "", 'a');
 	}
 }
 
