@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/20 11:42:16 by sbos          #+#    #+#                 */
-/*   Updated: 2022/02/01 16:06:21 by sbos          ########   odam.nl         */
+/*   Updated: 2022/02/01 17:54:09 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 
-// TODO: Remove this include as it should already be added by the Makefile?
 # include "../bonus/src/ft_printf_bonus.h"
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -39,6 +38,20 @@
 	(void)expected_var;						\
 											\
 	int expected_value = b;					\
+											\
+	assert(tested_value == expected_value);	\
+}
+
+#define ASSERT_CHAR(a, b) {					\
+	char *tested_var = #a;					\
+	(void)tested_var;						\
+											\
+	char tested_value = a;					\
+											\
+	char *expected_var = #b;				\
+	(void)expected_var;						\
+											\
+	char expected_value = b;				\
 											\
 	assert(tested_value == expected_value);	\
 }
