@@ -19,6 +19,9 @@
 # Allow gitignore
 !.gitignore
 
+# Allow libft submodule
+!libft
+
 # Disallow experiment
 # experiment.c
 
