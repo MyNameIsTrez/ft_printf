@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/20 11:34:27 by sbos          #+#    #+#                 */
-/*   Updated: 2022/02/03 11:56:54 by sbos          ########   odam.nl         */
+/*   Updated: 2022/02/03 12:16:54 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,12 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void	test_get_char_helper(int x, ...)
+void	test_get_char_helper(char *expected, ...)
 {
 	va_list	arg_ptr;
 
-	va_start(arg_ptr, x);
-	ASSERT_STR(get_char(&arg_ptr), "a");
+	va_start(arg_ptr, expected);
+	ASSERT_STR(get_char(&arg_ptr), expected);
 	va_end(arg_ptr);
 }
 
@@ -29,7 +29,7 @@ void	test_get_char_helper(int x, ...)
 
 void	test_get_char(void)
 {
-	test_get_char_helper(1, 'a');
+	test_get_char_helper("a", 'a');
 }
 
 ////////////////////////////////////////////////////////////////////////////////
