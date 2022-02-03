@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/15 13:05:27 by sbos          #+#    #+#                 */
-/*   Updated: 2022/02/01 17:33:34 by sbos          ########   odam.nl         */
+/*   Updated: 2022/02/03 11:45:38 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int	print_argument(unsigned char conversion_type, t_options *options, va_list *a
 
 	if (ft_strchr(CONVERSION_TYPES, conversion_type) != NULL)
 	{
-		conversion_str = conversion_table[conversion_type](options, arg_ptr);
+		conversion_str = conversion_table[conversion_type](arg_ptr);
 		total_width = ft_max((int)ft_strlen(conversion_str),
 				options->field_width);
 		print_with_padding(conversion_str, options, total_width);
