@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/15 13:05:05 by sbos          #+#    #+#                 */
-/*   Updated: 2022/02/01 16:05:16 by sbos          ########   odam.nl         */
+/*   Updated: 2022/02/03 12:19:03 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void	test_fill_options_and_subfunctions(void)
 void	test_get_type_strings(void)
 {
 	TEST(test_get_char);
+	TEST(test_get_decimal);
 }
 
 ////////////////////////////////////////////////////////////////////////////////

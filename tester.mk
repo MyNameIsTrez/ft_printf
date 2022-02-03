@@ -6,7 +6,7 @@
 #    By: sbos <sbos@student.codam.nl>                 +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/01/20 16:07:18 by sbos          #+#    #+#                  #
-#    Updated: 2022/02/01 14:47:50 by sbos          ########   odam.nl          #
+#    Updated: 2022/02/03 12:42:51 by sbos          ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,9 @@ TESTED_SOURCES := libftprintf.a
 TESTED_LIBS := libftprintf.a
 LIBS := -lftprintf
 
-TESTER_HEADERS := bonus/src/get_type_strings/get_type_strings.h
+TESTER_HEADERS :=											\
+	bonus/src/get_type_strings/get_type_strings.h			\
+	tests/tests_get_type_strings/test_get_type_strings.h
 
 TESTS_DIR := tests
 

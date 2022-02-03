@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   test_get_char.c                                    :+:    :+:            */
+/*   test_get_type_string.c                             :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2022/01/20 11:34:27 by sbos          #+#    #+#                 */
-/*   Updated: 2022/02/03 12:54:30 by sbos          ########   odam.nl         */
+/*   Created: 2022/02/03 12:44:11 by sbos          #+#    #+#                 */
+/*   Updated: 2022/02/03 12:46:06 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,14 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void	test_get_char(void)
+void	test_get_type_string(t_conversion_function get_type_string,
+								char *expected, ...)
 {
-	test_get_type_string(get_char, "a", 'a');
+	va_list	arg_ptr;
+
+	va_start(arg_ptr, expected);
+	ASSERT_STR(get_type_string(&arg_ptr), expected);
+	va_end(arg_ptr);
 }
 
 ////////////////////////////////////////////////////////////////////////////////

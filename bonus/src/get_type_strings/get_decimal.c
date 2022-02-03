@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/18 16:43:29 by sbos          #+#    #+#                 */
-/*   Updated: 2022/02/03 11:44:09 by sbos          ########   odam.nl         */
+/*   Updated: 2022/02/03 12:24:34 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,7 @@
 
 char	*get_decimal(va_list *arg_ptr)
 {
-	(void)arg_ptr;
-	return (NULL);
+	return (ft_itoa(va_arg(*arg_ptr, int)));
 }
 
 ////////////////////////////////////////////////////////////////////////////////
