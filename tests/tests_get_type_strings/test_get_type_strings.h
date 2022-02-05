@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/03 12:31:41 by sbos          #+#    #+#                 */
-/*   Updated: 2022/02/03 12:45:10 by sbos          ########   odam.nl         */
+/*   Updated: 2022/02/04 18:34:24 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ void	test_get_type_string(t_conversion_function get_type_string,
 
 void	test_get_char(void);
 void	test_get_decimal(void);
+void	test_get_hex_lower(void);
+void	test_get_hex_upper(void);
 
 ////////////////////////////////////////////////////////////////////////////////
 
