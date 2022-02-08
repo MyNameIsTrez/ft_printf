@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/20 11:34:27 by sbos          #+#    #+#                 */
-/*   Updated: 2022/01/28 13:25:46 by sbos          ########   odam.nl         */
+/*   Updated: 2022/02/08 17:21:20 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	test_parse_field_width(void)
 		initialize_options(&options);
 		parse_field_width(&format, &options);
 
-		ASSERT_INT(options.field_width, 42);
+		ASSERT(options.field_width, 42);
 	}
 
 	{
@@ -35,7 +35,7 @@ void	test_parse_field_width(void)
 		initialize_options(&options);
 		parse_field_width(&format, &options);
 
-		ASSERT_INT(options.field_width, 0);
+		ASSERT(options.field_width, 0);
 	}
 
 	{
@@ -45,7 +45,7 @@ void	test_parse_field_width(void)
 		initialize_options(&options);
 		parse_field_width(&format, &options);
 
-		ASSERT_INT(options.field_width, 0);
+		ASSERT(options.field_width, 0);
 	}
 }
 

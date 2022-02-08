@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/20 11:42:16 by sbos          #+#    #+#                 */
-/*   Updated: 2022/02/03 12:43:46 by sbos          ########   odam.nl         */
+/*   Updated: 2022/02/05 17:24:05 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,72 +22,11 @@
 
 # include "test_get_type_strings.h"
 
-////////////////////////////////////////////////////////////////////////////////
-
-# include <stdio.h>		// printf()
-# include <stdlib.h>	// EXIT_SUCCESS
-# include <assert.h>	// assert()
-# include <string.h>	// strcmp()
+# include "asserts.h"
 
 ////////////////////////////////////////////////////////////////////////////////
 
-#define ASSERT_INT(a, b) {					\
-	char *tested_var = #a;					\
-	(void)tested_var;						\
-											\
-	int tested_value = a;					\
-											\
-	char *expected_var = #b;				\
-	(void)expected_var;						\
-											\
-	int expected_value = b;					\
-											\
-	assert(tested_value == expected_value);	\
-}
-
-#define ASSERT_CHAR(a, b) {					\
-	char *tested_var = #a;					\
-	(void)tested_var;						\
-											\
-	char tested_value = a;					\
-											\
-	char *expected_var = #b;				\
-	(void)expected_var;						\
-											\
-	char expected_value = b;				\
-											\
-	assert(tested_value == expected_value);	\
-}
-
-#define ASSERT_BOOL(a, b) {					\
-	char *tested_var = #a;					\
-	(void)tested_var;						\
-											\
-	bool tested_value = a;					\
-											\
-	char *expected_var = #b;				\
-	(void)expected_var;						\
-											\
-	bool expected_value = b;				\
-											\
-	assert(tested_value == expected_value);	\
-}
-
-#define ASSERT_STR(a, b) {								\
-	char *tested_var = #a;								\
-	(void)tested_var;									\
-														\
-	char *tested_value = a;								\
-														\
-	char *expected_var = #b;							\
-	(void)expected_var;									\
-														\
-	char *expected_value = b;							\
-														\
-	assert(strcmp(tested_value, expected_value) == 0);	\
-}
-
-////////////////////////////////////////////////////////////////////////////////
+// TODO: Why the hell are the regular functions declared here as well?
 
 void	initialize_options(t_options *options);
 void	test_initialize_options(void);

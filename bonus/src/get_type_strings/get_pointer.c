@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/18 16:43:29 by sbos          #+#    #+#                 */
-/*   Updated: 2022/02/03 12:59:29 by sbos          ########   odam.nl         */
+/*   Updated: 2022/02/08 15:50:33 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@
 
 char	*get_pointer(va_list *arg_ptr)
 {
-	(void)arg_ptr;
-	return (NULL);
+	return (ft_strjoin("0x", ft_unsigned_nbr_to_str(
+				(uintmax_t)va_arg(*arg_ptr, void *), 16)));
 }
 
 ////////////////////////////////////////////////////////////////////////////////
