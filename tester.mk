@@ -6,7 +6,7 @@
 #    By: sbos <sbos@student.codam.nl>                 +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/01/20 16:07:18 by sbos          #+#    #+#                  #
-#    Updated: 2022/02/03 12:42:51 by sbos          ########   odam.nl          #
+#    Updated: 2022/02/08 17:36:39 by sbos          ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,8 +37,7 @@ TEST_INCLUDES :=
 
 ################################################################################
 
-# TESTER_SOURCES := $(wildcard $(TESTS_DIR)/**.c) $(TESTER_NAME).c
-TESTER_SOURCES := $(wildcard $(TESTS_DIR)/*.c) $(wildcard $(TESTS_DIR)/tests_get_type_strings/*.c) $(TESTER_NAME).c
+TESTER_SOURCES := $(wildcard $(TESTS_DIR)/*.c) $(wildcard $(TESTS_DIR)/**/*.c) $(TESTER_NAME).c
 
 TESTER_HEADERS += $(TESTS_DIR)/tests.h
 
