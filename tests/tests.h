@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/20 11:42:16 by sbos          #+#    #+#                 */
-/*   Updated: 2022/02/09 14:47:25 by sbos          ########   odam.nl         */
+/*   Updated: 2022/02/09 14:52:08 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@
 # include "asserts.h"
 
 ////////////////////////////////////////////////////////////////////////////////
-
-// TODO: Why the hell are the regular functions declared here as well?
+// These are helper functions from bonus/src
+// that aren't in bonus/src/ft_printf_bonus.h as they are normally private.
 
 void	initialize_options(t_options *options);
 void	test_initialize_options(void);

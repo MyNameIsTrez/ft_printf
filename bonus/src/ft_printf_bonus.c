@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/15 13:05:27 by sbos          #+#    #+#                 */
-/*   Updated: 2022/02/05 17:01:53 by sbos          ########   odam.nl         */
+/*   Updated: 2022/02/09 15:37:09 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,8 @@ const t_conversion_function	*get_conversion_table(void)
 
 // TODO: Would making conversion_table here a static
 //       prevent calling get_conversion_table() a second time or help somehow?
-int	print_argument(unsigned char conversion_type, t_options *options, va_list *arg_ptr)
+int	print_argument(unsigned char conversion_type, t_options *options,
+					va_list arg_ptr)
 {
 	const t_conversion_function	*conversion_table = get_conversion_table();
 	char						*conversion_str;
@@ -159,7 +160,7 @@ int	ft_printf(const char *format, ...)
 			format++;
 			fill_options(&format, &options);
 			conversion_type = (unsigned char)*format;
-			// chars_printed += print_argument(conversion_type, &options, &arg_ptr);
+			chars_printed += print_argument(conversion_type, &options, arg_ptr);
 		}
 		format++;
 	}
