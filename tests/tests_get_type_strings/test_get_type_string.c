@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/03 12:44:11 by sbos          #+#    #+#                 */
-/*   Updated: 2022/02/09 16:13:51 by sbos          ########   odam.nl         */
+/*   Updated: 2022/02/09 16:38:11 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	test_get_type_string(t_conversion_function get_type_string,
 	va_start(arg_ptr, expected);
 	char *v = get_type_string(arg_ptr);
 	ASSERT(v, expected);
+	free(v);
 	va_end(arg_ptr);
 }
 

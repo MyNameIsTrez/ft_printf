@@ -10,9 +10,6 @@
 # Allow Makefile
 !Makefile
 
-# Disallow tester
-# tester.c
-
 # Allow tester
 !tester.mk
 
@@ -22,8 +19,5 @@
 # Allow libft submodule
 !libft
 
-# Disallow experiment
-# experiment.c
-
-# Disallow example
-# jump_table_example.c
+# Allow .vscode settings
+!.vscode/*

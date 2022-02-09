@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/15 13:05:05 by sbos          #+#    #+#                 */
-/*   Updated: 2022/02/09 15:55:11 by sbos          ########   odam.nl         */
+/*   Updated: 2022/02/09 16:43:25 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ int	main(void)
 	printf("Running tests...\n");
 	run_tests();
 	printf("Tests ran successfully!\n");
+	// system("leaks tester");
 	return (EXIT_SUCCESS);
 }
 

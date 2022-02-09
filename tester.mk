@@ -6,7 +6,7 @@
 #    By: sbos <sbos@student.codam.nl>                 +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/01/20 16:07:18 by sbos          #+#    #+#                  #
-#    Updated: 2022/02/09 14:47:12 by sbos          ########   odam.nl          #
+#    Updated: 2022/02/09 17:29:50 by sbos          ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,8 @@ TESTED_LIBS := libftprintf.a
 LIBS := -lftprintf
 
 TESTER_HEADERS :=											\
-	bonus/src/get_type_strings/get_type_strings.h			\
+	src/ft_printf_bonus.h									\
+	src/get_type_strings/get_type_strings.h					\
 	tests/tests_get_type_strings/test_get_type_strings.h
 
 TESTS_DIR := tests
@@ -41,7 +42,7 @@ TESTER_SOURCES := $(wildcard $(TESTS_DIR)/*.c) $(wildcard $(TESTS_DIR)/**/*.c) $
 
 TESTER_HEADERS += $(TESTS_DIR)/tests.h
 
-TEST_INCLUDES += $(addprefix -I, $(sort $(dir $(TESTER_HEADERS)))) -Ibonus/src/
+TEST_INCLUDES += $(addprefix -I, $(sort $(dir $(TESTER_HEADERS))))
 
 TEST_LIBS := $(addprefix -L, $(sort $(dir $(TESTED_LIBS))))
 
@@ -49,8 +50,6 @@ TEST_LIBS := $(addprefix -L, $(sort $(dir $(TESTED_LIBS))))
 
 $(TESTER_NAME): bonus $(TESTER_HEADERS) $(TESTED_SOURCES) $(TESTER_SOURCES)
 	$(CC) $(CFLAGS) $(TEST_INCLUDES) -g3 $(TESTER_SOURCES) $(TEST_LIBS) $(LIBS) -o $(TESTER_NAME)
-
-################################################################################
 
 .PHONY: $(TESTER_NAME)
 
