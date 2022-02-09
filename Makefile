@@ -6,7 +6,7 @@
 #    By: trez <trez@student.codam.nl>                 +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/01/10 13:54:36 by trez          #+#    #+#                  #
-#    Updated: 2022/02/09 18:35:05 by sbos          ########   odam.nl          #
+#    Updated: 2022/02/09 18:45:10 by sbos          ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,11 +17,10 @@ LIBFT_PATH := libft/libft.a
 
 CC := cc
 
-# CFLAGS := -Wall -Wextra -Werror -g3 # Is it allowed to keep -g3 turned on?
 CFLAGS := -Wall -Wextra -Werror
 
-SOURCES_WITH_HEADERS := src/ft_printf_bonus.c
-SOURCES_WITHOUT_HEADERS :=			\
+SOURCES :=									\
+	src/ft_printf_bonus.c					\
 	src/get_type_strings/get_char.c			\
 	src/get_type_strings/get_decimal.c		\
 	src/get_type_strings/get_hex_lower.c	\
@@ -31,7 +30,9 @@ SOURCES_WITHOUT_HEADERS :=			\
 	src/get_type_strings/get_string.c		\
 	src/get_type_strings/get_unsigned.c
 
-HEADERS := src/get_type_strings/get_type_strings.h
+HEADERS :=									\
+	src/get_type_strings/get_type_strings.h	\
+	src/ft_printf_bonus.h
 
 CLEANED_FILES := obj
 FCLEANED_FILES := $(NAME)
@@ -43,11 +44,9 @@ LIBFT_DIR := libft
 
 ################################################################################
 
-HEADERS += $(SOURCES_WITH_HEADERS:.c=.h)
-SOURCES := $(SOURCES_WITH_HEADERS) $(SOURCES_WITHOUT_HEADERS)
-
 ifdef DEBUG
-CFLAGS += -g3 -Wconversion #-fsanitize=address
+CFLAGS += -g3 -Wconversion
+# CFLAGS += -fsanitize=address # Not compatible with "leaks" program.
 FCLEANED_FILES += tester
 endif
 
