@@ -6,7 +6,7 @@
 #    By: sbos <sbos@student.codam.nl>                 +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/01/20 16:07:18 by sbos          #+#    #+#                  #
-#    Updated: 2022/02/08 17:36:39 by sbos          ########   odam.nl          #
+#    Updated: 2022/02/09 14:47:12 by sbos          ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,7 +41,7 @@ TESTER_SOURCES := $(wildcard $(TESTS_DIR)/*.c) $(wildcard $(TESTS_DIR)/**/*.c) $
 
 TESTER_HEADERS += $(TESTS_DIR)/tests.h
 
-TEST_INCLUDES += $(addprefix -I, $(sort $(dir $(TESTER_HEADERS))))
+TEST_INCLUDES += $(addprefix -I, $(sort $(dir $(TESTER_HEADERS)))) -Ibonus/src/
 
 TEST_LIBS := $(addprefix -L, $(sort $(dir $(TESTED_LIBS))))
 

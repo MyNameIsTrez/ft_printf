@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/20 11:42:16 by sbos          #+#    #+#                 */
-/*   Updated: 2022/02/05 17:24:05 by sbos          ########   odam.nl         */
+/*   Updated: 2022/02/09 14:47:25 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,7 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 
-// TODO: Remove this:
-# include "../bonus/src/ft_printf_bonus.h"
+# include "ft_printf_bonus.h"
 
 # include "test_get_type_strings.h"
 
