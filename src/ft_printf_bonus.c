@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/15 13:05:27 by sbos          #+#    #+#                 */
-/*   Updated: 2022/02/09 15:37:09 by sbos          ########   odam.nl         */
+/*   Updated: 2022/02/09 17:31:59 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,38 +169,5 @@ int	ft_printf(const char *format, ...)
 	return (5);
 	return (chars_printed);
 }
-
-// int	ft_printf(char *format, ...)
-// {
-// 	va_list	arg_ptr;
-// 	int		d;
-// 	char	c;
-// 	char	*s;
-
-// 	va_start(arg_ptr, format);
-// 	while (*format)
-// 	{
-// 		// printf("%c\n", *format);
-// 		if (*format == 's')
-// 		{
-// 			s = va_arg(arg_ptr, char *);
-// 			printf("string %s\n", s);
-// 		}
-// 		else if (*format == 'd')
-// 		{
-// 			d = va_arg(arg_ptr, int);
-// 			printf("int %d\n", d);
-// 		}
-// 		else if (*format == 'c')
-// 		{
-// 			c = (char)va_arg(arg_ptr, int);
-// 			printf("char %c\n", c);
-// 		}
-// 		format++;
-// 	}
-// 	va_end(arg_ptr);
-// 	// write(STDOUT_FILENO, 's', 1);
-// 	return (3);
-// }
 
 ////////////////////////////////////////////////////////////////////////////////
