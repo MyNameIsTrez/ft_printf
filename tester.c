@@ -6,17 +6,17 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/15 13:05:05 by sbos          #+#    #+#                 */
-/*   Updated: 2022/02/09 13:55:09 by sbos          ########   odam.nl         */
+/*   Updated: 2022/02/09 14:48:04 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 ////////////////////////////////////////////////////////////////////////////////
 
-#include "bonus/src/ft_printf_bonus.h"
+#include "ft_printf_bonus.h"
 
 ////////////////////////////////////////////////////////////////////////////////
 
-#include "tests/tests.h"
+#include "tests.h"
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -25,28 +25,28 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 
-#define TEST(test_function) {printf("Calling function '" #test_function "'\n");test_function();}
+#define TEST(test_function) {void test_##test_function(void);printf("Calling function '" #test_function "'\n");test_##test_function();}
 
 ////////////////////////////////////////////////////////////////////////////////
 
 void	test_fill_options_and_subfunctions(void)
 {
-	TEST(test_initialize_options);
-	TEST(test_parse_flags);
-	TEST(test_parse_field_width);
-	TEST(test_parse_precision);
-	TEST(test_fix_priorities);
-	TEST(test_fill_options);
+	TEST(initialize_options);
+	TEST(parse_flags);
+	TEST(parse_field_width);
+	TEST(parse_precision);
+	TEST(fix_priorities);
+	TEST(fill_options);
 }
 
 void	test_get_type_strings(void)
 {
-	TEST(test_get_char);
-	TEST(test_get_decimal);
-	TEST(test_get_hex_lower);
-	TEST(test_get_hex_upper);
-	TEST(test_get_percent);
-	TEST(test_get_pointer);
+	TEST(get_char);
+	TEST(get_decimal);
+	TEST(get_hex_lower);
+	TEST(get_hex_upper);
+	TEST(get_percent);
+	TEST(get_pointer);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
