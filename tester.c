@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/15 13:05:05 by sbos          #+#    #+#                 */
-/*   Updated: 2022/02/09 14:48:04 by sbos          ########   odam.nl         */
+/*   Updated: 2022/02/09 15:55:11 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ void	test_get_type_strings(void)
 	TEST(get_hex_upper);
 	TEST(get_percent);
 	TEST(get_pointer);
+	TEST(get_unsigned);
+	TEST(get_string);
 }
 
 ////////////////////////////////////////////////////////////////////////////////

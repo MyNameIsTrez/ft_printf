@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/20 11:34:27 by sbos          #+#    #+#                 */
-/*   Updated: 2022/02/09 14:50:34 by sbos          ########   odam.nl         */
+/*   Updated: 2022/02/09 16:03:41 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,10 @@
 
 void	test_get_string(void)
 {
-	{
-		test_get_type_string(get_string, "0x1", 1);
-	}
+	test_get_type_string(get_string, "", "");
+	test_get_type_string(get_string, "1", "1");
+	test_get_type_string(get_string, "42", "42");
+	test_get_type_string(get_string, "hell", (char []){'h', 'e', 'l', 'l', 'o', '\0'});
 }
 
 ////////////////////////////////////////////////////////////////////////////////
