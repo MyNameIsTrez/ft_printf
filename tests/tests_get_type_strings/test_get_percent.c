@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/20 11:34:27 by sbos          #+#    #+#                 */
-/*   Updated: 2022/02/05 15:09:14 by sbos          ########   odam.nl         */
+/*   Updated: 2022/02/10 12:42:52 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void	test_get_percent(void)
+Test(get_percent)
 {
 	test_get_type_string(get_percent, "%");
 	test_get_type_string(get_percent, "%", "foo");

@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/15 13:05:27 by sbos          #+#    #+#                 */
-/*   Updated: 2022/02/09 17:31:59 by sbos          ########   odam.nl         */
+/*   Updated: 2022/02/10 11:42:36 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@
 void	print_with_padding(char *conversion_str, t_options *options,
 								int total_width)
 {
-	(void)conversion_str;
 	(void)options;
-	(void)total_width;
-	// write(STDOUT_FILENO, buffer, byte_count);
+	write(STDOUT_FILENO, conversion_str, (size_t)total_width + 1);
+	// (void)conversion_str;
+	// write(STDOUT_FILENO, buffer, total_width + 1);
 }
 
 // TODO: Can this function get *conversion_table as an arg
@@ -165,8 +165,6 @@ int	ft_printf(const char *format, ...)
 		format++;
 	}
 	va_end(arg_ptr);
-	write(STDOUT_FILENO, "hello", 5);
-	return (5);
 	return (chars_printed);
 }
 

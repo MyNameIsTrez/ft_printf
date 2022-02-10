@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/15 13:05:05 by sbos          #+#    #+#                 */
-/*   Updated: 2022/02/09 16:43:25 by sbos          ########   odam.nl         */
+/*   Updated: 2022/02/10 12:42:07 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,38 +25,35 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 
-#define TEST(test_function) {void test_##test_function(void);printf("Calling function '" #test_function "'\n");test_##test_function();}
+t_list *g_tests_lst = NULL;
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void	test_fill_options_and_subfunctions(void)
+static bool	str_in_arr(char *str, char *arr[], size_t sizeof_arr)
 {
-	TEST(initialize_options);
-	TEST(parse_flags);
-	TEST(parse_field_width);
-	TEST(parse_precision);
-	TEST(fix_priorities);
-	TEST(fill_options);
+	size_t i = 0;
+	while (i < sizeof_arr / sizeof(char *))
+	{
+		if (ft_strcmp(arr[i], str) == 0)
+			return (true);
+		i++;
+	}
+	return (false);
 }
 
-void	test_get_type_strings(void)
+static void	run_tests(char *exclude_tests[], size_t sizeof_exclude_tests)
 {
-	TEST(get_char);
-	TEST(get_decimal);
-	TEST(get_hex_lower);
-	TEST(get_hex_upper);
-	TEST(get_percent);
-	TEST(get_pointer);
-	TEST(get_unsigned);
-	TEST(get_string);
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
-void	run_tests(void)
-{
-	test_fill_options_and_subfunctions();
-	test_get_type_strings();
+	t_list	*lst = g_tests_lst;
+	while (lst != NULL)
+	{
+		t_fn_info *fn = lst->content;
+		if (!str_in_arr(fn->fn_name, exclude_tests, sizeof_exclude_tests))
+		{
+			printf("Testing function '%s'\n", fn->fn_name);
+			fn->fn_ptr();
+		}
+		lst = lst->next;
+	}
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -64,8 +61,12 @@ void	run_tests(void)
 int	main(void)
 {
 	printf("Running tests...\n");
-	run_tests();
+	char *exclude_tests[] = {
+		// "get_pointer",
+	};
+	run_tests(exclude_tests, sizeof(exclude_tests));
 	printf("Tests ran successfully!\n");
+	// ft_printf("foo");
 	// system("leaks tester");
 	return (EXIT_SUCCESS);
 }

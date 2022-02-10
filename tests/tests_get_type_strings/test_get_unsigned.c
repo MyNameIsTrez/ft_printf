@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/20 11:34:27 by sbos          #+#    #+#                 */
-/*   Updated: 2022/02/09 16:12:35 by sbos          ########   odam.nl         */
+/*   Updated: 2022/02/10 12:43:15 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void	test_get_unsigned(void)
+Test(get_unsigned)
 {
 	test_get_type_string(get_unsigned, "0", 0);
 	test_get_type_string(get_unsigned, "1", 1);

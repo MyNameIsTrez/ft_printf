@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/20 11:34:27 by sbos          #+#    #+#                 */
-/*   Updated: 2022/02/08 17:21:20 by sbos          ########   odam.nl         */
+/*   Updated: 2022/02/10 12:44:19 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ the number of digits to appear after the decimal-point for a, A, e, E, f, and F 
 the maximum number of significant digits for g and G con-versions,
 or the maximum number of characters to be printed from a string for s conversions.
 */
-void	test_parse_precision(void)
+Test(parse_precision)
 {
 	{
 		const char *format = ".42d";

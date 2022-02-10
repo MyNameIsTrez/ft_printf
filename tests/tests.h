@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/20 11:42:16 by sbos          #+#    #+#                 */
-/*   Updated: 2022/02/09 14:52:08 by sbos          ########   odam.nl         */
+/*   Updated: 2022/02/10 12:40:46 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,31 @@
 # include "test_get_type_strings.h"
 
 # include "asserts.h"
+
+////////////////////////////////////////////////////////////////////////////////
+
+typedef void (*void_fn)(void);
+
+typedef struct s_fn_info {
+	char	*fn_name;
+	void_fn	fn_ptr;
+}	t_fn_info;
+
+////////////////////////////////////////////////////////////////////////////////
+
+extern t_list	*g_tests_lst;
+
+////////////////////////////////////////////////////////////////////////////////
+
+#define Test(name)																\
+	void test_##name(void);														\
+	__attribute__((constructor))												\
+	void add_test_##name(void)													\
+	{																			\
+		static t_fn_info fn_info = {.fn_name = #name, .fn_ptr = &test_##name};	\
+		ft_lst_new_front(&g_tests_lst, &fn_info);								\
+	}																			\
+	void test_##name(void)
 
 ////////////////////////////////////////////////////////////////////////////////
 // These are helper functions from bonus/src
