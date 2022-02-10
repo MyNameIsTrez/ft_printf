@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/15 13:05:27 by sbos          #+#    #+#                 */
-/*   Updated: 2022/02/10 11:42:36 by sbos          ########   odam.nl         */
+/*   Updated: 2022/02/10 13:51:23 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	print_with_padding(char *conversion_str, t_options *options,
 
 // TODO: Can this function get *conversion_table as an arg
 //       so the return doesn't need to make a copy of it constantly?
-const t_conversion_function	*get_conversion_table(void)
+t_conversion_function	*get_conversion_table(void)
 {
 	// TODO: Which one should be used?
 	// static const t_conversion_function	conversion_table[] = {
