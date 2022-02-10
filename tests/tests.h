@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/20 11:42:16 by sbos          #+#    #+#                 */
-/*   Updated: 2022/02/10 12:40:46 by sbos          ########   odam.nl         */
+/*   Updated: 2022/02/10 13:47:48 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,23 +52,13 @@ extern t_list	*g_tests_lst;
 // These are helper functions from bonus/src
 // that aren't in bonus/src/ft_printf_bonus.h as they are normally private.
 
-void	initialize_options(t_options *options);
-void	test_initialize_options(void);
-
-void	parse_flags(const char **format, t_options *options);
-void	test_parse_flags(void);
-
-void	parse_field_width(const char **format, t_options *options);
-void	test_parse_field_width(void);
-
-void	parse_precision(const char **format, t_options *options);
-void	test_parse_precision(void);
-
-void	fix_priorities(t_options *options);
-void	test_fix_priorities(void);
-
 void	fill_options(const char **format, t_options *options);
-void	test_fill_options(void);
+void	fix_priorities(t_options *options);
+const t_conversion_function	*get_conversion_table(void);
+void	initialize_options(t_options *options);
+void	parse_field_width(const char **format, t_options *options);
+void	parse_flags(const char **format, t_options *options);
+void	parse_precision(const char **format, t_options *options);
 
 ////////////////////////////////////////////////////////////////////////////////
 
