@@ -21,3 +21,6 @@
 
 # Allow .vscode settings
 !.vscode/*
+
+# Allow documentation
+!DOCUMENTATION.txt
