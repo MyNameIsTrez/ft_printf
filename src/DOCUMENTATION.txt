@@ -112,13 +112,6 @@ printf("'%0.5d'\n" , 123) -> '00123'
 printf("'%5.5d'\n" , 123) -> '00123'
 
 ////////////////////////////////////////////////////////////////////////////////
-// The order in which flags should get processed
-
-1. Precision (adds '0' characters left of the number, or truncates a string)
-2. '+' / '0' / ' '
-3. '-'
-
-////////////////////////////////////////////////////////////////////////////////
 // Notes
 
 ' ' is ignored when '+' is present
@@ -136,6 +129,13 @@ printf("'%++d'\n", 123) -> '+123'
 The order of flags never matters
 printf("'% -10d'\n", 123) -> ' 123      '
 printf("'%- 10d'\n", 123) -> ' 123      '
+
+////////////////////////////////////////////////////////////////////////////////
+// The order in which flags should get processed
+
+1. Precision (adds '0' characters left of the number, or truncates a string)
+2. '+' / '0' / ' '
+3. '-'
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -168,6 +168,8 @@ printf("'%.5s'\n" , "foo") -> 'foo'
 ////////////////////////////////////////////////////////////////////////////////
 // [3]
 
+When the number is 0, 0x and 0X aren't prepended to it
+
 printf("'%x'\n" , 1) -> '1'
 printf("'%#x'\n", 1) -> '0x1'
 printf("'%#x'\n", 0) -> '0'
@@ -178,6 +180,8 @@ printf("'%#X'\n", 0) -> '0'
 
 ////////////////////////////////////////////////////////////////////////////////
 // [4]
+
+'-' and '0' also affect '%'
 
 printf("'%2%'\n" ) -> ' %'
 printf("'%-2%'\n") -> '% '
