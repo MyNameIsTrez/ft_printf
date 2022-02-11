@@ -134,7 +134,7 @@ printf("'%- 10d'\n", 123) -> ' 123      '
 // The order in which things can be parsed
 
 1. If the conversion type wasn't %, parse the argument and store a pointer to it
-   If the argument was negative, don't store the '-' and do store its negativity
+   If the argument was negative, don't store the '-' and do store it's negative
 2a. '.'
 2b. If a field width *and* '0' are used
 3. '0'
