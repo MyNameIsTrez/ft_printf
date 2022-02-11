@@ -4,6 +4,14 @@
 /*
 
 ////////////////////////////////////////////////////////////////////////////////
+// General printf() format
+
+printf("%d",    123)
+       ~~~~     ~~~
+      format  value 1
+
+////////////////////////////////////////////////////////////////////////////////
+// Behavior table
 
       +-----+-----+-----+-----+-----+-----+
       | '-' | '0' | '.' | '#' | ' ' | '+' |
@@ -28,6 +36,11 @@
 +-----+-----+-----+-----+-----+-----+-----+
 
 ////////////////////////////////////////////////////////////////////////////////
+// Behavior table explanation
+
+"-0.# +" are flags
+
+"cpsdiuxX%" are conversion specifiers
 
 An empty space stands for it doing something and being Defined Behavior
 UB stands for Undefined Behavior and should make printf return a negative value
