@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/15 13:05:27 by sbos          #+#    #+#                 */
-/*   Updated: 2022/02/11 18:09:38 by sbos          ########   odam.nl         */
+/*   Updated: 2022/02/14 15:17:38 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	print_with_padding(char *conversion_str, t_options *options,
 '+', ' ', precision, '0' has undefined behavior with %p
 
 */
-char	*apply_precision(char *conversion_str, t_options *options)
+char	*apply_precision(t_options *options)
 {
 	if (options->conversion_type == 's')
 	{
@@ -54,6 +54,7 @@ char	*apply_precision(char *conversion_str, t_options *options)
 	{
 
 	}
+	return (NULL);
 }
 
 // TODO: Can this function get *conversion_table as an arg
@@ -78,15 +79,14 @@ const t_conversion_function	*get_conversion_table(void)
 	return (conversion_table);
 }
 
-// TODO: Would making conversion_table here a static
-//       prevent calling get_conversion_table() a second time or help somehow?
-int	print_argument(t_options *options, va_list arg_ptr)
+int	print_argument(t_options *options)
 {
-	int							total_width;
+	char	*conversion_str;
+	int		total_width;
 
 	if (ft_strchr(CONVERSION_TYPES, options->conversion_type) != NULL)
 	{
-		conversion_str = apply_precision(conversion_str, options);
+		conversion_str = apply_precision(options);
 		total_width = ft_max((int)ft_strlen(conversion_str),
 				options->field_width);
 		print_with_padding(conversion_str, options, total_width);
@@ -98,6 +98,8 @@ int	print_argument(t_options *options, va_list arg_ptr)
 	}
 }
 
+// TODO: Would making conversion_table here a static
+//       prevent calling get_conversion_table() a second time or help somehow?
 void	parse_argument(t_options *options, va_list arg_ptr)
 {
 	const t_conversion_function	*conversion_table = get_conversion_table();
@@ -115,7 +117,7 @@ void	fix_priorities(t_options *options)
 
 void	parse_conversion_type(const char **format, t_options *options)
 {
-	options->conversion_type = *format;
+	options->conversion_type = (unsigned char)**format;
 }
 
 void	parse_precision(const char **format, t_options *options)
@@ -134,7 +136,8 @@ void	parse_precision(const char **format, t_options *options)
 void	parse_field_width(const char **format, t_options *options)
 {
 	options->field_width = ft_atoi(*format);
-	(*format) += ft_get_digit_count(options->field_width);
+	if (options->field_width != 0)
+		(*format) += ft_get_digit_count(options->field_width);
 }
 
 void	parse_flags(const char **format, t_options *options)
@@ -169,6 +172,8 @@ void	initialize_options(t_options *options)
 	options->field_width = 0;
 	options->precision = -1;
 	options->conversion_type = '\0';
+	options->negative = false; // TODO: Necessary?
+	options->conversion_str = NULL; // TODO: Necessary?
 }
 
 // TODO: Switch the arguments format and options around
@@ -180,8 +185,9 @@ void	fill_options(const char **format, t_options *options, va_list arg_ptr)
 	parse_precision(format, options);
 	parse_conversion_type(format, options);
 	fix_priorities(options);
-	if (options->conversion_type != '%')
-		parse_argument(options, arg_ptr);
+	(void)arg_ptr;
+	// if (options->conversion_type != '%')
+	// 	parse_argument(options, arg_ptr);
 }
 
 int	ft_printf(const char *format, ...)
@@ -198,7 +204,7 @@ int	ft_printf(const char *format, ...)
 		{
 			format++;
 			fill_options(&format, &options, arg_ptr);
-			chars_printed += print_argument(&options, arg_ptr);
+			chars_printed += print_argument(&options);
 		}
 		format++;
 	}

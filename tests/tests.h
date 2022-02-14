@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/20 11:42:16 by sbos          #+#    #+#                 */
-/*   Updated: 2022/02/10 17:00:31 by sbos          ########   odam.nl         */
+/*   Updated: 2022/02/14 14:47:42 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ void	fill_options(const char **format, t_options *options);
 void	fix_priorities(t_options *options);
 const t_conversion_function	*get_conversion_table(void);
 void	initialize_options(t_options *options);
+void	parse_argument(t_options *options, va_list arg_ptr);
 void	parse_field_width(const char **format, t_options *options);
 void	parse_flags(const char **format, t_options *options);
 void	parse_precision(const char **format, t_options *options);

@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/18 16:43:29 by sbos          #+#    #+#                 */
-/*   Updated: 2022/02/09 15:35:45 by sbos          ########   odam.nl         */
+/*   Updated: 2022/02/14 13:43:18 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,10 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 
-char	*get_hex_upper(va_list arg_ptr)
+void	get_hex_upper(va_list arg_ptr, t_options *options)
 {
-	return (ft_str_upper(get_hex_lower(arg_ptr)));
+	get_hex_lower(arg_ptr, options);
+	options->conversion_str = ft_str_upper(options->conversion_str);
 }
 
 ////////////////////////////////////////////////////////////////////////////////

@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/18 16:43:29 by sbos          #+#    #+#                 */
-/*   Updated: 2022/02/09 15:50:17 by sbos          ########   odam.nl         */
+/*   Updated: 2022/02/14 13:40:43 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 
-char	*get_string(va_list arg_ptr)
+void	get_string(va_list arg_ptr, t_options *options)
 {
-	return (ft_strdup(va_arg(arg_ptr, char *)));
+	options->conversion_str = ft_strdup(va_arg(arg_ptr, char *));
 }
 
 ////////////////////////////////////////////////////////////////////////////////

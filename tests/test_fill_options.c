@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/20 11:34:27 by sbos          #+#    #+#                 */
-/*   Updated: 2022/02/10 12:43:40 by sbos          ########   odam.nl         */
+/*   Updated: 2022/02/14 14:59:38 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ Test(fill_options)
 
 		ASSERT(options.field_width, 42);
 		ASSERT(options.precision, -1);
+		ASSERT(*format, (char)'d');
 	}
 
 	{
@@ -48,6 +49,7 @@ Test(fill_options)
 
 		ASSERT(options.field_width, 42);
 		ASSERT(options.precision, -1);
+		ASSERT(*format, (char)'d');
 	}
 
 	{
@@ -64,6 +66,7 @@ Test(fill_options)
 
 		ASSERT(options.field_width, 0);
 		ASSERT(options.precision, -1);
+		ASSERT(*format, (char)'d');
 	}
 
 	{
@@ -80,6 +83,7 @@ Test(fill_options)
 
 		ASSERT(options.field_width, 0);
 		ASSERT(options.precision, -1);
+		ASSERT(*format, (char)'d');
 	}
 }
 
