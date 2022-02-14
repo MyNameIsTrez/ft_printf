@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/15 13:05:27 by sbos          #+#    #+#                 */
-/*   Updated: 2022/02/14 15:19:06 by sbos          ########   odam.nl         */
+/*   Updated: 2022/02/14 15:58:15 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ const t_conversion_function	*get_conversion_table(void)
 	return (conversion_table);
 }
 
-int	print_argument(t_options *options)
+int	print(t_options *options)
 {
 	char	*conversion_str;
 	int		total_width;
@@ -177,7 +177,7 @@ void	initialize_options(t_options *options)
 }
 
 // TODO: Switch the arguments format and options around
-void	fill_options(const char **format, t_options *options, va_list arg_ptr)
+void	parse_format(const char **format, t_options *options)
 {
 	initialize_options(options);
 	parse_flags(format, options);
@@ -185,8 +185,6 @@ void	fill_options(const char **format, t_options *options, va_list arg_ptr)
 	parse_precision(format, options);
 	parse_conversion_type(format, options);
 	fix_priorities(options);
-	if (options->conversion_type != '%')
-		parse_argument(options, arg_ptr);
 }
 
 int	ft_printf(const char *format, ...)
@@ -202,8 +200,10 @@ int	ft_printf(const char *format, ...)
 		if (*format == '%')
 		{
 			format++;
-			fill_options(&format, &options, arg_ptr);
-			chars_printed += print_argument(&options);
+			parse_format(&format, &options);
+			if (options.conversion_type != '%')
+				parse_argument(&options, arg_ptr);
+			chars_printed += print(&options);
 		}
 		format++;
 	}

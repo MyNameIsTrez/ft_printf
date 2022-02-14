@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/20 11:42:16 by sbos          #+#    #+#                 */
-/*   Updated: 2022/02/14 15:40:07 by sbos          ########   odam.nl         */
+/*   Updated: 2022/02/14 15:55:08 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ extern t_list	*g_tests_lst;
 // These are helper functions from bonus/src
 // that aren't in bonus/src/ft_printf_bonus.h as they are normally private.
 
-void	fill_options(const char **format, t_options *options, va_list arg_ptr);
+void	parse_format(const char **format, t_options *options, va_list arg_ptr);
 void	fix_priorities(t_options *options);
 const t_conversion_function	*get_conversion_table(void);
 void	initialize_options(t_options *options);

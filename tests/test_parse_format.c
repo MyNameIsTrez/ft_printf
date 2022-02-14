@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   test_fill_options.c                                :+:    :+:            */
+/*   test_parse_format.c                                :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/20 11:34:27 by sbos          #+#    #+#                 */
-/*   Updated: 2022/02/14 15:41:25 by sbos          ########   odam.nl         */
+/*   Updated: 2022/02/14 15:55:52 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,13 @@ t_options	bar(const char	**format, ...)
 	va_list		arg_ptr;
 
 	va_start(arg_ptr, format);
-	fill_options(format, &options, arg_ptr);
+	parse_format(format, &options, arg_ptr);
 	va_end(arg_ptr);
 
 	return (options);
 }
 
-Test(fill_options)
+Test(parse_format)
 {
 	{
 		const char	*format = "#0- +42d";
@@ -43,7 +43,6 @@ Test(fill_options)
 		ASSERT(options.field_width, 42);
 		ASSERT(options.precision, -1);
 		ASSERT(*format, (char)'d');
-		ASSERT(options.conversion_str, "1337");
 	}
 
 	{
@@ -59,7 +58,6 @@ Test(fill_options)
 		ASSERT(options.field_width, 42);
 		ASSERT(options.precision, -1);
 		ASSERT(*format, (char)'d');
-		ASSERT(options.conversion_str, "1337");
 	}
 
 	{
@@ -75,7 +73,6 @@ Test(fill_options)
 		ASSERT(options.field_width, 0);
 		ASSERT(options.precision, -1);
 		ASSERT(*format, (char)'d');
-		ASSERT(options.conversion_str, "1337");
 	}
 
 	{
@@ -91,7 +88,6 @@ Test(fill_options)
 		ASSERT(options.field_width, 0);
 		ASSERT(options.precision, -1);
 		ASSERT(*format, (char)'d');
-		ASSERT(options.conversion_str, "1337");
 	}
 }
 
