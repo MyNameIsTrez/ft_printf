@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/20 11:34:27 by sbos          #+#    #+#                 */
-/*   Updated: 2022/02/14 14:59:38 by sbos          ########   odam.nl         */
+/*   Updated: 2022/02/14 15:41:25 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,23 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 
+t_options	bar(const char	**format, ...)
+{
+	t_options	options;
+	va_list		arg_ptr;
+
+	va_start(arg_ptr, format);
+	fill_options(format, &options, arg_ptr);
+	va_end(arg_ptr);
+
+	return (options);
+}
+
 Test(fill_options)
 {
 	{
-		t_options	options;
 		const char	*format = "#0- +42d";
-
-		fill_options(&format, &options);
+		t_options	options = bar(&format, 1337);
 
 		ASSERT(options.flags.alternate, (bool)true);
 		ASSERT(options.flags.zero_fill, (bool)true);
@@ -33,13 +43,12 @@ Test(fill_options)
 		ASSERT(options.field_width, 42);
 		ASSERT(options.precision, -1);
 		ASSERT(*format, (char)'d');
+		ASSERT(options.conversion_str, "1337");
 	}
 
 	{
-		t_options	options;
 		const char	*format = "42d";
-
-		fill_options(&format, &options);
+		t_options	options = bar(&format, 1337);
 
 		ASSERT(options.flags.alternate, (bool)false);
 		ASSERT(options.flags.zero_fill, (bool)false);
@@ -50,13 +59,12 @@ Test(fill_options)
 		ASSERT(options.field_width, 42);
 		ASSERT(options.precision, -1);
 		ASSERT(*format, (char)'d');
+		ASSERT(options.conversion_str, "1337");
 	}
 
 	{
-		t_options	options;
 		const char	*format = "d";
-
-		fill_options(&format, &options);
+		t_options	options = bar(&format, 1337);
 
 		ASSERT(options.flags.alternate, (bool)false);
 		ASSERT(options.flags.zero_fill, (bool)false);
@@ -67,13 +75,12 @@ Test(fill_options)
 		ASSERT(options.field_width, 0);
 		ASSERT(options.precision, -1);
 		ASSERT(*format, (char)'d');
+		ASSERT(options.conversion_str, "1337");
 	}
 
 	{
-		t_options	options;
 		const char	*format = "0d";
-
-		fill_options(&format, &options);
+		t_options	options = bar(&format, 1337);
 
 		ASSERT(options.flags.alternate, (bool)false);
 		ASSERT(options.flags.zero_fill, (bool)true);
@@ -84,6 +91,7 @@ Test(fill_options)
 		ASSERT(options.field_width, 0);
 		ASSERT(options.precision, -1);
 		ASSERT(*format, (char)'d');
+		ASSERT(options.conversion_str, "1337");
 	}
 }
 

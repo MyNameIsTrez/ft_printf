@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/15 13:05:27 by sbos          #+#    #+#                 */
-/*   Updated: 2022/02/14 15:17:38 by sbos          ########   odam.nl         */
+/*   Updated: 2022/02/14 15:19:06 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -185,9 +185,8 @@ void	fill_options(const char **format, t_options *options, va_list arg_ptr)
 	parse_precision(format, options);
 	parse_conversion_type(format, options);
 	fix_priorities(options);
-	(void)arg_ptr;
-	// if (options->conversion_type != '%')
-	// 	parse_argument(options, arg_ptr);
+	if (options->conversion_type != '%')
+		parse_argument(options, arg_ptr);
 }
 
 int	ft_printf(const char *format, ...)
