@@ -103,6 +103,7 @@ printf("'%+.5d'\n" , 123) -> '+00123'
 printf("'% .5d'\n" , 123) -> ' 00123'
 // A precision of 0 means that no character is written for the number 0
 printf("'%.0d'\n"  ,   0) -> ''
+printf("'%.d'\n"   ,   0) -> ''
 
 // '.' and field width
 printf("'%0.0d'\n" , 123) -> '123'
