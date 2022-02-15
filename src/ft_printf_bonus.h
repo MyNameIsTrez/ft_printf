@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/15 13:05:22 by sbos          #+#    #+#                 */
-/*   Updated: 2022/02/14 13:35:51 by sbos          ########   odam.nl         */
+/*   Updated: 2022/02/15 12:33:57 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 
-typedef void	(*t_conversion_function)(va_list arg_ptr, t_options *options);
+typedef void	(*t_conversion_function)(va_list arg_ptr, t_state *state);
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -47,7 +47,7 @@ typedef struct s_flags
 	bool	plus_sign;
 }	t_flags;
 
-typedef struct s_options
+typedef struct s_state
 {
 	t_flags			flags;
 	int				field_width;
@@ -55,7 +55,7 @@ typedef struct s_options
 	unsigned char	conversion_type;
 	bool			negative;
 	char			*conversion_str;
-}	t_options;
+}	t_state;
 
 ////////////////////////////////////////////////////////////////////////////////
 

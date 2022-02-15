@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   test_initialize_options.c                          :+:    :+:            */
+/*   test_initialize_state.c                          :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
@@ -16,21 +16,21 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Test(initialize_options)
+Test(initialize_state)
 {
 	{
-		t_options	options;
+		t_state	state;
 
-		initialize_options(&options);
+		initialize_state(&state);
 
-		ASSERT(options.flags.alternate, (bool)false);
-		ASSERT(options.flags.zero_fill, (bool)false);
-		ASSERT(options.flags.aligned_left, (bool)false);
-		ASSERT(options.flags.plus_space, (bool)false);
-		ASSERT(options.flags.plus_sign, (bool)false);
+		ASSERT(state.flags.alternate, (bool)false);
+		ASSERT(state.flags.zero_fill, (bool)false);
+		ASSERT(state.flags.aligned_left, (bool)false);
+		ASSERT(state.flags.plus_space, (bool)false);
+		ASSERT(state.flags.plus_sign, (bool)false);
 
-		ASSERT(options.field_width, 0);
-		ASSERT(options.precision, -1);
+		ASSERT(state.field_width, 0);
+		ASSERT(state.precision, -1);
 	}
 }
 

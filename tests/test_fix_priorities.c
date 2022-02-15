@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/20 11:34:27 by sbos          #+#    #+#                 */
-/*   Updated: 2022/02/10 12:43:53 by sbos          ########   odam.nl         */
+/*   Updated: 2022/02/15 12:33:57 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,18 +19,18 @@
 Test(fix_priorities)
 {
 	{
-		t_options	options;
+		t_state	state;
 
-		initialize_options(&options);
+		initialize_state(&state);
 
-		options.flags.zero_fill = true;
-		options.precision = 3;
+		state.flags.zero_fill = true;
+		state.precision = 3;
 
-		fix_priorities(&options);
+		fix_priorities(&state);
 
 		// printf("'%04d'\n", 42) -> '0042'
 		// printf("'%04.3d'\n", 42) -> ' 042'
-		ASSERT(options.flags.zero_fill, (bool)false);
+		ASSERT(state.flags.zero_fill, (bool)false);
 	}
 }
 

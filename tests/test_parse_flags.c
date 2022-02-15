@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/20 11:34:27 by sbos          #+#    #+#                 */
-/*   Updated: 2022/02/10 12:44:11 by sbos          ########   odam.nl         */
+/*   Updated: 2022/02/15 12:33:57 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,15 @@ Test(parse_flags)
 {
 	{
 		const char *format = "#0- +42d";
-		t_options	options;
+		t_state	state;
 
-		parse_flags(&format, &options);
+		parse_flags(&format, &state);
 
-		ASSERT(options.flags.alternate, (bool)true);
-		ASSERT(options.flags.zero_fill, (bool)true);
-		ASSERT(options.flags.aligned_left, (bool)true);
-		ASSERT(options.flags.plus_space, (bool)true);
-		ASSERT(options.flags.plus_sign, (bool)true);
+		ASSERT(state.flags.alternate, (bool)true);
+		ASSERT(state.flags.zero_fill, (bool)true);
+		ASSERT(state.flags.aligned_left, (bool)true);
+		ASSERT(state.flags.plus_space, (bool)true);
+		ASSERT(state.flags.plus_sign, (bool)true);
 	}
 }
 

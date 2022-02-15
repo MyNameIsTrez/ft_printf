@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/20 11:34:27 by sbos          #+#    #+#                 */
-/*   Updated: 2022/02/10 12:44:19 by sbos          ########   odam.nl         */
+/*   Updated: 2022/02/15 12:33:57 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,62 +28,62 @@ Test(parse_precision)
 {
 	{
 		const char *format = ".42d";
-		t_options	options;
+		t_state	state;
 
-		initialize_options(&options);
-		parse_precision(&format, &options);
+		initialize_state(&state);
+		parse_precision(&format, &state);
 
 		// printf("'%7.42d'\n",  0) -> '000000000000000000000000000000000000000000'
 		// printf("'%7.42d'\n", 42) -> '000000000000000000000000000000000000000042'
-		ASSERT(options.precision, 42);
+		ASSERT(state.precision, 42);
 	}
 
 	{
 		const char *format = ".1d";
-		t_options	options;
+		t_state	state;
 
-		initialize_options(&options);
-		parse_precision(&format, &options);
+		initialize_state(&state);
+		parse_precision(&format, &state);
 
 		// printf("%.1d",  0) -> '0'
 		// printf("%.1d", 42) -> '42'
-		ASSERT(options.precision, 1); // TODO: What should this be??
+		ASSERT(state.precision, 1); // TODO: What should this be??
 	}
 
 	{
 		const char *format = ".0d";
-		t_options	options;
+		t_state	state;
 
-		initialize_options(&options);
-		parse_precision(&format, &options);
+		initialize_state(&state);
+		parse_precision(&format, &state);
 
 		// printf("%.0d",  0) -> ''
 		// printf("%.0d", 42) -> '42'
-		ASSERT(options.precision, 0); // TODO: What should this be??
+		ASSERT(state.precision, 0); // TODO: What should this be??
 	}
 
 	{
 		const char *format = ".d";
-		t_options	options;
+		t_state	state;
 
-		initialize_options(&options);
-		parse_precision(&format, &options);
+		initialize_state(&state);
+		parse_precision(&format, &state);
 
 		// printf("%.d",  0) -> ''
 		// printf("%.d", 42) -> '42'
-		ASSERT(options.precision, 0); // TODO: What should this be??
+		ASSERT(state.precision, 0); // TODO: What should this be??
 	}
 
 	{
 		const char *format = "d";
-		t_options	options;
+		t_state	state;
 
-		initialize_options(&options);
-		parse_precision(&format, &options);
+		initialize_state(&state);
+		parse_precision(&format, &state);
 
 		// printf("'%d'\n" , 0) -> '0'
 		// printf("'%.0d'\n", 0) -> ''
-		ASSERT(options.precision, -1);
+		ASSERT(state.precision, -1);
 	}
 }
 

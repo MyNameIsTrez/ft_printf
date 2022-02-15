@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/15 13:05:27 by sbos          #+#    #+#                 */
-/*   Updated: 2022/02/14 15:58:15 by sbos          ########   odam.nl         */
+/*   Updated: 2022/02/15 12:33:57 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,10 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 
-/*
-[cling]$ printf("'%#07x'\n",    (unsigned)0x42) -> '0x00042'
-[cling]$ printf("'%#.7x'\n",    (unsigned)0x42) -> '0x0000042'
-[cling]$ printf("'%#015.7x'\n", (unsigned)0x42) -> '      0x0000042'
-*/
-void	print_with_padding(char *conversion_str, t_options *options,
+void	print_with_padding(char *conversion_str, t_state *state,
 								int total_width)
 {
-	(void)options;
+	(void)state;
 	write(STDOUT_FILENO, conversion_str, (size_t)total_width + 1);
 	// (void)conversion_str;
 	// write(STDOUT_FILENO, buffer, total_width + 1);
@@ -44,13 +39,13 @@ void	print_with_padding(char *conversion_str, t_options *options,
 '+', ' ', precision, '0' has undefined behavior with %p
 
 */
-char	*apply_precision(t_options *options)
+char	*apply_precision(t_state *state)
 {
-	if (options->conversion_type == 's')
+	if (state->conversion_type == 's')
 	{
 
 	}
-	else if (ft_strchr("diuxX", options->conversion_type))
+	else if (ft_strchr("diuxX", state->conversion_type))
 	{
 
 	}
@@ -79,17 +74,17 @@ const t_conversion_function	*get_conversion_table(void)
 	return (conversion_table);
 }
 
-int	print(t_options *options)
+int	print(t_state *state)
 {
 	char	*conversion_str;
 	int		total_width;
 
-	if (ft_strchr(CONVERSION_TYPES, options->conversion_type) != NULL)
+	if (ft_strchr(CONVERSION_TYPES, state->conversion_type) != NULL)
 	{
-		conversion_str = apply_precision(options);
+		conversion_str = apply_precision(state);
 		total_width = ft_max((int)ft_strlen(conversion_str),
-				options->field_width);
-		print_with_padding(conversion_str, options, total_width);
+				state->field_width);
+		print_with_padding(conversion_str, state, total_width);
 		return (total_width);
 	}
 	else
@@ -100,60 +95,60 @@ int	print(t_options *options)
 
 // TODO: Would making conversion_table here a static
 //       prevent calling get_conversion_table() a second time or help somehow?
-void	parse_argument(t_options *options, va_list arg_ptr)
+void	parse_argument(t_state *state, va_list arg_ptr)
 {
 	const t_conversion_function	*conversion_table = get_conversion_table();
 
-	conversion_table[options->conversion_type](arg_ptr, options);
+	conversion_table[state->conversion_type](arg_ptr, state);
 }
 
-void	fix_priorities(t_options *options)
+void	fix_priorities(t_state *state)
 {
-	if (options->flags.zero_fill && options->precision >= 0)
+	if (state->flags.zero_fill && state->precision >= 0)
 	{
-		options->flags.zero_fill = false;
+		state->flags.zero_fill = false;
 	}
 }
 
-void	parse_conversion_type(const char **format, t_options *options)
+void	parse_conversion_type(const char **format, t_state *state)
 {
-	options->conversion_type = (unsigned char)**format;
+	state->conversion_type = (unsigned char)**format;
 }
 
-void	parse_precision(const char **format, t_options *options)
+void	parse_precision(const char **format, t_state *state)
 {
 	if (**format == '.')
 	{
-		options->precision = 0;
+		state->precision = 0;
 		(*format)++;
 	}
 	if (**format != '\0' && ft_isdigit(**format))
 	{
-		options->precision = ft_atoi(*format);
+		state->precision = ft_atoi(*format);
 	}
 }
 
-void	parse_field_width(const char **format, t_options *options)
+void	parse_field_width(const char **format, t_state *state)
 {
-	options->field_width = ft_atoi(*format);
-	if (options->field_width != 0)
-		(*format) += ft_get_digit_count(options->field_width);
+	state->field_width = ft_atoi(*format);
+	if (state->field_width != 0)
+		(*format) += ft_get_digit_count(state->field_width);
 }
 
-void	parse_flags(const char **format, t_options *options)
+void	parse_flags(const char **format, t_state *state)
 {
 	while (**format != '\0' && ft_strchr(FLAGS, **format) != NULL)
 	{
 		if (**format == '#')
-			options->flags.alternate = true;
+			state->flags.alternate = true;
 		if (**format == '0')
-			options->flags.zero_fill = true;
+			state->flags.zero_fill = true;
 		if (**format == '-')
-			options->flags.aligned_left = true;
+			state->flags.aligned_left = true;
 		if (**format == ' ')
-			options->flags.plus_space = true;
+			state->flags.plus_space = true;
 		if (**format == '+')
-			options->flags.plus_sign = true;
+			state->flags.plus_sign = true;
 		(*format)++;
 	}
 }
@@ -162,34 +157,34 @@ void	parse_flags(const char **format, t_options *options)
 // as it signifies using the length of the number/string/etc.
 // printf("%d", 0) -> '0' but
 // printf("%.d", 0) -> '', printf("%.0d", 0) -> '' and printf("%.1d", 0) -> '0'
-void	initialize_options(t_options *options)
+void	initialize_state(t_state *state)
 {
-	options->flags.alternate = false;
-	options->flags.zero_fill = false;
-	options->flags.aligned_left = false;
-	options->flags.plus_space = false;
-	options->flags.plus_sign = false;
-	options->field_width = 0;
-	options->precision = -1;
-	options->conversion_type = '\0';
-	options->negative = false; // TODO: Necessary?
-	options->conversion_str = NULL; // TODO: Necessary?
+	state->flags.alternate = false;
+	state->flags.zero_fill = false;
+	state->flags.aligned_left = false;
+	state->flags.plus_space = false;
+	state->flags.plus_sign = false;
+	state->field_width = 0;
+	state->precision = -1;
+	state->conversion_type = '\0';
+	state->negative = false; // TODO: Necessary?
+	state->conversion_str = NULL; // TODO: Necessary?
 }
 
-// TODO: Switch the arguments format and options around
-void	parse_format(const char **format, t_options *options)
+// TODO: Switch the arguments format and state around
+void	parse_format(const char **format, t_state *state)
 {
-	initialize_options(options);
-	parse_flags(format, options);
-	parse_field_width(format, options);
-	parse_precision(format, options);
-	parse_conversion_type(format, options);
-	fix_priorities(options);
+	initialize_state(state);
+	parse_flags(format, state);
+	parse_field_width(format, state);
+	parse_precision(format, state);
+	parse_conversion_type(format, state);
+	fix_priorities(state);
 }
 
 int	ft_printf(const char *format, ...)
 {
-	t_options		options;
+	t_state		state;
 	int				chars_printed;
 	va_list			arg_ptr;
 
@@ -200,10 +195,10 @@ int	ft_printf(const char *format, ...)
 		if (*format == '%')
 		{
 			format++;
-			parse_format(&format, &options);
-			if (options.conversion_type != '%')
-				parse_argument(&options, arg_ptr);
-			chars_printed += print(&options);
+			parse_format(&format, &state);
+			if (state.conversion_type != '%')
+				parse_argument(&state, arg_ptr);
+			chars_printed += print(&state);
 		}
 		format++;
 	}
