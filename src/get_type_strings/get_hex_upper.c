@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/18 16:43:29 by sbos          #+#    #+#                 */
-/*   Updated: 2022/02/15 12:33:57 by sbos          ########   odam.nl         */
+/*   Updated: 2022/02/15 16:23:43 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 void	get_hex_upper(va_list arg_ptr, t_state *state)
 {
 	get_hex_lower(arg_ptr, state);
-	state->conversion_str = ft_str_upper(state->conversion_str);
+	ft_str_upper(state->conversion_str);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
