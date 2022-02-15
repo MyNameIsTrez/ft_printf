@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   test_get_type_string.c                             :+:    :+:            */
+/*   test_apply_precision.c                             :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2022/02/03 12:44:11 by sbos          #+#    #+#                 */
-/*   Updated: 2022/02/15 14:23:09 by sbos          ########   odam.nl         */
+/*   Created: 2022/01/20 11:34:27 by sbos          #+#    #+#                 */
+/*   Updated: 2022/02/15 16:07:37 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,19 +16,33 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void	test_get_type_string(t_conversion_function get_type_string,
-								char *expected, ...)
+static void	foo(char *expected, const char *format, ...)
 {
-	t_state	state;
-	va_list	arg_ptr;
+	{
+		t_state	state;
+		va_list	arg_ptr;
 
-	initialize_state(&state);
-	va_start(arg_ptr, expected);
-	get_type_string(arg_ptr, &state);
-	char *v = state.conversion_str;
-	ASSERT(v, expected);
-	free(v);
-	va_end(arg_ptr);
+		va_start(arg_ptr, format);
+		format++;
+		parse_format(&format, &state);
+		if (state.conversion_type != '%')
+		{
+			parse_argument(&state, arg_ptr);
+			apply_precision(&state);
+		}
+		va_end(arg_ptr);
+		ASSERT(state.conversion_str, expected);
+	}
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+Test(apply_precision)
+{
+	foo("123", "%.d", 123);
+	foo("123", "%.0d", 123);
+	foo("123", "%.1d", 123);
+	// foo("00123", "%.5d", 123);
 }
 
 ////////////////////////////////////////////////////////////////////////////////

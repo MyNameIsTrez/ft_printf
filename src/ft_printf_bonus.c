@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/15 13:05:27 by sbos          #+#    #+#                 */
-/*   Updated: 2022/02/15 16:03:14 by sbos          ########   odam.nl         */
+/*   Updated: 2022/02/15 16:22:31 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 #include <unistd.h> // write, STDOUT_FILENO
+#include <stdlib.h> // free
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -31,21 +32,25 @@ void	print_with_padding(char *conversion_str, t_state *state,
 
 void	apply_precision(t_state *state)
 {
-	if (state->conversion_type == 's')
-	{
-
-	}
-	else if (ft_strchr(CONVERSION_NUMBER_TYPES, state->conversion_type))
-	{
-
-	}
-	else if (state->conversion_type == 'c')
+	if (state->conversion_type == 'c')
 	{
 
 	}
 	else if (state->conversion_type == 'p')
 	{
 
+	}
+	else if (state->conversion_type == 's')
+	{
+
+	}
+	else if (ft_strchr(CONVERSION_NUMBER_TYPES, state->conversion_type))
+	{
+		// if (state->precision == 0)
+		// {
+		// 	free(state->conversion_str);
+		// 	state->conversion_str = ft_strdup("");
+		// }
 	}
 }
 
