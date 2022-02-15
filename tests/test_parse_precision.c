@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/20 11:34:27 by sbos          #+#    #+#                 */
-/*   Updated: 2022/02/15 12:33:57 by sbos          ########   odam.nl         */
+/*   Updated: 2022/02/15 16:05:16 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ Test(parse_precision)
 		// printf("'%7.42d'\n",  0) -> '000000000000000000000000000000000000000000'
 		// printf("'%7.42d'\n", 42) -> '000000000000000000000000000000000000000042'
 		ASSERT(state.precision, 42);
+		ASSERT(*format, (char)'d')
 	}
 
 	{
@@ -48,6 +49,7 @@ Test(parse_precision)
 		// printf("%.1d",  0) -> '0'
 		// printf("%.1d", 42) -> '42'
 		ASSERT(state.precision, 1); // TODO: What should this be??
+		ASSERT(*format, (char)'d')
 	}
 
 	{
@@ -60,6 +62,7 @@ Test(parse_precision)
 		// printf("%.0d",  0) -> ''
 		// printf("%.0d", 42) -> '42'
 		ASSERT(state.precision, 0); // TODO: What should this be??
+		ASSERT(*format, (char)'d')
 	}
 
 	{
@@ -72,6 +75,7 @@ Test(parse_precision)
 		// printf("%.d",  0) -> ''
 		// printf("%.d", 42) -> '42'
 		ASSERT(state.precision, 0); // TODO: What should this be??
+		ASSERT(*format, (char)'d')
 	}
 
 	{
@@ -84,6 +88,7 @@ Test(parse_precision)
 		// printf("'%d'\n" , 0) -> '0'
 		// printf("'%.0d'\n", 0) -> ''
 		ASSERT(state.precision, -1);
+		ASSERT(*format, (char)'d')
 	}
 }
 
