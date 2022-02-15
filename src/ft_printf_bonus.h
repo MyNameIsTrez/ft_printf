@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/15 13:05:22 by sbos          #+#    #+#                 */
-/*   Updated: 2022/02/15 12:33:57 by sbos          ########   odam.nl         */
+/*   Updated: 2022/02/15 12:51:54 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@
 
 # define FLAGS " -+#0"
 # define CONVERSION_TYPES "cspdiuxX%"
+# define CONVERSION_NUMBER_TYPES "diuxX"
 
 ////////////////////////////////////////////////////////////////////////////////
 

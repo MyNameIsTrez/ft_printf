@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/15 13:05:27 by sbos          #+#    #+#                 */
-/*   Updated: 2022/02/15 12:33:57 by sbos          ########   odam.nl         */
+/*   Updated: 2022/02/15 12:53:40 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,27 +29,24 @@ void	print_with_padding(char *conversion_str, t_state *state,
 	// write(STDOUT_FILENO, buffer, total_width + 1);
 }
 
-/*
-[cling]$ printf("'%.5s'\n", "foobarbaz")
-'fooba'
-(int) 8
-[cling]$ printf("'%.50s'\n", "foobarbaz")
-'foobarbaz'
-
-'+', ' ', precision, '0' has undefined behavior with %p
-
-*/
-char	*apply_precision(t_state *state)
+void	apply_precision(t_state *state)
 {
 	if (state->conversion_type == 's')
 	{
 
 	}
-	else if (ft_strchr("diuxX", state->conversion_type))
+	else if (ft_strchr(CONVERSION_NUMBER_TYPES, state->conversion_type))
 	{
 
 	}
-	return (NULL);
+	else if (state->conversion_type == 'c')
+	{
+
+	}
+	else if (state->conversion_type == 'p')
+	{
+
+	}
 }
 
 // TODO: Can this function get *conversion_table as an arg
@@ -76,21 +73,22 @@ const t_conversion_function	*get_conversion_table(void)
 
 int	print(t_state *state)
 {
-	char	*conversion_str;
-	int		total_width;
+	// int		total_width;
 
-	if (ft_strchr(CONVERSION_TYPES, state->conversion_type) != NULL)
-	{
-		conversion_str = apply_precision(state);
-		total_width = ft_max((int)ft_strlen(conversion_str),
-				state->field_width);
-		print_with_padding(conversion_str, state, total_width);
-		return (total_width);
-	}
-	else
-	{
-		return (42);
-	}
+	// if (ft_strchr(CONVERSION_TYPES, state->conversion_type) != NULL)
+	// {
+	// 	apply_precision(state);
+	// 	total_width = ft_max((int)ft_strlen(conversion_str),
+	// 			state->field_width);
+	// 	print_with_padding(conversion_str, state, total_width);
+	// 	return (total_width);
+	// }
+	// else
+	// {
+	// 	return (42);
+	// }
+	(void)state;
+	return (42);
 }
 
 // TODO: Would making conversion_table here a static
@@ -141,13 +139,13 @@ void	parse_flags(const char **format, t_state *state)
 	{
 		if (**format == '#')
 			state->flags.alternate = true;
-		if (**format == '0')
+		else if (**format == '0')
 			state->flags.zero_fill = true;
-		if (**format == '-')
+		else if (**format == '-')
 			state->flags.aligned_left = true;
-		if (**format == ' ')
+		else if (**format == ' ')
 			state->flags.plus_space = true;
-		if (**format == '+')
+		else if (**format == '+')
 			state->flags.plus_sign = true;
 		(*format)++;
 	}
@@ -184,9 +182,9 @@ void	parse_format(const char **format, t_state *state)
 
 int	ft_printf(const char *format, ...)
 {
-	t_state		state;
-	int				chars_printed;
-	va_list			arg_ptr;
+	t_state	state;
+	int		chars_printed;
+	va_list	arg_ptr;
 
 	chars_printed = 0;
 	va_start(arg_ptr, format);
