@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/20 11:34:27 by sbos          #+#    #+#                 */
-/*   Updated: 2022/02/15 15:47:54 by sbos          ########   odam.nl         */
+/*   Updated: 2022/02/15 17:54:53 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ Test(parse_format)
 		ASSERT(state.flags.plus_space, (bool)true);
 		ASSERT(state.flags.plus_sign, (bool)true);
 
-		ASSERT(state.field_width, 42);
-		ASSERT(state.precision, -1);
+		ASSERT(state.field_width, (size_t)42);
+		ASSERT(state.precision, (ssize_t)-1);
 		ASSERT(*format, (char)'d');
 	}
 
@@ -51,8 +51,8 @@ Test(parse_format)
 		ASSERT(state.flags.plus_space, (bool)false);
 		ASSERT(state.flags.plus_sign, (bool)false);
 
-		ASSERT(state.field_width, 42);
-		ASSERT(state.precision, -1);
+		ASSERT(state.field_width, (size_t)42);
+		ASSERT(state.precision, (ssize_t)-1);
 		ASSERT(*format, (char)'d');
 	}
 
@@ -66,8 +66,8 @@ Test(parse_format)
 		ASSERT(state.flags.plus_space, (bool)false);
 		ASSERT(state.flags.plus_sign, (bool)false);
 
-		ASSERT(state.field_width, 0);
-		ASSERT(state.precision, -1);
+		ASSERT(state.field_width, (size_t)0);
+		ASSERT(state.precision, (ssize_t)-1);
 		ASSERT(*format, (char)'d');
 	}
 
@@ -81,8 +81,8 @@ Test(parse_format)
 		ASSERT(state.flags.plus_space, (bool)false);
 		ASSERT(state.flags.plus_sign, (bool)false);
 
-		ASSERT(state.field_width, 0);
-		ASSERT(state.precision, -1);
+		ASSERT(state.field_width, (size_t)0);
+		ASSERT(state.precision, (ssize_t)-1);
 		ASSERT(*format, (char)'d');
 	}
 }

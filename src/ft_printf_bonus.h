@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/15 13:05:22 by sbos          #+#    #+#                 */
-/*   Updated: 2022/02/15 12:51:54 by sbos          ########   odam.nl         */
+/*   Updated: 2022/02/15 17:51:34 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 # include <stdbool.h>	// bool
+# include <sys/types.h>	// ssize_t
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -51,8 +52,8 @@ typedef struct s_flags
 typedef struct s_state
 {
 	t_flags			flags;
-	int				field_width;
-	int				precision;
+	size_t			field_width;
+	ssize_t			precision;
 	unsigned char	conversion_type;
 	bool			negative;
 	char			*conversion_str;

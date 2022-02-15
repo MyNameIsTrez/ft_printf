@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/20 11:34:27 by sbos          #+#    #+#                 */
-/*   Updated: 2022/02/15 12:33:57 by sbos          ########   odam.nl         */
+/*   Updated: 2022/02/15 17:55:07 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ Test(parse_field_width)
 		initialize_state(&state);
 		parse_field_width(&format, &state);
 
-		ASSERT(state.field_width, 42);
+		ASSERT(state.field_width, (size_t)42);
 		ASSERT(*format, (char)'d');
 	}
 
@@ -36,7 +36,7 @@ Test(parse_field_width)
 		initialize_state(&state);
 		parse_field_width(&format, &state);
 
-		ASSERT(state.field_width, 0);
+		ASSERT(state.field_width, (size_t)0);
 		ASSERT(*format, (char)'d');
 	}
 }

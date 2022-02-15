@@ -29,8 +29,8 @@ Test(initialize_state)
 		ASSERT(state.flags.plus_space, (bool)false);
 		ASSERT(state.flags.plus_sign, (bool)false);
 
-		ASSERT(state.field_width, 0);
-		ASSERT(state.precision, -1);
+		ASSERT(state.field_width, (size_t)0);
+		ASSERT(state.precision, (ssize_t)-1);
 	}
 }
 
