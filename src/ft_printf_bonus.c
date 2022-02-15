@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/15 13:05:27 by sbos          #+#    #+#                 */
-/*   Updated: 2022/02/15 12:53:40 by sbos          ########   odam.nl         */
+/*   Updated: 2022/02/15 16:03:14 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,9 +120,10 @@ void	parse_precision(const char **format, t_state *state)
 		state->precision = 0;
 		(*format)++;
 	}
-	if (**format != '\0' && ft_isdigit(**format))
+	if (ft_isdigit(**format))
 	{
 		state->precision = ft_atoi(*format);
+		(*format) += ft_get_digit_count(state->precision);
 	}
 }
 
@@ -195,7 +196,10 @@ int	ft_printf(const char *format, ...)
 			format++;
 			parse_format(&format, &state);
 			if (state.conversion_type != '%')
+			{
 				parse_argument(&state, arg_ptr);
+				// apply_precision(&state);
+			}
 			chars_printed += print(&state);
 		}
 		format++;
