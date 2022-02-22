@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/15 13:05:27 by sbos          #+#    #+#                 */
-/*   Updated: 2022/02/15 16:52:55 by sbos          ########   odam.nl         */
+/*   Updated: 2022/02/22 15:09:17 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,29 @@ void	print_with_padding(char *conversion_str, t_state *state,
 	// write(STDOUT_FILENO, buffer, total_width + 1);
 }
 
+void	apply_precision_numbers(t_state *state)
+{
+	size_t	zeros_to_add;
+
+	if (state->precision == 0 && ft_str_eq(state->conversion_str, "0"))
+	{
+		free(state->conversion_str);
+		state->conversion_str = ft_strdup("");
+	}
+	else if (state->precision >= 1)
+	{
+		zeros_to_add = (size_t)state->precision - ft_strlen(
+				state->conversion_str);
+		if (zeros_to_add > 0)
+		{
+			// foo = ft_strjoin(ft_str_repeat("0", zeros_to_add),
+			//		state->conversion_str);
+			// free(state->conversion_str);
+			// state->conversion_str = foo;
+		}
+	}
+}
+
 void	apply_precision(t_state *state)
 {
 	if (state->conversion_type == 'c')
@@ -46,11 +69,7 @@ void	apply_precision(t_state *state)
 	}
 	else if (ft_strchr(CONVERSION_NUMBER_TYPES, state->conversion_type))
 	{
-		if (ft_streq(state->conversion_str, "0") && state->precision == 0)
-		{
-			free(state->conversion_str);
-			state->conversion_str = ft_strdup("");
-		}
+		apply_precision_numbers(state);
 	}
 }
 
@@ -134,9 +153,9 @@ void	parse_precision(const char **format, t_state *state)
 
 void	parse_field_width(const char **format, t_state *state)
 {
-	state->field_width = ft_atoi(*format);
+	state->field_width = (size_t)ft_atoi(*format);
 	if (state->field_width != 0)
-		(*format) += ft_get_digit_count(state->field_width);
+		(*format) += ft_get_digit_count((intmax_t)state->field_width);
 }
 
 void	parse_flags(const char **format, t_state *state)
