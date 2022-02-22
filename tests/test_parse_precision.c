@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/20 11:34:27 by sbos          #+#    #+#                 */
-/*   Updated: 2022/02/15 17:54:39 by sbos          ########   odam.nl         */
+/*   Updated: 2022/02/22 15:18:03 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ Test(parse_precision)
 
 		// printf("%.1d",  0) -> '0'
 		// printf("%.1d", 42) -> '42'
-		ASSERT(state.precision, (ssize_t)1); // TODO: What should this be??
+		ASSERT(state.precision, (ssize_t)1);
 		ASSERT(*format, (char)'d')
 	}
 
@@ -61,7 +61,7 @@ Test(parse_precision)
 
 		// printf("%.0d",  0) -> ''
 		// printf("%.0d", 42) -> '42'
-		ASSERT(state.precision, (ssize_t)0); // TODO: What should this be??
+		ASSERT(state.precision, (ssize_t)0);
 		ASSERT(*format, (char)'d')
 	}
 
@@ -74,7 +74,7 @@ Test(parse_precision)
 
 		// printf("%.d",  0) -> ''
 		// printf("%.d", 42) -> '42'
-		ASSERT(state.precision, (ssize_t)0); // TODO: What should this be??
+		ASSERT(state.precision, (ssize_t)0);
 		ASSERT(*format, (char)'d')
 	}
 
