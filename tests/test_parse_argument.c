@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/20 11:34:27 by sbos          #+#    #+#                 */
-/*   Updated: 2022/02/15 14:19:55 by sbos          ########   odam.nl         */
+/*   Updated: 2022/02/22 15:40:32 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ void	foo(bool expected_negative, char *expected, const char *format, ...)
 	parse_argument(&state, arg_ptr);
 	va_end(arg_ptr);
 
-	ASSERT(state.negative, expected_negative);
-	ASSERT(state.conversion_str, expected);
+	massert(state.negative, expected_negative);
+	massert(state.conversion_str, expected);
 }
 
 Test(parse_argument)

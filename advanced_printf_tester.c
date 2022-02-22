@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/05 17:14:55 by sbos          #+#    #+#                 */
-/*   Updated: 2022/02/08 17:21:20 by sbos          ########   odam.nl         */
+/*   Updated: 2022/02/22 15:40:32 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,9 +78,9 @@ void q(void)
 	munmap(glob_var_0, sizeof(glob_var_0));
 	munmap(glob_var_1, sizeof(glob_var_1));
 
-	ASSERT((int)ft_printf_return, (int)file_size); // check if return value correct with output
-	ASSERT((int)ft_printf_return, (int)printf_return); // check if return value correct
-	ASSERT(ft_buf, buf);
+	massert((int)ft_printf_return, (int)file_size); // check if return value correct with output
+	massert((int)ft_printf_return, (int)printf_return); // check if return value correct
+	massert(ft_buf, buf);
 }
 
 ////////////////////////////////////////////////////////////////////////////////

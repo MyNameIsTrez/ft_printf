@@ -23,14 +23,14 @@ Test(initialize_state)
 
 		initialize_state(&state);
 
-		ASSERT(state.flags.alternate, (bool)false);
-		ASSERT(state.flags.zero_fill, (bool)false);
-		ASSERT(state.flags.aligned_left, (bool)false);
-		ASSERT(state.flags.plus_space, (bool)false);
-		ASSERT(state.flags.plus_sign, (bool)false);
+		massert(state.flags.alternate, (bool)false);
+		massert(state.flags.zero_fill, (bool)false);
+		massert(state.flags.aligned_left, (bool)false);
+		massert(state.flags.plus_space, (bool)false);
+		massert(state.flags.plus_sign, (bool)false);
 
-		ASSERT(state.field_width, (size_t)0);
-		ASSERT(state.precision, (ssize_t)-1);
+		massert(state.field_width, (size_t)0);
+		massert(state.precision, (ssize_t)-1);
 	}
 }
 
