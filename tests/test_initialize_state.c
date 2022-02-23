@@ -19,18 +19,18 @@
 Test(initialize_state)
 {
 	{
-		t_state	state;
+		t_conversion	conversion;
 
-		initialize_state(&state);
+		initialize_state(&conversion);
 
-		massert(state.flags.alternate, (bool)false);
-		massert(state.flags.zero_fill, (bool)false);
-		massert(state.flags.aligned_left, (bool)false);
-		massert(state.flags.plus_space, (bool)false);
-		massert(state.flags.plus_sign, (bool)false);
+		massert(conversion.options.flags.alternate, (bool)false);
+		massert(conversion.options.flags.zero_fill, (bool)false);
+		massert(conversion.options.flags.aligned_left, (bool)false);
+		massert(conversion.options.flags.plus_space, (bool)false);
+		massert(conversion.options.flags.plus_sign, (bool)false);
 
-		massert(state.field_width, (size_t)0);
-		massert(state.precision, (ssize_t)-1);
+		massert(conversion.options.field_width, (size_t)0);
+		massert(conversion.options.precision, (ssize_t)-1);
 	}
 }
 

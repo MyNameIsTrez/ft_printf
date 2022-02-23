@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/20 11:34:27 by sbos          #+#    #+#                 */
-/*   Updated: 2022/02/22 15:40:32 by sbos          ########   odam.nl         */
+/*   Updated: 2022/02/23 17:29:28 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,73 +16,73 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 
-static t_state	foo(const char	**format, ...)
+static t_conversion	foo(const char	**format, ...)
 {
-	t_state	state;
+	t_conversion	conversion;
 
-	parse_format(format, &state);
-	return (state);
+	parse_format(format, &conversion);
+	return (conversion);
 }
 
 Test(parse_format)
 {
 	{
 		const char	*format = "#0- +42d";
-		t_state	state = foo(&format, 1337);
+		t_conversion	conversion = foo(&format, 1337);
 
-		massert(state.flags.alternate, (bool)true);
-		massert(state.flags.zero_fill, (bool)true);
-		massert(state.flags.aligned_left, (bool)true);
-		massert(state.flags.plus_space, (bool)true);
-		massert(state.flags.plus_sign, (bool)true);
+		massert(conversion.options.flags.alternate, (bool)true);
+		massert(conversion.options.flags.zero_fill, (bool)true);
+		massert(conversion.options.flags.aligned_left, (bool)true);
+		massert(conversion.options.flags.plus_space, (bool)true);
+		massert(conversion.options.flags.plus_sign, (bool)true);
 
-		massert(state.field_width, (size_t)42);
-		massert(state.precision, (ssize_t)-1);
+		massert(conversion.options.field_width, (size_t)42);
+		massert(conversion.options.precision, (ssize_t)-1);
 		massert(*format, (char)'d');
 	}
 
 	{
 		const char	*format = "42d";
-		t_state	state = foo(&format, 1337);
+		t_conversion	conversion = foo(&format, 1337);
 
-		massert(state.flags.alternate, (bool)false);
-		massert(state.flags.zero_fill, (bool)false);
-		massert(state.flags.aligned_left, (bool)false);
-		massert(state.flags.plus_space, (bool)false);
-		massert(state.flags.plus_sign, (bool)false);
+		massert(conversion.options.flags.alternate, (bool)false);
+		massert(conversion.options.flags.zero_fill, (bool)false);
+		massert(conversion.options.flags.aligned_left, (bool)false);
+		massert(conversion.options.flags.plus_space, (bool)false);
+		massert(conversion.options.flags.plus_sign, (bool)false);
 
-		massert(state.field_width, (size_t)42);
-		massert(state.precision, (ssize_t)-1);
+		massert(conversion.options.field_width, (size_t)42);
+		massert(conversion.options.precision, (ssize_t)-1);
 		massert(*format, (char)'d');
 	}
 
 	{
 		const char	*format = "d";
-		t_state	state = foo(&format, 1337);
+		t_conversion	conversion = foo(&format, 1337);
 
-		massert(state.flags.alternate, (bool)false);
-		massert(state.flags.zero_fill, (bool)false);
-		massert(state.flags.aligned_left, (bool)false);
-		massert(state.flags.plus_space, (bool)false);
-		massert(state.flags.plus_sign, (bool)false);
+		massert(conversion.options.flags.alternate, (bool)false);
+		massert(conversion.options.flags.zero_fill, (bool)false);
+		massert(conversion.options.flags.aligned_left, (bool)false);
+		massert(conversion.options.flags.plus_space, (bool)false);
+		massert(conversion.options.flags.plus_sign, (bool)false);
 
-		massert(state.field_width, (size_t)0);
-		massert(state.precision, (ssize_t)-1);
+		massert(conversion.options.field_width, (size_t)0);
+		massert(conversion.options.precision, (ssize_t)-1);
 		massert(*format, (char)'d');
 	}
 
 	{
 		const char	*format = "0d";
-		t_state	state = foo(&format, 1337);
+		t_conversion	conversion = foo(&format, 1337);
 
-		massert(state.flags.alternate, (bool)false);
-		massert(state.flags.zero_fill, (bool)true);
-		massert(state.flags.aligned_left, (bool)false);
-		massert(state.flags.plus_space, (bool)false);
-		massert(state.flags.plus_sign, (bool)false);
+		massert(conversion.options.flags.alternate, (bool)false);
+		massert(conversion.options.flags.zero_fill, (bool)true);
+		massert(conversion.options.flags.aligned_left, (bool)false);
+		massert(conversion.options.flags.plus_space, (bool)false);
+		massert(conversion.options.flags.plus_sign, (bool)false);
 
-		massert(state.field_width, (size_t)0);
-		massert(state.precision, (ssize_t)-1);
+		massert(conversion.options.field_width, (size_t)0);
+		massert(conversion.options.precision, (ssize_t)-1);
 		massert(*format, (char)'d');
 	}
 }

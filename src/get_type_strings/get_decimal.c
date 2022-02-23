@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/18 16:43:29 by sbos          #+#    #+#                 */
-/*   Updated: 2022/02/15 14:17:07 by sbos          ########   odam.nl         */
+/*   Updated: 2022/02/23 17:29:28 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,15 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void	get_decimal(va_list arg_ptr, t_state *state)
+void	get_decimal(va_list arg_ptr, t_conversion *conversion)
 {
 	intmax_t const	nbr = va_arg(arg_ptr, int);
 
-	state->negative = nbr < 0;
+	conversion->options.negative = nbr < 0;
 	if (nbr < 0)
-		state->conversion_str = ft_nbr_to_str(-nbr, 10);
+		conversion->conversion_str = ft_nbr_to_str(-nbr, 10);
 	else
-		state->conversion_str = ft_nbr_to_str(nbr, 10);
+		conversion->conversion_str = ft_nbr_to_str(nbr, 10);
 }
 
 ////////////////////////////////////////////////////////////////////////////////

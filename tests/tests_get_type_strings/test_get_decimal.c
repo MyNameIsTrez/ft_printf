@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/20 11:34:27 by sbos          #+#    #+#                 */
-/*   Updated: 2022/02/22 15:40:32 by sbos          ########   odam.nl         */
+/*   Updated: 2022/02/23 17:29:28 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,14 @@
 static void	foo(bool expected_negative, t_conversion_function get_type_string,
 					char *expected, ...)
 {
-	t_state	state;
+	t_conversion	conversion;
 	va_list	arg_ptr;
 
-	initialize_state(&state);
+	initialize_state(&conversion);
 	va_start(arg_ptr, expected);
-	get_type_string(arg_ptr, &state);
-	char *v = state.conversion_str;
-	massert(state.negative, expected_negative);
+	get_type_string(arg_ptr, &conversion);
+	char *v = conversion.conversion_str;
+	massert(conversion.options.negative, expected_negative);
 	massert(v, expected);
 	free(v);
 	va_end(arg_ptr);

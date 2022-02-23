@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/15 13:05:27 by sbos          #+#    #+#                 */
-/*   Updated: 2022/02/22 15:09:17 by sbos          ########   odam.nl         */
+/*   Updated: 2022/02/23 17:29:28 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,55 +21,55 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void	print_with_padding(char *conversion_str, t_state *state,
+void	print_with_padding(char *conversion_str, t_conversion *conversion,
 								int total_width)
 {
-	(void)state;
+	(void)conversion;
 	write(STDOUT_FILENO, conversion_str, (size_t)total_width + 1);
 	// (void)conversion_str;
 	// write(STDOUT_FILENO, buffer, total_width + 1);
 }
 
-void	apply_precision_numbers(t_state *state)
+void	apply_precision_numbers(t_conversion *conversion)
 {
 	size_t	zeros_to_add;
 
-	if (state->precision == 0 && ft_str_eq(state->conversion_str, "0"))
+	if (conversion->options.precision == 0 && ft_str_eq(conversion->conversion_str, "0"))
 	{
-		free(state->conversion_str);
-		state->conversion_str = ft_strdup("");
+		free(conversion->conversion_str);
+		conversion->conversion_str = ft_strdup("");
 	}
-	else if (state->precision >= 1)
+	else if (conversion->options.precision >= 1)
 	{
-		zeros_to_add = (size_t)state->precision - ft_strlen(
-				state->conversion_str);
+		zeros_to_add = (size_t)conversion->options.precision - ft_strlen(
+				conversion->conversion_str);
 		if (zeros_to_add > 0)
 		{
 			// foo = ft_strjoin(ft_str_repeat("0", zeros_to_add),
-			//		state->conversion_str);
-			// free(state->conversion_str);
-			// state->conversion_str = foo;
+			//		conversion->conversion_str);
+			// free(conversion->conversion_str);
+			// conversion->conversion_str = foo;
 		}
 	}
 }
 
-void	apply_precision(t_state *state)
+void	apply_precision(t_conversion *conversion)
 {
-	if (state->conversion_type == 'c')
+	if (conversion->options.type == 'c')
 	{
 
 	}
-	else if (state->conversion_type == 'p')
+	else if (conversion->options.type == 'p')
 	{
 
 	}
-	else if (state->conversion_type == 's')
+	else if (conversion->options.type == 's')
 	{
 
 	}
-	else if (ft_strchr(CONVERSION_NUMBER_TYPES, state->conversion_type))
+	else if (ft_strchr(CONVERSION_NUMBER_TYPES, conversion->options.type))
 	{
-		apply_precision_numbers(state);
+		apply_precision_numbers(conversion);
 	}
 }
 
@@ -95,121 +95,129 @@ const t_conversion_function	*get_conversion_table(void)
 	return (conversion_table);
 }
 
-int	print(t_state *state)
+int	print_conversion(t_conversion *conversion)
 {
 	// int		total_width;
 
-	// if (ft_strchr(CONVERSION_TYPES, state->conversion_type) != NULL)
+	// if (ft_strchr(CONVERSION_TYPES, conversion->options.type) != NULL)
 	// {
-	// 	apply_precision(state);
+	// 	apply_precision(conversion);
 	// 	total_width = ft_max((int)ft_strlen(conversion_str),
-	// 			state->field_width);
-	// 	print_with_padding(conversion_str, state, total_width);
+	// 			conversion->options.field_width);
+	// 	print_with_padding(conversion_str, conversion, total_width);
 	// 	return (total_width);
 	// }
 	// else
 	// {
 	// 	return (42);
 	// }
-	(void)state;
+	(void)conversion;
 	return (42);
 }
 
 // TODO: Would making conversion_table here a static
 //       prevent calling get_conversion_table() a second time or help somehow?
-void	parse_argument(t_state *state, va_list arg_ptr)
+void	parse_argument(t_conversion *conversion, va_list arg_ptr)
 {
 	const t_conversion_function	*conversion_table = get_conversion_table();
 
-	conversion_table[state->conversion_type](arg_ptr, state);
+	conversion_table[conversion->options.type](arg_ptr, conversion);
 }
 
-void	fix_priorities(t_state *state)
+void	fix_priorities(t_conversion *conversion)
 {
-	if (state->flags.zero_fill && state->precision >= 0)
+	if (conversion->options.flags.zero_fill && conversion->options.precision >= 0)
 	{
-		state->flags.zero_fill = false;
+		conversion->options.flags.zero_fill = false;
 	}
 }
 
-void	parse_conversion_type(const char **format, t_state *state)
+void	parse_conversion_type(const char **format, t_conversion *conversion)
 {
-	state->conversion_type = (unsigned char)**format;
+	conversion->options.type = (unsigned char)**format;
 }
 
-void	parse_precision(const char **format, t_state *state)
+void	parse_precision(const char **format, t_conversion *conversion)
 {
 	if (**format == '.')
 	{
-		state->precision = 0;
+		conversion->options.precision = 0;
 		(*format)++;
 	}
 	if (ft_isdigit(**format))
 	{
-		state->precision = ft_atoi(*format);
-		(*format) += ft_get_digit_count(state->precision);
+		conversion->options.precision = ft_atoi(*format);
+		(*format) += ft_get_digit_count(conversion->options.precision);
 	}
 }
 
-void	parse_field_width(const char **format, t_state *state)
+void	parse_field_width(const char **format, t_conversion *conversion)
 {
-	state->field_width = (size_t)ft_atoi(*format);
-	if (state->field_width != 0)
-		(*format) += ft_get_digit_count((intmax_t)state->field_width);
+	conversion->options.field_width = (size_t)ft_atoi(*format);
+	if (conversion->options.field_width != 0)
+		(*format) += ft_get_digit_count((intmax_t)conversion->options.field_width);
 }
 
-void	parse_flags(const char **format, t_state *state)
+void	parse_flags(const char **format, t_conversion *conversion)
 {
 	while (**format != '\0' && ft_strchr(FLAGS, **format) != NULL)
 	{
 		if (**format == '#')
-			state->flags.alternate = true;
+			conversion->options.flags.alternate = true;
 		else if (**format == '0')
-			state->flags.zero_fill = true;
+			conversion->options.flags.zero_fill = true;
 		else if (**format == '-')
-			state->flags.aligned_left = true;
+			conversion->options.flags.aligned_left = true;
 		else if (**format == ' ')
-			state->flags.plus_space = true;
+			conversion->options.flags.plus_space = true;
 		else if (**format == '+')
-			state->flags.plus_sign = true;
+			conversion->options.flags.plus_sign = true;
 		(*format)++;
 	}
 }
 
-// precision is -1 by default instead of 0
-// as it signifies using the length of the number/string/etc.
-// printf("%d", 0) -> '0' but
-// printf("%.d", 0) -> '', printf("%.0d", 0) -> '' and printf("%.1d", 0) -> '0'
-void	initialize_state(t_state *state)
+void	initialize_flags(t_flags *flags)
 {
-	state->flags.alternate = false;
-	state->flags.zero_fill = false;
-	state->flags.aligned_left = false;
-	state->flags.plus_space = false;
-	state->flags.plus_sign = false;
-	state->field_width = 0;
-	state->precision = -1;
-	state->conversion_type = '\0';
-	state->negative = false; // TODO: Necessary?
-	state->conversion_str = NULL; // TODO: Necessary?
+	flags->alternate = false;
+	flags->zero_fill = false;
+	flags->aligned_left = false;
+	flags->plus_space = false;
+	flags->plus_sign = false;
 }
 
-// TODO: Switch the arguments format and state around
-void	parse_format(const char **format, t_state *state)
+// precision is -1 by default instead of 0 cause:
+// printf("'%d'\n", 0) -> '0' but printf("'%.d'\n", 0) -> ''
+void	initialize_options(t_options *options)
 {
-	initialize_state(state);
-	parse_flags(format, state);
-	parse_field_width(format, state);
-	parse_precision(format, state);
-	parse_conversion_type(format, state);
-	fix_priorities(state);
+	initialize_flags(&options->flags);
+	options->field_width = 0;
+	options->precision = -1;
+	options->type = '\0';
+	options->negative = false; // TODO: Necessary?
+}
+
+void	initialize_state(t_conversion *conversion)
+{
+	initialize_options(&conversion->options);
+	conversion->conversion_str = NULL; // TODO: Necessary?
+}
+
+// TODO: Switch the arguments format and conversion around
+void	parse_format(const char **format, t_conversion *conversion)
+{
+	initialize_state(conversion);
+	parse_flags(format, conversion);
+	parse_field_width(format, conversion);
+	parse_precision(format, conversion);
+	parse_conversion_type(format, conversion);
+	fix_priorities(conversion);
 }
 
 int	ft_printf(const char *format, ...)
 {
-	t_state	state;
-	int		chars_printed;
-	va_list	arg_ptr;
+	t_conversion	conversion;
+	int				chars_printed;
+	va_list			arg_ptr;
 
 	chars_printed = 0;
 	va_start(arg_ptr, format);
@@ -218,13 +226,13 @@ int	ft_printf(const char *format, ...)
 		if (*format == '%')
 		{
 			format++;
-			parse_format(&format, &state);
-			if (state.conversion_type != '%')
+			parse_format(&format, &conversion);
+			if (conversion.options.type != '%')
 			{
-				parse_argument(&state, arg_ptr);
-				// apply_precision(&state);
+				parse_argument(&conversion, arg_ptr);
+				// apply_precision(&conversion);
 			}
-			chars_printed += print(&state);
+			chars_printed += print_conversion(&conversion);
 		}
 		format++;
 	}

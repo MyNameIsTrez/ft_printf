@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/20 11:34:27 by sbos          #+#    #+#                 */
-/*   Updated: 2022/02/22 15:40:32 by sbos          ########   odam.nl         */
+/*   Updated: 2022/02/23 17:29:28 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,19 +18,19 @@
 
 void	foo(bool expected_negative, char *expected, const char *format, ...)
 {
-	t_state	state;
+	t_conversion	conversion;
 	va_list	arg_ptr;
 
-	initialize_state(&state);
-	parse_conversion_type(&format, &state);
-	fix_priorities(&state);
+	initialize_state(&conversion);
+	parse_conversion_type(&format, &conversion);
+	fix_priorities(&conversion);
 
 	va_start(arg_ptr, format);
-	parse_argument(&state, arg_ptr);
+	parse_argument(&conversion, arg_ptr);
 	va_end(arg_ptr);
 
-	massert(state.negative, expected_negative);
-	massert(state.conversion_str, expected);
+	massert(conversion.options.negative, expected_negative);
+	massert(conversion.conversion_str, expected);
 }
 
 Test(parse_argument)

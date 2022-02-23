@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/20 11:34:27 by sbos          #+#    #+#                 */
-/*   Updated: 2022/02/22 15:40:32 by sbos          ########   odam.nl         */
+/*   Updated: 2022/02/23 17:27:37 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,19 +19,19 @@
 static void	foo(char *expected, const char *format, ...)
 {
 	{
-		t_state	state;
+		t_conversion	conversion;
 		va_list	arg_ptr;
 
 		va_start(arg_ptr, format);
 		format++;
-		parse_format(&format, &state);
-		if (state.conversion_type != '%')
+		parse_format(&format, &conversion);
+		if (conversion.options.type != '%')
 		{
-			parse_argument(&state, arg_ptr);
-			apply_precision(&state);
+			parse_argument(&conversion, arg_ptr);
+			apply_precision(&conversion);
 		}
 		va_end(arg_ptr);
-		massert(state.conversion_str, expected);
+		massert(conversion.conversion_str, expected);
 	}
 }
 

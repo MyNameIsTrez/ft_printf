@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/20 11:34:27 by sbos          #+#    #+#                 */
-/*   Updated: 2022/02/22 15:40:32 by sbos          ########   odam.nl         */
+/*   Updated: 2022/02/23 17:29:28 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,66 +28,66 @@ Test(parse_precision)
 {
 	{
 		const char *format = ".42d";
-		t_state	state;
+		t_conversion	conversion;
 
-		initialize_state(&state);
-		parse_precision(&format, &state);
+		initialize_state(&conversion);
+		parse_precision(&format, &conversion);
 
 		// printf("'%7.42d'\n",  0) -> '000000000000000000000000000000000000000000'
 		// printf("'%7.42d'\n", 42) -> '000000000000000000000000000000000000000042'
-		massert(state.precision, 42l);
+		massert(conversion.options.precision, 42l);
 		massert(*format, (char)'d')
 	}
 
 	{
 		const char *format = ".1d";
-		t_state	state;
+		t_conversion	conversion;
 
-		initialize_state(&state);
-		parse_precision(&format, &state);
+		initialize_state(&conversion);
+		parse_precision(&format, &conversion);
 
 		// printf("%.1d",  0) -> '0'
 		// printf("%.1d", 42) -> '42'
-		massert(state.precision, (ssize_t)1);
+		massert(conversion.options.precision, (ssize_t)1);
 		massert(*format, (char)'d')
 	}
 
 	{
 		const char *format = ".0d";
-		t_state	state;
+		t_conversion	conversion;
 
-		initialize_state(&state);
-		parse_precision(&format, &state);
+		initialize_state(&conversion);
+		parse_precision(&format, &conversion);
 
 		// printf("%.0d",  0) -> ''
 		// printf("%.0d", 42) -> '42'
-		massert(state.precision, (ssize_t)0);
+		massert(conversion.options.precision, (ssize_t)0);
 		massert(*format, (char)'d')
 	}
 
 	{
 		const char *format = ".d";
-		t_state	state;
+		t_conversion	conversion;
 
-		initialize_state(&state);
-		parse_precision(&format, &state);
+		initialize_state(&conversion);
+		parse_precision(&format, &conversion);
 
 		// printf("%.d",  0) -> ''
 		// printf("%.d", 42) -> '42'
-		massert(state.precision, (ssize_t)0);
+		massert(conversion.options.precision, (ssize_t)0);
 		massert(*format, (char)'d')
 	}
 
 	{
 		const char *format = "d";
-		t_state	state;
+		t_conversion	conversion;
 
-		initialize_state(&state);
-		parse_precision(&format, &state);
+		initialize_state(&conversion);
+		parse_precision(&format, &conversion);
 
 		// printf("'%d'\n" , 0) -> '0'
 		// printf("'%.0d'\n", 0) -> ''
-		massert(state.precision, (ssize_t)-1);
+		massert(conversion.options.precision, (ssize_t)-1);
 		massert(*format, (char)'d')
 	}
 }
