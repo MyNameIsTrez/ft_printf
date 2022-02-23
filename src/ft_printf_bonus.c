@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/15 13:05:27 by sbos          #+#    #+#                 */
-/*   Updated: 2022/02/23 17:29:28 by sbos          ########   odam.nl         */
+/*   Updated: 2022/02/23 17:38:03 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,10 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void	print_with_padding(char *conversion_str, t_conversion *conversion,
-								int total_width)
+int	print_conversion(t_conversion *conversion)
 {
 	(void)conversion;
-	write(STDOUT_FILENO, conversion_str, (size_t)total_width + 1);
-	// (void)conversion_str;
-	// write(STDOUT_FILENO, buffer, total_width + 1);
+	return (42);
 }
 
 void	apply_precision_numbers(t_conversion *conversion)
@@ -93,26 +90,6 @@ const t_conversion_function	*get_conversion_table(void)
 	};
 
 	return (conversion_table);
-}
-
-int	print_conversion(t_conversion *conversion)
-{
-	// int		total_width;
-
-	// if (ft_strchr(CONVERSION_TYPES, conversion->options.type) != NULL)
-	// {
-	// 	apply_precision(conversion);
-	// 	total_width = ft_max((int)ft_strlen(conversion_str),
-	// 			conversion->options.field_width);
-	// 	print_with_padding(conversion_str, conversion, total_width);
-	// 	return (total_width);
-	// }
-	// else
-	// {
-	// 	return (42);
-	// }
-	(void)conversion;
-	return (42);
 }
 
 // TODO: Would making conversion_table here a static
