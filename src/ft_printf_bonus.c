@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/15 13:05:27 by sbos          #+#    #+#                 */
-/*   Updated: 2022/02/23 17:38:03 by sbos          ########   odam.nl         */
+/*   Updated: 2022/02/23 18:04:22 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 int	print_conversion(t_conversion *conversion)
 {
 	(void)conversion;
+	write(STDOUT_FILENO, "foo", 3);
 	return (42);
 }
 
