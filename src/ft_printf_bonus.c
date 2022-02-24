@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/15 13:05:27 by sbos          #+#    #+#                 */
-/*   Updated: 2022/02/24 18:34:27 by sbos          ########   odam.nl         */
+/*   Updated: 2022/02/24 20:03:38 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,8 @@ void	set_space_pad(char *parts[PARTS_LEN], t_conversion *conversion)
 	{
 		len = ft_strlen(parts[PREFIX]) + ft_strlen(parts[PRECISION_OR_ZERO_PAD])
 			+ ft_strlen(parts[BASE_STR]);
+		if (conversion->options.type == 'c' && parts[BASE_STR][0] == '\0')
+			len++;
 		if (conversion->options.field_width > len)
 		{
 			pad_len = conversion->options.field_width - len;
@@ -124,7 +126,10 @@ int	print_conversion(t_conversion *conversion)
 	len = (int)ft_putstr(parts[LEFT_PAD]);
 	len += (int)ft_putstr(parts[PREFIX]);
 	len += (int)ft_putstr(parts[PRECISION_OR_ZERO_PAD]);
-	len += (int)ft_putstr(parts[BASE_STR]);
+	if (conversion->options.type == 'c')
+		len += (int)ft_putchar_fd(parts[BASE_STR][0], STDOUT_FILENO);
+	else
+		len += (int)ft_putstr(parts[BASE_STR]);
 	len += (int)ft_putstr(parts[RIGHT_PAD]);
 	free(parts[LEFT_PAD]);
 	free(parts[PREFIX]);
@@ -165,12 +170,14 @@ void	parse_argument(t_conversion *conversion, va_list arg_ptr)
 	conversion_table[conversion->options.type](arg_ptr, conversion);
 }
 
-void	fix_priorities(t_conversion *conversion)
+void	fix_priorities(t_options *options)
 {
-	if (conversion->options.flags.zero_fill && conversion->options.precision >= 0)
-	{
-		conversion->options.flags.zero_fill = false;
-	}
+	if (options->precision >= 0 && options->type == '%')
+		options->precision = -1;
+	if (options->flags.zero_fill && options->precision >= 0)
+		options->flags.zero_fill = false;
+	if (options->flags.zero_fill && options->flags.pad_right)
+		options->flags.zero_fill = false;
 }
 
 void	parse_conversion_type(const char **format, t_conversion *conversion)
@@ -188,7 +195,8 @@ void	parse_precision(const char **format, t_conversion *conversion)
 	if (ft_isdigit(**format))
 	{
 		conversion->options.precision = ft_atoi(*format);
-		(*format) += ft_get_digit_count(conversion->options.precision);
+		while (ft_isdigit(**format))
+			(*format)++;
 	}
 }
 
@@ -252,7 +260,7 @@ void	parse_format(const char **format, t_conversion *conversion)
 	parse_field_width(format, conversion);
 	parse_precision(format, conversion);
 	parse_conversion_type(format, conversion);
-	fix_priorities(conversion);
+	fix_priorities(&conversion->options);
 }
 
 int	ft_printf(const char *format, ...)
@@ -269,7 +277,7 @@ int	ft_printf(const char *format, ...)
 		format = ft_strchr(format, '%');
 		if (format == NULL)
 			break ;
-		chars_printed += write(STDOUT_FILENO, non_format_start, (size_t)(format - non_format_start));
+		chars_printed += (int)write(STDOUT_FILENO, non_format_start, (size_t)(format - non_format_start));
 		format++;
 		parse_format(&format, &conversion);
 		parse_argument(&conversion, arg_ptr);
@@ -278,6 +286,6 @@ int	ft_printf(const char *format, ...)
 		non_format_start = format;
 	}
 	va_end(arg_ptr);
-	chars_printed += ft_putstr_fd((char *)non_format_start, STDOUT_FILENO);
+	chars_printed += (int)ft_putstr_fd((char *)non_format_start, STDOUT_FILENO);
 	return (chars_printed);
 }
