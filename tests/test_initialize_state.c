@@ -25,7 +25,7 @@ Test(initialize_state)
 
 		massert(conversion.options.flags.alternate, (bool)false);
 		massert(conversion.options.flags.zero_fill, (bool)false);
-		massert(conversion.options.flags.aligned_left, (bool)false);
+		massert(conversion.options.flags.pad_right, (bool)false);
 		massert(conversion.options.flags.plus_space, (bool)false);
 		massert(conversion.options.flags.plus_sign, (bool)false);
 

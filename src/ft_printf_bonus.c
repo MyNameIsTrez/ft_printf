@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/15 13:05:27 by sbos          #+#    #+#                 */
-/*   Updated: 2022/02/24 13:35:50 by sbos          ########   odam.nl         */
+/*   Updated: 2022/02/24 18:07:17 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,53 +21,117 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 
-int	print_conversion(t_conversion *conversion)
+enum e_parts_indices
 {
-	write(STDOUT_FILENO, conversion->base_str, ft_strlen(conversion->base_str));
-	return ((int)ft_strlen(conversion->base_str));
-}
+	LEFT_PAD,
+	PREFIX,
+	PRECISION_OR_ZERO_PAD,
+	BASE_STR,
+	RIGHT_PAD,
+	PARTS_LEN
+};
 
-void	apply_precision_numbers(t_conversion *conversion)
+void	set_precision_str(char *parts[PARTS_LEN], t_conversion *conversion)
 {
-	size_t	zeros_to_add;
+	size_t	base_len;
+	size_t	precision_len;
 
-	if (conversion->options.precision == 0 && ft_str_eq(conversion->base_str, "0"))
+	if (ft_strchr(PRECISION_TYPES, conversion->options.type) != NULL)
 	{
-		free(conversion->base_str);
-		conversion->base_str = ft_strdup("");
-	}
-	else if (conversion->options.precision >= 1)
-	{
-		zeros_to_add = (size_t)conversion->options.precision - ft_strlen(
-				conversion->base_str);
-		if (zeros_to_add > 0)
+		base_len = ft_strlen(parts[BASE_STR]);
+		if (conversion->options.precision > (ssize_t)base_len)
 		{
-			// foo = ft_strjoin(ft_str_repeat("0", zeros_to_add),
-			//		conversion->base_str);
-			// free(conversion->base_str);
-			// conversion->base_str = foo;
+			precision_len = (size_t)conversion->options.precision - base_len;
+			parts[PRECISION_OR_ZERO_PAD] = ft_stralloc(precision_len);
+			ft_memset(parts[PRECISION_OR_ZERO_PAD], '0', precision_len);
 		}
 	}
 }
 
-void	apply_precision(t_conversion *conversion)
+void	set_zero_pad(char *parts[PARTS_LEN], t_conversion *conversion)
 {
-	if (conversion->options.type == 'c')
-	{
+	size_t	len;
+	size_t	pad_len;
 
-	}
-	else if (conversion->options.type == 'p')
+	if (ft_strchr(ZERO_PAD_TYPES, conversion->options.type) != NULL)
 	{
+		len = ft_strlen(parts[PREFIX]) + ft_strlen(parts[BASE_STR]);
+		if (conversion->options.field_width > len)
+		{
+			pad_len = conversion->options.field_width - len;
+			parts[PRECISION_OR_ZERO_PAD] = ft_stralloc(pad_len);
+			ft_memset(parts[PRECISION_OR_ZERO_PAD], '0', pad_len);
+		}
+	}
+}
 
-	}
-	else if (conversion->options.type == 's')
+void	set_left_right_pad(char *parts[PARTS_LEN], t_conversion *conversion,
+							char *pad)
+{
+	if (conversion->options.flags.zero_fill)
 	{
+		parts[LEFT_PAD] = ft_strdup("");
+		parts[RIGHT_PAD] = ft_strdup("");
+	}
+	else if (conversion->options.flags.pad_right)
+	{
+		parts[LEFT_PAD] = ft_strdup("");
+		parts[RIGHT_PAD] = pad;
+	}
+	else
+	{
+		parts[LEFT_PAD] = pad;
+		parts[RIGHT_PAD] = ft_strdup("");
+	}
+}
 
-	}
-	else if (ft_strchr(CONVERSION_NUMBER_TYPES, conversion->options.type))
+void	set_space_pad(char *parts[PARTS_LEN], t_conversion *conversion)
+{
+	char	*pad;
+	size_t	len;
+	size_t	pad_len;
+
+	pad = NULL;
+	if (!conversion->options.flags.zero_fill)
 	{
-		apply_precision_numbers(conversion);
+		len = ft_strlen(parts[PREFIX]) + ft_strlen(parts[PRECISION_OR_ZERO_PAD])
+			+ ft_strlen(parts[BASE_STR]);
+		if (conversion->options.field_width > len)
+		{
+			pad_len = conversion->options.field_width - len;
+			pad = ft_stralloc(pad_len);
+			ft_memset(pad, ' ', pad_len);
+		}
 	}
+	set_left_right_pad(parts, conversion, pad);
+}
+
+int	print_conversion(t_conversion *conversion)
+{
+	char	*parts[PARTS_LEN];
+	int		len;
+
+	parts[PREFIX] = conversion->prefix;
+	parts[BASE_STR] = conversion->base_str;
+	parts[PRECISION_OR_ZERO_PAD] = NULL;
+	if (conversion->options.precision >= 0)
+		set_precision_str(parts, conversion);
+	else if (conversion->options.flags.zero_fill)
+		set_zero_pad(parts, conversion);
+	if (parts[PRECISION_OR_ZERO_PAD] == NULL)
+		parts[PRECISION_OR_ZERO_PAD] = ft_strdup("");
+	set_space_pad(parts, conversion);
+	len = (int)ft_putstr(parts[LEFT_PAD]);
+	len += (int)ft_putstr(parts[PREFIX]);
+	len += (int)ft_putstr(parts[PRECISION_OR_ZERO_PAD]);
+	len += (int)ft_putstr(parts[BASE_STR]);
+	len += (int)ft_putstr(parts[RIGHT_PAD]);
+	free(parts[LEFT_PAD]);
+	free(parts[PREFIX]);
+	free(parts[PRECISION_OR_ZERO_PAD]);
+	free(parts[BASE_STR]);
+	free(parts[RIGHT_PAD]);
+	return (len);
 }
 
 // TODO: Can this function get *conversion_table as an arg
@@ -144,7 +208,7 @@ void	parse_flags(const char **format, t_conversion *conversion)
 		else if (**format == '0')
 			conversion->options.flags.zero_fill = true;
 		else if (**format == '-')
-			conversion->options.flags.aligned_left = true;
+			conversion->options.flags.pad_right = true;
 		else if (**format == ' ')
 			conversion->options.flags.plus_space = true;
 		else if (**format == '+')
@@ -157,7 +221,7 @@ void	initialize_flags(t_flags *flags)
 {
 	flags->alternate = false;
 	flags->zero_fill = false;
-	flags->aligned_left = false;
+	flags->pad_right = false;
 	flags->plus_space = false;
 	flags->plus_sign = false;
 }
@@ -205,11 +269,7 @@ int	ft_printf(const char *format, ...)
 		{
 			format++;
 			parse_format(&format, &conversion);
-			if (conversion.options.type != '%')
-			{
-				parse_argument(&conversion, arg_ptr);
-				// apply_precision(&conversion);
-			}
+			parse_argument(&conversion, arg_ptr);
 			chars_printed += print_conversion(&conversion);
 		}
 		format++;

@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/20 11:42:16 by sbos          #+#    #+#                 */
-/*   Updated: 2022/02/24 12:32:13 by sbos          ########   odam.nl         */
+/*   Updated: 2022/02/24 17:24:08 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,8 +89,6 @@ extern t_list	*g_tests_lst;
 // These are helper functions from bonus/src
 // that aren't in bonus/src/ft_printf_bonus.h as they are normally private.
 
-void	apply_precision_numbers(t_conversion *conversion);
-void	apply_precision(t_conversion *conversion);
 void	fix_priorities(t_conversion *conversion);
 const t_conversion_function	*get_conversion_table(void);
 void	initialize_state(t_conversion *conversion);

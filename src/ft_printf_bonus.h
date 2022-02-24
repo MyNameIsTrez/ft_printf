@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/15 13:05:22 by sbos          #+#    #+#                 */
-/*   Updated: 2022/02/24 13:23:59 by sbos          ########   odam.nl         */
+/*   Updated: 2022/02/24 18:07:20 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@
 
 # define FLAGS " -+#0"
 # define CONVERSION_TYPES "cspdiuxX%"
-# define CONVERSION_NUMBER_TYPES "diuxX"
+# define PRECISION_TYPES "pdiuxX"
+# define ZERO_PAD_TYPES "pdiuxX%"
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -45,7 +46,7 @@ typedef struct s_flags
 {
 	bool	alternate;
 	bool	zero_fill;
-	bool	aligned_left;
+	bool	pad_right;
 	bool	plus_space;
 	bool	plus_sign;
 }	t_flags;
