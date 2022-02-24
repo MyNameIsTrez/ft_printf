@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: cacharle <marvin@42.fr>                    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/06 18:13:45 by cacharle          #+#    #+#             */
-/*   Updated: 2021/01/31 03:21:14 by charles          ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   main.c                                             :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: cacharle <marvin@42.fr>                      +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2020/02/06 18:13:45 by cacharle      #+#    #+#                 */
+/*   Updated: 2022/02/24 19:04:09 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,9 +94,9 @@ int main(int argc, char **argv)
 	test_moulitest_90();
 #endif
 	test_moulitest_91();
-	test_moulitest_wildcard_01();
-	test_moulitest_wildcard_02();
-	test_moulitest_wildcard_03();
+	// test_moulitest_wildcard_01();
+	// test_moulitest_wildcard_02();
+	// test_moulitest_wildcard_03();
 
 	test_printf_tester();
 

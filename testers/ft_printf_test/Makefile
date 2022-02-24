@@ -1,16 +1,16 @@
 # **************************************************************************** #
 #                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: cacharle <marvin@42.fr>                    +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2020/02/06 18:13:15 by cacharle          #+#    #+#              #
-#    Updated: 2021/01/31 03:25:48 by charles          ###   ########.fr        #
+#                                                         ::::::::             #
+#    Makefile                                           :+:    :+:             #
+#                                                      +:+                     #
+#    By: cacharle <marvin@42.fr>                      +#+                      #
+#                                                    +#+                       #
+#    Created: 2020/02/06 18:13:15 by cacharle      #+#    #+#                  #
+#    Updated: 2022/02/24 18:41:46 by sbos          ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
-FT_PRINTF_PATH = ../ft_printf
+FT_PRINTF_PATH = ../../
 
 CC = gcc
 CCFLAGS = -Wall -Wextra -Wno-trigraphs  # Adding -std=c99 causes crash
