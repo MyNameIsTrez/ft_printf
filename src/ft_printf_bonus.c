@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/15 13:05:27 by sbos          #+#    #+#                 */
-/*   Updated: 2022/02/24 18:07:17 by sbos          ########   odam.nl         */
+/*   Updated: 2022/02/24 18:34:27 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -260,20 +260,24 @@ int	ft_printf(const char *format, ...)
 	t_conversion	conversion;
 	int				chars_printed;
 	va_list			arg_ptr;
+	const char		*non_format_start = format;
 
 	chars_printed = 0;
 	va_start(arg_ptr, format);
 	while (*format != '\0')
 	{
-		if (*format == '%')
-		{
-			format++;
-			parse_format(&format, &conversion);
-			parse_argument(&conversion, arg_ptr);
-			chars_printed += print_conversion(&conversion);
-		}
+		format = ft_strchr(format, '%');
+		if (format == NULL)
+			break ;
+		chars_printed += write(STDOUT_FILENO, non_format_start, (size_t)(format - non_format_start));
 		format++;
+		parse_format(&format, &conversion);
+		parse_argument(&conversion, arg_ptr);
+		chars_printed += print_conversion(&conversion);
+		format++;
+		non_format_start = format;
 	}
 	va_end(arg_ptr);
+	chars_printed += ft_putstr_fd((char *)non_format_start, STDOUT_FILENO);
 	return (chars_printed);
 }
