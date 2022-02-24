@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/20 11:34:27 by sbos          #+#    #+#                 */
-/*   Updated: 2022/02/10 12:42:55 by sbos          ########   odam.nl         */
+/*   Updated: 2022/02/24 13:52:16 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,16 @@
 Test(get_pointer)
 {
 	{
-		test_get_type_string(get_pointer, "0x1", 1);
+		test_get_type_string(get_pointer, "0x", "1", 1);
 	}
 	{
 		unsigned int	a = 5;
 		unsigned int	*b = &a;
-		char	*str = NULL;
+		char			*str = NULL;
 
-		asprintf(&str, "%p", b);
+		asprintf(&str, "%lx", (unsigned long)b);
 		// str[0] = 'E';
-		test_get_type_string(get_pointer, str, b);
+		test_get_type_string(get_pointer, "0x", str, b);
 		free(str);
 	}
 }

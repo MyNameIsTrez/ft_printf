@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/20 11:34:27 by sbos          #+#    #+#                 */
-/*   Updated: 2022/02/23 17:27:37 by sbos          ########   odam.nl         */
+/*   Updated: 2022/02/24 13:23:48 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static void	foo(char *expected, const char *format, ...)
 			apply_precision(&conversion);
 		}
 		va_end(arg_ptr);
-		massert(conversion.conversion_str, expected);
+		massert(conversion.base_str, expected);
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/18 16:43:29 by sbos          #+#    #+#                 */
-/*   Updated: 2022/02/23 17:26:40 by sbos          ########   odam.nl         */
+/*   Updated: 2022/02/24 13:42:02 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,11 @@
 void	get_hex_upper(va_list arg_ptr, t_conversion *conversion)
 {
 	get_hex_lower(arg_ptr, conversion);
-	ft_str_upper(conversion->conversion_str);
+	ft_str_upper(conversion->base_str);
+	if (conversion->options.flags.alternate)
+		conversion->prefix = ft_strdup("0X");
+	else
+		conversion->prefix = ft_strdup("");
 }
 
 ////////////////////////////////////////////////////////////////////////////////

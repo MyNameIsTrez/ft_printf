@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/15 13:05:27 by sbos          #+#    #+#                 */
-/*   Updated: 2022/02/23 18:04:22 by sbos          ########   odam.nl         */
+/*   Updated: 2022/02/24 13:35:50 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,30 +23,29 @@
 
 int	print_conversion(t_conversion *conversion)
 {
-	(void)conversion;
-	write(STDOUT_FILENO, "foo", 3);
-	return (42);
+	write(STDOUT_FILENO, conversion->base_str, ft_strlen(conversion->base_str));
+	return ((int)ft_strlen(conversion->base_str));
 }
 
 void	apply_precision_numbers(t_conversion *conversion)
 {
 	size_t	zeros_to_add;
 
-	if (conversion->options.precision == 0 && ft_str_eq(conversion->conversion_str, "0"))
+	if (conversion->options.precision == 0 && ft_str_eq(conversion->base_str, "0"))
 	{
-		free(conversion->conversion_str);
-		conversion->conversion_str = ft_strdup("");
+		free(conversion->base_str);
+		conversion->base_str = ft_strdup("");
 	}
 	else if (conversion->options.precision >= 1)
 	{
 		zeros_to_add = (size_t)conversion->options.precision - ft_strlen(
-				conversion->conversion_str);
+				conversion->base_str);
 		if (zeros_to_add > 0)
 		{
 			// foo = ft_strjoin(ft_str_repeat("0", zeros_to_add),
-			//		conversion->conversion_str);
-			// free(conversion->conversion_str);
-			// conversion->conversion_str = foo;
+			//		conversion->base_str);
+			// free(conversion->base_str);
+			// conversion->base_str = foo;
 		}
 	}
 }
@@ -177,7 +176,8 @@ void	initialize_options(t_options *options)
 void	initialize_state(t_conversion *conversion)
 {
 	initialize_options(&conversion->options);
-	conversion->conversion_str = NULL; // TODO: Necessary?
+	conversion->base_str = NULL;
+	conversion->prefix = NULL;
 }
 
 // TODO: Switch the arguments format and conversion around

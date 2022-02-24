@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/15 13:05:22 by sbos          #+#    #+#                 */
-/*   Updated: 2022/02/23 17:25:59 by sbos          ########   odam.nl         */
+/*   Updated: 2022/02/24 13:23:59 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,8 @@ typedef struct s_options
 typedef struct s_conversion
 {
 	t_options	options;
-	char		*conversion_str;
+	char		*base_str;
+	char		*prefix;
 }	t_conversion;
 
 ////////////////////////////////////////////////////////////////////////////////

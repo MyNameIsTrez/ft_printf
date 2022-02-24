@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/03 12:44:11 by sbos          #+#    #+#                 */
-/*   Updated: 2022/02/23 17:26:40 by sbos          ########   odam.nl         */
+/*   Updated: 2022/02/24 13:47:12 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 void	test_get_type_string(t_conversion_function get_type_string,
-								char *expected, ...)
+								char *prefix, char *expected, ...)
 {
 	t_conversion	conversion;
 	va_list	arg_ptr;
@@ -25,9 +25,10 @@ void	test_get_type_string(t_conversion_function get_type_string,
 	initialize_state(&conversion);
 	va_start(arg_ptr, expected);
 	get_type_string(arg_ptr, &conversion);
-	char *v = conversion.conversion_str;
-	massert(v, expected);
-	free(v);
+	massert(conversion.base_str, expected);
+	free(conversion.base_str);
+	massert(conversion.prefix, prefix);
+	free(conversion.prefix);
 	va_end(arg_ptr);
 }
 

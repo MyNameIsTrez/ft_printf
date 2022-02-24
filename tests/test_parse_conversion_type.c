@@ -1,26 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   get_percent.c                                      :+:    :+:            */
+/*   test_parse_conversion_type.c                       :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2022/01/18 16:43:29 by sbos          #+#    #+#                 */
-/*   Updated: 2022/02/24 13:42:13 by sbos          ########   odam.nl         */
+/*   Created: 2022/02/23 17:56:28 by sbos          #+#    #+#                 */
+/*   Updated: 2022/02/24 12:32:02 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 ////////////////////////////////////////////////////////////////////////////////
 
-#include "ft_printf_bonus.h"
+#include "tests.h"
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void	get_percent(va_list arg_ptr, t_conversion *conversion)
+Test(test_parse_conversion_type)
 {
-	(void)arg_ptr;
-	conversion->base_str = ft_strdup("%");
-	conversion->prefix = ft_strdup("");
+
 }
 
 ////////////////////////////////////////////////////////////////////////////////
