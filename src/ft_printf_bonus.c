@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/15 13:05:27 by sbos          #+#    #+#                 */
-/*   Updated: 2022/02/25 16:40:28 by sbos          ########   odam.nl         */
+/*   Updated: 2022/02/25 17:43:35 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,71 +21,60 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 
-enum e_parts_indices
-{
-	LEFT_PAD,
-	PREFIX,
-	PRECISION_OR_ZERO_PAD,
-	BASE_STR,
-	RIGHT_PAD,
-	PARTS_LEN
-};
-
-void	set_precision_str(char *parts[PARTS_LEN], t_conversion *conversion)
+void	set_precision_str(t_conversion *conversion)
 {
 	size_t	base_len;
 	size_t	precision_len;
 
 	if (ft_strchr(PRECISION_TYPES, conversion->options.type) != NULL)
 	{
-		base_len = ft_strlen(parts[BASE_STR]);
+		base_len = ft_strlen(conversion->options.parts.base_str);
 		if (conversion->options.precision > (ssize_t)base_len)
 		{
 			precision_len = (size_t)conversion->options.precision - base_len;
-			parts[PRECISION_OR_ZERO_PAD] = ft_stralloc(precision_len);
-			ft_memset(parts[PRECISION_OR_ZERO_PAD], '0', precision_len);
+			conversion->options.parts.precision_or_zero_pad = ft_stralloc(precision_len);
+			ft_memset(conversion->options.parts.precision_or_zero_pad, '0', precision_len);
 		}
 	}
 }
 
-void	set_zero_pad(char *parts[PARTS_LEN], t_conversion *conversion)
+void	set_zero_pad(t_conversion *conversion)
 {
 	size_t	len;
 	size_t	pad_len;
 
 	if (ft_strchr(ZERO_PAD_TYPES, conversion->options.type) != NULL)
 	{
-		len = ft_strlen(parts[PREFIX]) + ft_strlen(parts[BASE_STR]);
+		len = ft_strlen(conversion->options.parts.prefix) + ft_strlen(conversion->options.parts.base_str);
 		if (conversion->options.field_width > len)
 		{
 			pad_len = conversion->options.field_width - len;
-			parts[PRECISION_OR_ZERO_PAD] = ft_stralloc(pad_len);
-			ft_memset(parts[PRECISION_OR_ZERO_PAD], '0', pad_len);
+			conversion->options.parts.precision_or_zero_pad = ft_stralloc(pad_len);
+			ft_memset(conversion->options.parts.precision_or_zero_pad, '0', pad_len);
 		}
 	}
 }
 
-void	set_left_right_pad(char *parts[PARTS_LEN], t_conversion *conversion,
-							char *pad)
+void	set_left_right_pad(t_conversion *conversion, char *pad)
 {
 	if (conversion->options.flags.zero_fill)
 	{
-		parts[LEFT_PAD] = ft_strdup("");
-		parts[RIGHT_PAD] = ft_strdup("");
+		conversion->options.parts.left_pad = ft_strdup("");
+		conversion->options.parts.right_pad = ft_strdup("");
 	}
 	else if (conversion->options.flags.pad_right)
 	{
-		parts[LEFT_PAD] = ft_strdup("");
-		parts[RIGHT_PAD] = pad;
+		conversion->options.parts.left_pad = ft_strdup("");
+		conversion->options.parts.right_pad = pad;
 	}
 	else
 	{
-		parts[LEFT_PAD] = pad;
-		parts[RIGHT_PAD] = ft_strdup("");
+		conversion->options.parts.left_pad = pad;
+		conversion->options.parts.right_pad = ft_strdup("");
 	}
 }
 
-void	set_space_pad(char *parts[PARTS_LEN], t_conversion *conversion)
+void	set_space_pad(t_conversion *conversion)
 {
 	char	*pad;
 	size_t	len;
@@ -94,9 +83,9 @@ void	set_space_pad(char *parts[PARTS_LEN], t_conversion *conversion)
 	pad = NULL;
 	if (!conversion->options.flags.zero_fill)
 	{
-		len = ft_strlen(parts[PREFIX]) + ft_strlen(parts[PRECISION_OR_ZERO_PAD])
-			+ ft_strlen(parts[BASE_STR]);
-		if (conversion->options.type == 'c' && parts[BASE_STR][0] == '\0')
+		len = ft_strlen(conversion->options.parts.prefix) + ft_strlen(conversion->options.parts.precision_or_zero_pad)
+			+ ft_strlen(conversion->options.parts.base_str);
+		if (conversion->options.type == 'c' && conversion->options.parts.base_str[0] == '\0')
 			len++;
 		if (conversion->options.field_width > len)
 		{
@@ -105,37 +94,36 @@ void	set_space_pad(char *parts[PARTS_LEN], t_conversion *conversion)
 			ft_memset(pad, ' ', pad_len);
 		}
 	}
-	set_left_right_pad(parts, conversion, pad);
+	set_left_right_pad(conversion, pad);
 }
 
 int	print_conversion(t_conversion *conversion)
 {
-	char	*parts[PARTS_LEN];
 	int		len;
 
-	parts[PREFIX] = conversion->prefix;
-	parts[BASE_STR] = conversion->base_str;
-	parts[PRECISION_OR_ZERO_PAD] = NULL;
+	conversion->options.parts.prefix = conversion->prefix;
+	conversion->options.parts.base_str = conversion->base_str;
+	conversion->options.parts.precision_or_zero_pad = NULL;
 	if (conversion->options.precision >= 0)
-		set_precision_str(parts, conversion);
+		set_precision_str(conversion);
 	else if (conversion->options.flags.zero_fill)
-		set_zero_pad(parts, conversion);
-	if (parts[PRECISION_OR_ZERO_PAD] == NULL)
-		parts[PRECISION_OR_ZERO_PAD] = ft_strdup("");
-	set_space_pad(parts, conversion);
-	len = (int)ft_putstr(parts[LEFT_PAD]);
-	len += (int)ft_putstr(parts[PREFIX]);
-	len += (int)ft_putstr(parts[PRECISION_OR_ZERO_PAD]);
+		set_zero_pad(conversion);
+	if (conversion->options.parts.precision_or_zero_pad == NULL)
+		conversion->options.parts.precision_or_zero_pad = ft_strdup("");
+	set_space_pad(conversion);
+	len = (int)ft_putstr(conversion->options.parts.left_pad);
+	len += (int)ft_putstr(conversion->options.parts.prefix);
+	len += (int)ft_putstr(conversion->options.parts.precision_or_zero_pad);
 	if (conversion->options.type == 'c')
-		len += (int)ft_putchar_fd(parts[BASE_STR][0], STDOUT_FILENO);
+		len += (int)ft_putchar_fd(conversion->options.parts.base_str[0], STDOUT_FILENO); // TODO: Use ft_putchar
 	else
-		len += (int)ft_putstr(parts[BASE_STR]);
-	len += (int)ft_putstr(parts[RIGHT_PAD]);
-	free(parts[LEFT_PAD]);
-	free(parts[PREFIX]);
-	free(parts[PRECISION_OR_ZERO_PAD]);
-	free(parts[BASE_STR]);
-	free(parts[RIGHT_PAD]);
+		len += (int)ft_putstr(conversion->options.parts.base_str);
+	len += (int)ft_putstr(conversion->options.parts.right_pad);
+	free(conversion->options.parts.left_pad);
+	free(conversion->options.parts.prefix);
+	free(conversion->options.parts.precision_or_zero_pad);
+	free(conversion->options.parts.base_str);
+	free(conversion->options.parts.right_pad);
 	return (len);
 }
 

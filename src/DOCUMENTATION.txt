@@ -62,7 +62,7 @@ printf("'%5d'\n"  , -123) -> ' -123'
 // It makes the minimum field width use '0' instead of ' '
 printf("'%0d'\n"  ,  123) -> '123'
 printf("'%05d'\n" ,  123) -> '00123'
-// It also makes the field width add to the *right* of the sign
+// It also makes the field width add to the *right* of the sign, like precision
 printf("'%05d'\n" , -123) -> '-0123'
 // '0' is ignored if a precision is given with a numeric conversion (diuxX)
 printf("'%7.d'\n" , -123) -> '   -123'
@@ -114,16 +114,16 @@ printf("'%0.5d'\n" , 123) -> '00123'
 printf("'%5.5d'\n" , 123) -> '00123'
 
 // Field width vs precision
-printf("'%05d'\n", 123) -> '00123'
-printf("'%.5d'\n", 123) -> '00123'
+printf("'%05d'\n", 123)     -> '00123'
+printf("'%.5d'\n", 123)     -> '00123'
 printf("'%.5d'\n", 1234567) -> '1234567'
 printf("'%05d'\n", 1234567) -> '1234567'
-printf("'%05d'\n", -123) -> '-0123'
-printf("'%.5d'\n", -123) -> '-00123'
-printf("'%.5d'\n", 0) -> '00000'
-printf("'%05d'\n", 0) -> '00000'
-printf("'%0d'\n", 0) -> '0'
-printf("'%.d'\n", 0) -> ''
+printf("'%05d'\n", -123)    -> '-0123'
+printf("'%.5d'\n", -123)    -> '-00123'
+printf("'%.5d'\n", 0)       -> '00000'
+printf("'%05d'\n", 0)       -> '00000'
+printf("'%0d'\n", 0)        -> '0'
+printf("'%.d'\n", 0)        -> ''
 
 // Precision and '+' or ' '
 printf("%+.d", 0) -> '+'

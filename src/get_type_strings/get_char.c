@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/18 16:43:29 by sbos          #+#    #+#                 */
-/*   Updated: 2022/02/24 13:40:22 by sbos          ########   odam.nl         */
+/*   Updated: 2022/02/25 17:20:40 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,9 @@
 
 void	get_char(va_list arg_ptr, t_conversion *conversion)
 {
-	conversion->base_str = ft_char_to_str((char)va_arg(arg_ptr, int));
+	char const	chr = (char)va_arg(arg_ptr, int);
+
+	conversion->base_str = ft_char_to_str(chr);
 	conversion->prefix = ft_strdup("");
 }
 
