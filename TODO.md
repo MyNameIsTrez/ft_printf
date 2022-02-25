@@ -15,3 +15,4 @@
 
 # Before evalling
 * Check that no forbidden functions are being called (search all calls using '('?)
+* Run ft_printf_test on a clone (and maybe another tester?)
