@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/15 13:05:27 by sbos          #+#    #+#                 */
-/*   Updated: 2022/02/25 18:21:43 by sbos          ########   odam.nl         */
+/*   Updated: 2022/02/25 18:27:01 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,8 +126,7 @@ void	print_conversion(t_conversion *conversion)
 	conversion->options.len += (size_t)ft_putstr(conversion->options.parts.right_pad);
 }
 
-// TODO: Can this function get *conversion_table as an arg
-//       so the return doesn't need to make a copy of it constantly?
+// TODO: Let this return the result of accessing the table instead.
 const t_conversion_function	*get_conversion_table(void)
 {
 	// TODO: Which one should be used?
@@ -148,8 +147,7 @@ const t_conversion_function	*get_conversion_table(void)
 	return (conversion_table);
 }
 
-// TODO: Would making conversion_table here a static
-//       prevent calling get_conversion_table() a second time or help somehow?
+// TODO: After changing get_conversion_table so it returns the result of accessing the table, update this function.
 void	parse_argument(t_conversion *conversion, va_list arg_ptr)
 {
 	const t_conversion_function	*conversion_table = get_conversion_table();
