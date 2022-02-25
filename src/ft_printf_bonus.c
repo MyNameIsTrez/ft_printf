@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/15 13:05:27 by sbos          #+#    #+#                 */
-/*   Updated: 2022/02/25 19:49:23 by sbos          ########   odam.nl         */
+/*   Updated: 2022/02/25 19:51:52 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,8 +81,7 @@ void	set_zero_pad(t_options *options)
 		if (options->field_width > len)
 		{
 			pad_len = options->field_width - len;
-			options->parts.precision_or_zero_pad = ft_stralloc(pad_len);
-			ft_memset(options->parts.precision_or_zero_pad, '0', pad_len);
+			options->parts.precision_or_zero_pad = ft_chr_repeat('0', pad_len);
 		}
 	}
 }
@@ -98,8 +97,7 @@ void	set_precision_str(t_options *options)
 		if (options->precision > (ssize_t)base_len)
 		{
 			precision_len = (size_t)options->precision - base_len;
-			options->parts.precision_or_zero_pad = ft_stralloc(precision_len);
-			ft_memset(options->parts.precision_or_zero_pad, '0', precision_len);
+			options->parts.precision_or_zero_pad = ft_chr_repeat('0', precision_len);
 		}
 	}
 }
