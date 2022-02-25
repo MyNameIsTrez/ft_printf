@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/20 11:34:27 by sbos          #+#    #+#                 */
-/*   Updated: 2022/02/25 16:40:03 by sbos          ########   odam.nl         */
+/*   Updated: 2022/02/25 17:59:57 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ void	foo(char *prefix, char *expected, const char *format, ...)
 	parse_argument(&conversion, arg_ptr);
 	va_end(arg_ptr);
 
-	massert(conversion.base_str, expected);
-	massert(conversion.prefix, prefix);
+	massert(conversion.options.parts.base_str, expected);
+	massert(conversion.options.parts.prefix, prefix);
 }
 
 Test(parse_argument)

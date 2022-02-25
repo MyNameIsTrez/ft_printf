@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/15 13:05:27 by sbos          #+#    #+#                 */
-/*   Updated: 2022/02/25 17:55:53 by sbos          ########   odam.nl         */
+/*   Updated: 2022/02/25 18:05:16 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,9 +110,6 @@ int	print_conversion(t_conversion *conversion)
 {
 	int		len;
 
-	conversion->options.parts.prefix = conversion->prefix;
-	conversion->options.parts.base_str = conversion->base_str;
-	conversion->options.parts.precision_or_zero_pad = NULL;
 	if (conversion->options.precision >= 0)
 		set_precision_str(conversion);
 	else if (conversion->options.flags.zero_fill)
@@ -217,6 +214,15 @@ void	parse_flags(const char **format, t_conversion *conversion)
 	}
 }
 
+void	initialize_parts(t_parts *parts)
+{
+	parts->left_pad = NULL;
+	parts->prefix = NULL;
+	parts->precision_or_zero_pad = NULL;
+	parts->base_str = NULL;
+	parts->right_pad = NULL;
+}
+
 void	initialize_flags(t_flags *flags)
 {
 	flags->alternate = false;
@@ -231,6 +237,7 @@ void	initialize_flags(t_flags *flags)
 void	initialize_options(t_options *options)
 {
 	initialize_flags(&options->flags);
+	initialize_parts(&options->parts);
 	options->field_width = 0;
 	options->precision = -1;
 	options->type = '\0';
@@ -239,8 +246,6 @@ void	initialize_options(t_options *options)
 void	initialize_state(t_conversion *conversion)
 {
 	initialize_options(&conversion->options);
-	conversion->base_str = NULL;
-	conversion->prefix = NULL;
 }
 
 // TODO: Switch the arguments format and conversion around

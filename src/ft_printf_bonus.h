@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/15 13:05:22 by sbos          #+#    #+#                 */
-/*   Updated: 2022/02/25 17:38:46 by sbos          ########   odam.nl         */
+/*   Updated: 2022/02/25 18:03:16 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,11 +70,10 @@ typedef struct s_options
 	size_t			len;
 }	t_options;
 
+// TODO: This struct is too empty.
 typedef struct s_conversion
 {
 	t_options	options;
-	char		*base_str;
-	char		*prefix;
 }	t_conversion;
 
 ////////////////////////////////////////////////////////////////////////////////

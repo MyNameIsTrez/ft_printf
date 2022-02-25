@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/20 11:34:27 by sbos          #+#    #+#                 */
-/*   Updated: 2022/02/25 16:39:21 by sbos          ########   odam.nl         */
+/*   Updated: 2022/02/25 17:59:57 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void	foo(t_conversion_function get_type_string,
 	initialize_state(&conversion);
 	va_start(arg_ptr, expected);
 	get_type_string(arg_ptr, &conversion);
-	char *v = conversion.base_str;
+	char *v = conversion.options.parts.base_str;
 	massert(v, expected);
 	free(v);
 	va_end(arg_ptr);
