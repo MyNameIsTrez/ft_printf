@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/15 13:05:27 by sbos          #+#    #+#                 */
-/*   Updated: 2022/02/25 18:51:04 by sbos          ########   odam.nl         */
+/*   Updated: 2022/02/25 19:49:23 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,25 +51,23 @@ void	set_left_right_pad(t_options *options, char *pad)
 
 void	set_space_pad(t_options *options)
 {
-	char	*pad;
-	size_t	len;
-	size_t	pad_len;
+	const char	*pad = NULL;
+	size_t		len;
+	size_t		pad_len;
 
-	pad = NULL;
 	if (!options->flags.zero_fill)
 	{
 		len = ft_strlen(options->parts.prefix) + ft_strlen(options->parts.precision_or_zero_pad)
 			+ ft_strlen(options->parts.base_str);
-		if (options->type == 'c' && options->parts.base_str[0] == '\0')
+		if (options->type == 'c' && ft_str_eq(options->parts.base_str, ""))
 			len++;
 		if (options->field_width > len)
 		{
 			pad_len = options->field_width - len;
-			pad = ft_stralloc(pad_len);
-			ft_memset(pad, ' ', pad_len);
+			pad = ft_chr_repeat(' ', pad_len);
 		}
 	}
-	set_left_right_pad(options, pad);
+	set_left_right_pad(options, (char *)pad);
 }
 
 void	set_zero_pad(t_options *options)

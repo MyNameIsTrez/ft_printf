@@ -6,7 +6,7 @@
 #    By: sbos <sbos@student.codam.nl>                 +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/01/20 16:07:18 by sbos          #+#    #+#                  #
-#    Updated: 2022/02/22 15:39:44 by sbos          ########   odam.nl          #
+#    Updated: 2022/02/25 19:25:13 by sbos          ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,7 @@ TESTS_OBJ_DIR := obj_tests
 MASSERT_DIR := libmassert
 
 TESTER := tester
+# TODO: Why are the Makefile's headers also included in this tester.mk?
 TESTER_HEADERS :=											\
 	src/ft_printf_bonus.h									\
 	src/get_type_strings/get_type_strings.h					\
