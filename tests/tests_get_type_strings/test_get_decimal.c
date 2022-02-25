@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/20 11:34:27 by sbos          #+#    #+#                 */
-/*   Updated: 2022/02/25 17:59:57 by sbos          ########   odam.nl         */
+/*   Updated: 2022/02/25 18:51:26 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,16 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 
-static void	foo(t_conversion_function get_type_string,
+static void	foo(t_base_and_prefix_fn get_type_string,
 					char *expected, ...)
 {
-	t_conversion	conversion;
+	t_options	options;
 	va_list	arg_ptr;
 
-	initialize_state(&conversion);
+	initialize_options(&options);
 	va_start(arg_ptr, expected);
-	get_type_string(arg_ptr, &conversion);
-	char *v = conversion.options.parts.base_str;
+	get_type_string(arg_ptr, &options);
+	char *v = options.parts.base_str;
 	massert(v, expected);
 	free(v);
 	va_end(arg_ptr);

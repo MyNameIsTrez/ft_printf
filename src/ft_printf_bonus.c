@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/15 13:05:27 by sbos          #+#    #+#                 */
-/*   Updated: 2022/02/25 18:27:01 by sbos          ########   odam.nl         */
+/*   Updated: 2022/02/25 18:51:04 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,118 +21,118 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void	free_conversion(t_conversion *conversion)
+void	free_options(t_options *options)
 {
-	free(conversion->options.parts.left_pad);
-	free(conversion->options.parts.prefix);
-	free(conversion->options.parts.precision_or_zero_pad);
-	free(conversion->options.parts.base_str);
-	free(conversion->options.parts.right_pad);
+	free(options->parts.left_pad);
+	free(options->parts.prefix);
+	free(options->parts.precision_or_zero_pad);
+	free(options->parts.base_str);
+	free(options->parts.right_pad);
 }
 
-void	set_left_right_pad(t_conversion *conversion, char *pad)
+void	set_left_right_pad(t_options *options, char *pad)
 {
-	if (conversion->options.flags.zero_fill)
+	if (options->flags.zero_fill)
 	{
-		conversion->options.parts.left_pad = ft_strdup("");
-		conversion->options.parts.right_pad = ft_strdup("");
+		options->parts.left_pad = ft_strdup("");
+		options->parts.right_pad = ft_strdup("");
 	}
-	else if (conversion->options.flags.pad_right)
+	else if (options->flags.pad_right)
 	{
-		conversion->options.parts.left_pad = ft_strdup("");
-		conversion->options.parts.right_pad = pad;
+		options->parts.left_pad = ft_strdup("");
+		options->parts.right_pad = pad;
 	}
 	else
 	{
-		conversion->options.parts.left_pad = pad;
-		conversion->options.parts.right_pad = ft_strdup("");
+		options->parts.left_pad = pad;
+		options->parts.right_pad = ft_strdup("");
 	}
 }
 
-void	set_space_pad(t_conversion *conversion)
+void	set_space_pad(t_options *options)
 {
 	char	*pad;
 	size_t	len;
 	size_t	pad_len;
 
 	pad = NULL;
-	if (!conversion->options.flags.zero_fill)
+	if (!options->flags.zero_fill)
 	{
-		len = ft_strlen(conversion->options.parts.prefix) + ft_strlen(conversion->options.parts.precision_or_zero_pad)
-			+ ft_strlen(conversion->options.parts.base_str);
-		if (conversion->options.type == 'c' && conversion->options.parts.base_str[0] == '\0')
+		len = ft_strlen(options->parts.prefix) + ft_strlen(options->parts.precision_or_zero_pad)
+			+ ft_strlen(options->parts.base_str);
+		if (options->type == 'c' && options->parts.base_str[0] == '\0')
 			len++;
-		if (conversion->options.field_width > len)
+		if (options->field_width > len)
 		{
-			pad_len = conversion->options.field_width - len;
+			pad_len = options->field_width - len;
 			pad = ft_stralloc(pad_len);
 			ft_memset(pad, ' ', pad_len);
 		}
 	}
-	set_left_right_pad(conversion, pad);
+	set_left_right_pad(options, pad);
 }
 
-void	set_zero_pad(t_conversion *conversion)
+void	set_zero_pad(t_options *options)
 {
 	size_t	len;
 	size_t	pad_len;
 
-	if (ft_strchr(ZERO_PAD_TYPES, conversion->options.type) != NULL)
+	if (ft_strchr(ZERO_PAD_TYPES, options->type) != NULL)
 	{
-		len = ft_strlen(conversion->options.parts.prefix) + ft_strlen(conversion->options.parts.base_str);
-		if (conversion->options.field_width > len)
+		len = ft_strlen(options->parts.prefix) + ft_strlen(options->parts.base_str);
+		if (options->field_width > len)
 		{
-			pad_len = conversion->options.field_width - len;
-			conversion->options.parts.precision_or_zero_pad = ft_stralloc(pad_len);
-			ft_memset(conversion->options.parts.precision_or_zero_pad, '0', pad_len);
+			pad_len = options->field_width - len;
+			options->parts.precision_or_zero_pad = ft_stralloc(pad_len);
+			ft_memset(options->parts.precision_or_zero_pad, '0', pad_len);
 		}
 	}
 }
 
-void	set_precision_str(t_conversion *conversion)
+void	set_precision_str(t_options *options)
 {
 	size_t	base_len;
 	size_t	precision_len;
 
-	if (ft_strchr(PRECISION_TYPES, conversion->options.type) != NULL)
+	if (ft_strchr(PRECISION_TYPES, options->type) != NULL)
 	{
-		base_len = ft_strlen(conversion->options.parts.base_str);
-		if (conversion->options.precision > (ssize_t)base_len)
+		base_len = ft_strlen(options->parts.base_str);
+		if (options->precision > (ssize_t)base_len)
 		{
-			precision_len = (size_t)conversion->options.precision - base_len;
-			conversion->options.parts.precision_or_zero_pad = ft_stralloc(precision_len);
-			ft_memset(conversion->options.parts.precision_or_zero_pad, '0', precision_len);
+			precision_len = (size_t)options->precision - base_len;
+			options->parts.precision_or_zero_pad = ft_stralloc(precision_len);
+			ft_memset(options->parts.precision_or_zero_pad, '0', precision_len);
 		}
 	}
 }
 
-void	print_conversion(t_conversion *conversion)
+void	print_options(t_options *options)
 {
-	if (conversion->options.precision >= 0)
-		set_precision_str(conversion);
-	else if (conversion->options.flags.zero_fill)
-		set_zero_pad(conversion);
-	if (conversion->options.parts.precision_or_zero_pad == NULL)
-		conversion->options.parts.precision_or_zero_pad = ft_strdup("");
-	set_space_pad(conversion);
+	if (options->precision >= 0)
+		set_precision_str(options);
+	else if (options->flags.zero_fill)
+		set_zero_pad(options);
+	if (options->parts.precision_or_zero_pad == NULL)
+		options->parts.precision_or_zero_pad = ft_strdup("");
+	set_space_pad(options);
 	// TODO: Check if these ft_put_str return < 0
-	conversion->options.len += (size_t)ft_putstr(conversion->options.parts.left_pad);
-	conversion->options.len += (size_t)ft_putstr(conversion->options.parts.prefix);
-	conversion->options.len += (size_t)ft_putstr(conversion->options.parts.precision_or_zero_pad);
-	if (conversion->options.type == 'c')
-		conversion->options.len += (size_t)ft_putchar_fd(conversion->options.parts.base_str[0], STDOUT_FILENO); // TODO: Use ft_putchar
+	options->len += (size_t)ft_putstr(options->parts.left_pad);
+	options->len += (size_t)ft_putstr(options->parts.prefix);
+	options->len += (size_t)ft_putstr(options->parts.precision_or_zero_pad);
+	if (options->type == 'c')
+		options->len += (size_t)ft_putchar_fd(options->parts.base_str[0], STDOUT_FILENO); // TODO: Use ft_putchar
 	else
-		conversion->options.len += (size_t)ft_putstr(conversion->options.parts.base_str);
-	conversion->options.len += (size_t)ft_putstr(conversion->options.parts.right_pad);
+		options->len += (size_t)ft_putstr(options->parts.base_str);
+	options->len += (size_t)ft_putstr(options->parts.right_pad);
 }
 
 // TODO: Let this return the result of accessing the table instead.
-const t_conversion_function	*get_conversion_table(void)
+const t_base_and_prefix_fn	*get_options_table(void)
 {
 	// TODO: Which one should be used?
-	// static const t_conversion_function	conversion_table[] = {
-	// t_conversion_function static	conversion_table[] = {
-	const static t_conversion_function	conversion_table[] = {
+	// static const t_base_and_prefix_fn	options_table[] = {
+	// t_base_and_prefix_fn static	options_table[] = {
+	const static t_base_and_prefix_fn	options_table[] = {
 	['c'] = get_char,
 	['s'] = get_string,
 	['p'] = get_pointer,
@@ -144,15 +144,15 @@ const t_conversion_function	*get_conversion_table(void)
 	['%'] = get_percent,
 	};
 
-	return (conversion_table);
+	return (options_table);
 }
 
-// TODO: After changing get_conversion_table so it returns the result of accessing the table, update this function.
-void	parse_argument(t_conversion *conversion, va_list arg_ptr)
+// TODO: After changing get_options_table so it returns the result of accessing the table, update this function.
+void	parse_argument(t_options *options, va_list arg_ptr)
 {
-	const t_conversion_function	*conversion_table = get_conversion_table();
+	const t_base_and_prefix_fn	*options_table = get_options_table();
 
-	conversion_table[conversion->options.type](arg_ptr, conversion);
+	options_table[options->type](arg_ptr, options);
 }
 
 void	fix_priorities(t_options *options)
@@ -165,47 +165,47 @@ void	fix_priorities(t_options *options)
 		options->flags.zero_fill = false;
 }
 
-void	parse_conversion_type(const char **format, t_conversion *conversion)
+void	parse_options_type(const char **format, t_options *options)
 {
-	conversion->options.type = (unsigned char)**format;
+	options->type = (unsigned char)**format;
 }
 
-void	parse_precision(const char **format, t_conversion *conversion)
+void	parse_precision(const char **format, t_options *options)
 {
 	if (**format == '.')
 	{
-		conversion->options.precision = 0;
+		options->precision = 0;
 		(*format)++;
 	}
 	if (ft_isdigit(**format))
 	{
-		conversion->options.precision = ft_atoi(*format);
+		options->precision = ft_atoi(*format);
 		while (ft_isdigit(**format))
 			(*format)++;
 	}
 }
 
-void	parse_field_width(const char **format, t_conversion *conversion)
+void	parse_field_width(const char **format, t_options *options)
 {
-	conversion->options.field_width = (size_t)ft_atoi(*format);
-	if (conversion->options.field_width != 0)
-		(*format) += ft_get_digit_count((intmax_t)conversion->options.field_width);
+	options->field_width = (size_t)ft_atoi(*format);
+	if (options->field_width != 0)
+		(*format) += ft_get_digit_count((intmax_t)options->field_width);
 }
 
-void	parse_flags(const char **format, t_conversion *conversion)
+void	parse_flags(const char **format, t_options *options)
 {
 	while (**format != '\0' && ft_strchr(FLAGS, **format) != NULL)
 	{
 		if (**format == '#')
-			conversion->options.flags.alternate = true;
+			options->flags.alternate = true;
 		else if (**format == '0')
-			conversion->options.flags.zero_fill = true;
+			options->flags.zero_fill = true;
 		else if (**format == '-')
-			conversion->options.flags.pad_right = true;
+			options->flags.pad_right = true;
 		else if (**format == ' ')
-			conversion->options.flags.plus_space = true;
+			options->flags.plus_space = true;
 		else if (**format == '+')
-			conversion->options.flags.plus_sign = true;
+			options->flags.plus_sign = true;
 		(*format)++;
 	}
 }
@@ -240,25 +240,20 @@ void	initialize_options(t_options *options)
 	options->len = 0;
 }
 
-void	initialize_state(t_conversion *conversion)
+// TODO: Switch the arguments format and options around
+void	parse_format(const char **format, t_options *options)
 {
-	initialize_options(&conversion->options);
-}
-
-// TODO: Switch the arguments format and conversion around
-void	parse_format(const char **format, t_conversion *conversion)
-{
-	initialize_state(conversion);
-	parse_flags(format, conversion);
-	parse_field_width(format, conversion);
-	parse_precision(format, conversion);
-	parse_conversion_type(format, conversion);
-	fix_priorities(&conversion->options);
+	initialize_options(options);
+	parse_flags(format, options);
+	parse_field_width(format, options);
+	parse_precision(format, options);
+	parse_options_type(format, options);
+	fix_priorities(options);
 }
 
 int	ft_printf(const char *format, ...)
 {
-	t_conversion	conversion;
+	t_options	options;
 	int				chars_printed;
 	va_list			arg_ptr;
 	const char		*non_format_start = format;
@@ -273,11 +268,11 @@ int	ft_printf(const char *format, ...)
 		// TODO: Check if write returns -1
 		chars_printed += (int)write(STDOUT_FILENO, non_format_start, (size_t)(format - non_format_start));
 		format++;
-		parse_format(&format, &conversion);
-		parse_argument(&conversion, arg_ptr);
-		print_conversion(&conversion);
-		chars_printed += conversion.options.len;
-		free_conversion(&conversion);
+		parse_format(&format, &options);
+		parse_argument(&options, arg_ptr);
+		print_options(&options);
+		chars_printed += options.len;
+		free_options(&options);
 		format++;
 		non_format_start = format;
 	}

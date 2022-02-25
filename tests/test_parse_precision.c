@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/20 11:34:27 by sbos          #+#    #+#                 */
-/*   Updated: 2022/02/23 17:29:28 by sbos          ########   odam.nl         */
+/*   Updated: 2022/02/25 18:51:26 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,75 +19,75 @@
 /*
 An optional precision, in the form of a period . followed by an optional digit string.
 If the digit string is omitted, the precision is taken as zero.
-This gives the minimum number of digits to appear for d, i, o, u, x, and X conversions,
-the number of digits to appear after the decimal-point for a, A, e, E, f, and F conversions,
+This gives the minimum number of digits to appear for d, i, o, u, x, and X optionss,
+the number of digits to appear after the decimal-point for a, A, e, E, f, and F optionss,
 the maximum number of significant digits for g and G con-versions,
-or the maximum number of characters to be printed from a string for s conversions.
+or the maximum number of characters to be printed from a string for s optionss.
 */
 Test(parse_precision)
 {
 	{
 		const char *format = ".42d";
-		t_conversion	conversion;
+		t_options	options;
 
-		initialize_state(&conversion);
-		parse_precision(&format, &conversion);
+		initialize_options(&options);
+		parse_precision(&format, &options);
 
 		// printf("'%7.42d'\n",  0) -> '000000000000000000000000000000000000000000'
 		// printf("'%7.42d'\n", 42) -> '000000000000000000000000000000000000000042'
-		massert(conversion.options.precision, 42l);
+		massert(options.precision, 42l);
 		massert(*format, (char)'d')
 	}
 
 	{
 		const char *format = ".1d";
-		t_conversion	conversion;
+		t_options	options;
 
-		initialize_state(&conversion);
-		parse_precision(&format, &conversion);
+		initialize_options(&options);
+		parse_precision(&format, &options);
 
 		// printf("%.1d",  0) -> '0'
 		// printf("%.1d", 42) -> '42'
-		massert(conversion.options.precision, (ssize_t)1);
+		massert(options.precision, (ssize_t)1);
 		massert(*format, (char)'d')
 	}
 
 	{
 		const char *format = ".0d";
-		t_conversion	conversion;
+		t_options	options;
 
-		initialize_state(&conversion);
-		parse_precision(&format, &conversion);
+		initialize_options(&options);
+		parse_precision(&format, &options);
 
 		// printf("%.0d",  0) -> ''
 		// printf("%.0d", 42) -> '42'
-		massert(conversion.options.precision, (ssize_t)0);
+		massert(options.precision, (ssize_t)0);
 		massert(*format, (char)'d')
 	}
 
 	{
 		const char *format = ".d";
-		t_conversion	conversion;
+		t_options	options;
 
-		initialize_state(&conversion);
-		parse_precision(&format, &conversion);
+		initialize_options(&options);
+		parse_precision(&format, &options);
 
 		// printf("%.d",  0) -> ''
 		// printf("%.d", 42) -> '42'
-		massert(conversion.options.precision, (ssize_t)0);
+		massert(options.precision, (ssize_t)0);
 		massert(*format, (char)'d')
 	}
 
 	{
 		const char *format = "d";
-		t_conversion	conversion;
+		t_options	options;
 
-		initialize_state(&conversion);
-		parse_precision(&format, &conversion);
+		initialize_options(&options);
+		parse_precision(&format, &options);
 
 		// printf("'%d'\n" , 0) -> '0'
 		// printf("'%.0d'\n", 0) -> ''
-		massert(conversion.options.precision, (ssize_t)-1);
+		massert(options.precision, (ssize_t)-1);
 		massert(*format, (char)'d')
 	}
 }

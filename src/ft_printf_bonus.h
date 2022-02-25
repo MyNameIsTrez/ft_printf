@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/15 13:05:22 by sbos          #+#    #+#                 */
-/*   Updated: 2022/02/25 18:18:01 by sbos          ########   odam.nl         */
+/*   Updated: 2022/02/25 18:48:47 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,13 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 # define FLAGS " -+#0"
-# define CONVERSION_TYPES "cspdiuxX%"
+// # define CONVERSION_TYPES "cspdiuxX%" // TODO: Remove?
 # define PRECISION_TYPES "pdiuxX"
 # define ZERO_PAD_TYPES "pdiuxX%"
 
 ////////////////////////////////////////////////////////////////////////////////
 
-typedef void	(*t_conversion_function)(va_list arg_ptr,
-	t_conversion *conversion);
+typedef void	(*t_base_and_prefix_fn)(va_list arg_ptr, t_options *options);
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -69,12 +68,6 @@ typedef struct s_options
 	unsigned char	type;
 	size_t			len;
 }	t_options;
-
-// TODO: This struct is too empty.
-typedef struct s_conversion
-{
-	t_options	options;
-}	t_conversion;
 
 ////////////////////////////////////////////////////////////////////////////////
 

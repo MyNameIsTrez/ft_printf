@@ -16,21 +16,21 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Test(initialize_state)
+Test(initialize_options)
 {
 	{
-		t_conversion	conversion;
+		t_options	options;
 
-		initialize_state(&conversion);
+		initialize_options(&options);
 
-		massert(conversion.options.flags.alternate, (bool)false);
-		massert(conversion.options.flags.zero_fill, (bool)false);
-		massert(conversion.options.flags.pad_right, (bool)false);
-		massert(conversion.options.flags.plus_space, (bool)false);
-		massert(conversion.options.flags.plus_sign, (bool)false);
+		massert(options.flags.alternate, (bool)false);
+		massert(options.flags.zero_fill, (bool)false);
+		massert(options.flags.pad_right, (bool)false);
+		massert(options.flags.plus_space, (bool)false);
+		massert(options.flags.plus_sign, (bool)false);
 
-		massert(conversion.options.field_width, (size_t)0);
-		massert(conversion.options.precision, (ssize_t)-1);
+		massert(options.field_width, (size_t)0);
+		massert(options.precision, (ssize_t)-1);
 	}
 }
 

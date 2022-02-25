@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/18 16:43:29 by sbos          #+#    #+#                 */
-/*   Updated: 2022/02/25 18:04:57 by sbos          ########   odam.nl         */
+/*   Updated: 2022/02/25 18:43:40 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,11 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void	get_percent(va_list arg_ptr, t_conversion *conversion)
+void	get_percent(va_list arg_ptr, t_options *options)
 {
 	(void)arg_ptr;
-	conversion->options.parts.base_str = ft_strdup("%");
-	conversion->options.parts.prefix = ft_strdup("");
+	options->parts.base_str = ft_strdup("%");
+	options->parts.prefix = ft_strdup("");
 }
 
 ////////////////////////////////////////////////////////////////////////////////

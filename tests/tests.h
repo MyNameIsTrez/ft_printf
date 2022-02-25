@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/20 11:42:16 by sbos          #+#    #+#                 */
-/*   Updated: 2022/02/24 17:24:08 by sbos          ########   odam.nl         */
+/*   Updated: 2022/02/25 18:52:31 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,15 +89,15 @@ extern t_list	*g_tests_lst;
 // These are helper functions from bonus/src
 // that aren't in bonus/src/ft_printf_bonus.h as they are normally private.
 
-void	fix_priorities(t_conversion *conversion);
-const t_conversion_function	*get_conversion_table(void);
-void	initialize_state(t_conversion *conversion);
-void	parse_argument(t_conversion *conversion, va_list arg_ptr);
-void	parse_conversion_type(const char **format, t_conversion *conversion);
-void	parse_field_width(const char **format, t_conversion *conversion);
-void	parse_flags(const char **format, t_conversion *conversion);
-void	parse_format(const char **format, t_conversion *conversion);
-void	parse_precision(const char **format, t_conversion *conversion);
+void	fix_priorities(t_options *options);
+const t_base_and_prefix_fn	*get_options_table(void);
+void	initialize_options(t_options *options);
+void	parse_argument(t_options *options, va_list arg_ptr);
+void	parse_options_type(const char **format, t_options *options);
+void	parse_field_width(const char **format, t_options *options);
+void	parse_flags(const char **format, t_options *options);
+void	parse_format(const char **format, t_options *options);
+void	parse_precision(const char **format, t_options *options);
 
 ////////////////////////////////////////////////////////////////////////////////
 

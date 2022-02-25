@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/03 12:44:11 by sbos          #+#    #+#                 */
-/*   Updated: 2022/02/25 17:59:57 by sbos          ########   odam.nl         */
+/*   Updated: 2022/02/25 18:51:26 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,19 +16,19 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void	test_get_type_string(t_conversion_function get_type_string,
+void	test_get_type_string(t_base_and_prefix_fn get_type_string,
 								char *prefix, char *expected, ...)
 {
-	t_conversion	conversion;
+	t_options	options;
 	va_list	arg_ptr;
 
-	initialize_state(&conversion);
+	initialize_options(&options);
 	va_start(arg_ptr, expected);
-	get_type_string(arg_ptr, &conversion);
-	massert(conversion.options.parts.base_str, expected);
-	free(conversion.options.parts.base_str);
-	massert(conversion.options.parts.prefix, prefix);
-	free(conversion.options.parts.prefix);
+	get_type_string(arg_ptr, &options);
+	massert(options.parts.base_str, expected);
+	free(options.parts.base_str);
+	massert(options.parts.prefix, prefix);
+	free(options.parts.prefix);
 	va_end(arg_ptr);
 }
 
