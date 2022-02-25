@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/15 13:05:27 by sbos          #+#    #+#                 */
-/*   Updated: 2022/02/24 20:03:38 by sbos          ########   odam.nl         */
+/*   Updated: 2022/02/25 16:40:28 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -242,7 +242,6 @@ void	initialize_options(t_options *options)
 	options->field_width = 0;
 	options->precision = -1;
 	options->type = '\0';
-	options->negative = false; // TODO: Necessary?
 }
 
 void	initialize_state(t_conversion *conversion)

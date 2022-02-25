@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/18 16:43:29 by sbos          #+#    #+#                 */
-/*   Updated: 2022/02/24 17:09:13 by sbos          ########   odam.nl         */
+/*   Updated: 2022/02/25 16:38:10 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ void	get_decimal(va_list arg_ptr, t_conversion *conversion)
 {
 	int const	nbr = va_arg(arg_ptr, int);
 
-	conversion->options.negative = nbr < 0;
 	if (nbr < 0)
 	{
 		conversion->base_str = ft_nbr_to_str(-(intmax_t)nbr, 10);
