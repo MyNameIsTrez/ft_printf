@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/15 13:05:27 by sbos          #+#    #+#                 */
-/*   Updated: 2022/02/25 20:23:33 by sbos          ########   odam.nl         */
+/*   Updated: 2022/02/25 21:06:46 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ void	set_precision_str(t_options *options)
 	}
 }
 
-void	print_options(t_options *options)
+ssize_t	print_options(t_options *options)
 {
 	if (options->precision >= 0)
 		set_precision_str(options);
@@ -113,17 +113,21 @@ void	print_options(t_options *options)
 	if (options->parts.precision_or_zero_pad == NULL)
 		options->parts.precision_or_zero_pad = ft_empty_str();
 	set_space_pad(options);
-	ft_putstr(options->parts.left_pad); // TODO: Check if this returns < 1
+	if (ft_putstr(options->parts.left_pad) == -1)
+		return (-1);
 	options->len += ft_strlen(options->parts.left_pad);
-	ft_putstr(options->parts.prefix);
+	if (ft_putstr(options->parts.prefix) == -1)
+		return (-1);
 	options->len += ft_strlen(options->parts.prefix);
-	ft_putstr(options->parts.precision_or_zero_pad);
+	if (ft_putstr(options->parts.precision_or_zero_pad) == -1)
+		return (-1);
 	options->len += ft_strlen(options->parts.precision_or_zero_pad);
 	if (options->type == 'c')
 		options->len += (size_t)ft_putchar_fd(options->parts.base_str[0], STDOUT_FILENO); // TODO: Use ft_putchar
 	else
 		options->len += (size_t)ft_putstr(options->parts.base_str);
 	options->len += (size_t)ft_putstr(options->parts.right_pad);
+	return (0);
 }
 
 // TODO: Let this return the result of accessing the table instead.
@@ -254,30 +258,34 @@ void	parse_format(const char **format, t_options *options)
 int	ft_printf(const char *format, ...)
 {
 	t_options	options;
-	int				chars_printed;
-	va_list			arg_ptr;
-	const char		*non_format_start = format;
+	int			chrs_printed;
+	va_list		arg_ptr;
+	const char	*non_format_start = format;
+	size_t		bytes_written; // TODO: Better name.
 
-	chars_printed = 0;
+	chrs_printed = 0;
 	va_start(arg_ptr, format);
 	while (*format != '\0')
 	{
 		format = ft_strchr(format, '%');
 		if (format == NULL)
 			break ;
-		// TODO: Check if write returns -1
-		chars_printed += (int)write(STDOUT_FILENO, non_format_start, (size_t)(format - non_format_start));
+		bytes_written = (size_t)(format - non_format_start);
+		if (write(STDOUT_FILENO, non_format_start, bytes_written) == -1)
+			return (-1);
+		chrs_printed += bytes_written;
 		format++;
 		parse_format(&format, &options);
 		parse_argument(&options, arg_ptr);
-		print_options(&options);
-		chars_printed += options.len;
+		if (print_options(&options) == -1)
+			return (-1);
+		chrs_printed += options.len;
 		free_options(&options);
 		format++;
 		non_format_start = format;
 	}
 	va_end(arg_ptr);
 	// TODO: Check if ft_putstr_fd returns -1
-	chars_printed += (int)ft_putstr_fd((char *)non_format_start, STDOUT_FILENO);
-	return (chars_printed);
+	chrs_printed += (int)ft_putstr_fd((char *)non_format_start, STDOUT_FILENO);
+	return (chrs_printed);
 }

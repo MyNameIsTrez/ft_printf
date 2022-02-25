@@ -11,6 +11,7 @@
 * Let printf return -1 if malloc returns NULL.
 * Free all mallocs.
 * Use the leaks program.
+* Replace hardcoded mentions of -1 with some sort #define error name.
 
 # Before evalling
 * Check that no forbidden functions are being called (search all calls using '('?)
