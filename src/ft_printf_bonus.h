@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/15 13:05:22 by sbos          #+#    #+#                 */
-/*   Updated: 2022/02/25 18:48:47 by sbos          ########   odam.nl         */
+/*   Updated: 2022/02/25 19:56:10 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ typedef void	(*t_base_and_prefix_fn)(va_list arg_ptr, t_options *options);
 typedef struct s_flags
 {
 	bool	alternate;
-	bool	zero_fill;
+	bool	zero_fill; // TODO: Rename to zero_pad?
 	bool	pad_right;
 	bool	plus_space;
 	bool	plus_sign;

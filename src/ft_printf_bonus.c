@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/15 13:05:27 by sbos          #+#    #+#                 */
-/*   Updated: 2022/02/25 19:51:52 by sbos          ########   odam.nl         */
+/*   Updated: 2022/02/25 20:18:01 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,18 +34,18 @@ void	set_left_right_pad(t_options *options, char *pad)
 {
 	if (options->flags.zero_fill)
 	{
-		options->parts.left_pad = ft_strdup("");
-		options->parts.right_pad = ft_strdup("");
+		options->parts.left_pad = ft_empty_str();
+		options->parts.right_pad = ft_empty_str();
 	}
 	else if (options->flags.pad_right)
 	{
-		options->parts.left_pad = ft_strdup("");
+		options->parts.left_pad = ft_empty_str();
 		options->parts.right_pad = pad;
 	}
 	else
 	{
 		options->parts.left_pad = pad;
-		options->parts.right_pad = ft_strdup("");
+		options->parts.right_pad = ft_empty_str();
 	}
 }
 
@@ -67,6 +67,8 @@ void	set_space_pad(t_options *options)
 			pad = ft_chr_repeat(' ', pad_len);
 		}
 	}
+	if (pad == NULL)
+		pad = ft_empty_str();
 	set_left_right_pad(options, (char *)pad);
 }
 
@@ -109,12 +111,14 @@ void	print_options(t_options *options)
 	else if (options->flags.zero_fill)
 		set_zero_pad(options);
 	if (options->parts.precision_or_zero_pad == NULL)
-		options->parts.precision_or_zero_pad = ft_strdup("");
+		options->parts.precision_or_zero_pad = ft_empty_str();
 	set_space_pad(options);
-	// TODO: Check if these ft_put_str return < 0
-	options->len += (size_t)ft_putstr(options->parts.left_pad);
-	options->len += (size_t)ft_putstr(options->parts.prefix);
-	options->len += (size_t)ft_putstr(options->parts.precision_or_zero_pad);
+	ft_putstr(options->parts.left_pad); // TODO: Check if this returns < 1
+	options->len += ft_strlen(options->parts.left_pad);
+	ft_putstr(options->parts.prefix);
+	options->len += ft_strlen(options->parts.prefix);
+	ft_putstr(options->parts.precision_or_zero_pad);
+	options->len += ft_strlen(options->parts.precision_or_zero_pad);
 	if (options->type == 'c')
 		options->len += (size_t)ft_putchar_fd(options->parts.base_str[0], STDOUT_FILENO); // TODO: Use ft_putchar
 	else
@@ -208,11 +212,11 @@ void	parse_flags(const char **format, t_options *options)
 
 void	initialize_parts(t_parts *parts)
 {
-	parts->left_pad = NULL;
-	parts->prefix = NULL;
-	parts->precision_or_zero_pad = NULL;
-	parts->base_str = NULL;
-	parts->right_pad = NULL;
+	parts->left_pad = ft_empty_str();
+	parts->prefix = ft_empty_str();
+	parts->precision_or_zero_pad = ft_empty_str();
+	parts->base_str = ft_empty_str();
+	parts->right_pad = ft_empty_str();
 }
 
 void	initialize_flags(t_flags *flags)
