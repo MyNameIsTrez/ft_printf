@@ -10,6 +10,7 @@
 * Let printf return -1 if write returns negative.
 * Let printf return -1 if malloc returns NULL.
 * Free all mallocs.
+* Use the leaks program.
 
 # Before evalling
 * Check that no forbidden functions are being called (search all calls using '('?)

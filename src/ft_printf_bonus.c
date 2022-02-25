@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/15 13:05:27 by sbos          #+#    #+#                 */
-/*   Updated: 2022/02/25 20:18:01 by sbos          ########   odam.nl         */
+/*   Updated: 2022/02/25 20:23:33 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -212,11 +212,11 @@ void	parse_flags(const char **format, t_options *options)
 
 void	initialize_parts(t_parts *parts)
 {
-	parts->left_pad = ft_empty_str();
-	parts->prefix = ft_empty_str();
-	parts->precision_or_zero_pad = ft_empty_str();
-	parts->base_str = ft_empty_str();
-	parts->right_pad = ft_empty_str();
+	parts->left_pad = NULL;
+	parts->prefix = NULL;
+	parts->precision_or_zero_pad = NULL;
+	parts->base_str = NULL;
+	parts->right_pad = NULL;
 }
 
 void	initialize_flags(t_flags *flags)
