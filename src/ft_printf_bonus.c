@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/15 13:05:27 by sbos          #+#    #+#                 */
-/*   Updated: 2022/02/25 18:05:16 by sbos          ########   odam.nl         */
+/*   Updated: 2022/02/25 18:21:43 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,10 +106,8 @@ void	set_precision_str(t_conversion *conversion)
 	}
 }
 
-int	print_conversion(t_conversion *conversion)
+void	print_conversion(t_conversion *conversion)
 {
-	int		len;
-
 	if (conversion->options.precision >= 0)
 		set_precision_str(conversion);
 	else if (conversion->options.flags.zero_fill)
@@ -117,15 +115,15 @@ int	print_conversion(t_conversion *conversion)
 	if (conversion->options.parts.precision_or_zero_pad == NULL)
 		conversion->options.parts.precision_or_zero_pad = ft_strdup("");
 	set_space_pad(conversion);
-	len = (int)ft_putstr(conversion->options.parts.left_pad);
-	len += (int)ft_putstr(conversion->options.parts.prefix);
-	len += (int)ft_putstr(conversion->options.parts.precision_or_zero_pad);
+	// TODO: Check if these ft_put_str return < 0
+	conversion->options.len += (size_t)ft_putstr(conversion->options.parts.left_pad);
+	conversion->options.len += (size_t)ft_putstr(conversion->options.parts.prefix);
+	conversion->options.len += (size_t)ft_putstr(conversion->options.parts.precision_or_zero_pad);
 	if (conversion->options.type == 'c')
-		len += (int)ft_putchar_fd(conversion->options.parts.base_str[0], STDOUT_FILENO); // TODO: Use ft_putchar
+		conversion->options.len += (size_t)ft_putchar_fd(conversion->options.parts.base_str[0], STDOUT_FILENO); // TODO: Use ft_putchar
 	else
-		len += (int)ft_putstr(conversion->options.parts.base_str);
-	len += (int)ft_putstr(conversion->options.parts.right_pad);
-	return (len);
+		conversion->options.len += (size_t)ft_putstr(conversion->options.parts.base_str);
+	conversion->options.len += (size_t)ft_putstr(conversion->options.parts.right_pad);
 }
 
 // TODO: Can this function get *conversion_table as an arg
@@ -241,6 +239,7 @@ void	initialize_options(t_options *options)
 	options->field_width = 0;
 	options->precision = -1;
 	options->type = '\0';
+	options->len = 0;
 }
 
 void	initialize_state(t_conversion *conversion)
@@ -273,16 +272,19 @@ int	ft_printf(const char *format, ...)
 		format = ft_strchr(format, '%');
 		if (format == NULL)
 			break ;
+		// TODO: Check if write returns -1
 		chars_printed += (int)write(STDOUT_FILENO, non_format_start, (size_t)(format - non_format_start));
 		format++;
 		parse_format(&format, &conversion);
 		parse_argument(&conversion, arg_ptr);
-		chars_printed += print_conversion(&conversion);
+		print_conversion(&conversion);
+		chars_printed += conversion.options.len;
 		free_conversion(&conversion);
 		format++;
 		non_format_start = format;
 	}
 	va_end(arg_ptr);
+	// TODO: Check if ft_putstr_fd returns -1
 	chars_printed += (int)ft_putstr_fd((char *)non_format_start, STDOUT_FILENO);
 	return (chars_printed);
 }

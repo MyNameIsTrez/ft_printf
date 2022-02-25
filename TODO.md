@@ -12,7 +12,6 @@
 * Let printf return -1 if malloc returns NULL.
 * Free all mallocs.
 * Make conversion->options.type an enum instead of a char.
-* t_conversion contains base_str and prefix, while t_parts does as well.
 
 # Before evalling
 * Check that no forbidden functions are being called (search all calls using '('?)
