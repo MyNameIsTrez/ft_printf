@@ -8,10 +8,11 @@
   This includes ft_putstr() and ft_putchar_fd() calls in this project.
 * Change all "const type" to "type const" here and in libft.
 * Use ft_str_repeat() instead of ft_stralloc(pad_len); ft_memset(pad, ' ', pad_len);
-* Let printf return -1 if write returns negative
-* Let printf return -1 if malloc returns NULL
-* Free all mallocs
-* Make conversion->options.type an enum instead of a char
+* Let printf return -1 if write returns negative.
+* Let printf return -1 if malloc returns NULL.
+* Free all mallocs.
+* Make conversion->options.type an enum instead of a char.
+* t_conversion contains base_str and prefix, while t_parts does as well.
 
 # Before evalling
 * Check that no forbidden functions are being called (search all calls using '('?)
