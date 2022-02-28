@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/15 13:05:27 by sbos          #+#    #+#                 */
-/*   Updated: 2022/02/25 21:06:46 by sbos          ########   odam.nl         */
+/*   Updated: 2022/02/28 13:55:31 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,31 @@ void	set_precision_str(t_options *options)
 	}
 }
 
-ssize_t	print_options(t_options *options)
+ssize_t	pft_putstr(char *str, size_t *acc)
+{
+	ssize_t	a;
+
+	a = ft_putstr(str);
+	if (a < 0)
+		return (a);
+	if (acc != NULL)
+		(*acc) += (size_t)a;
+	return (a);
+}
+
+ssize_t	pft_putchr(char chr, size_t *acc)
+{
+	ssize_t	a;
+
+	a = ft_putchar(chr);
+	if (a < 0)
+		return (a);
+	if (acc != NULL)
+		(*acc) += (size_t)a;
+	return (a);
+}
+
+void	fill_parts(t_options *options)
 {
 	if (options->precision >= 0)
 		set_precision_str(options);
@@ -113,20 +137,25 @@ ssize_t	print_options(t_options *options)
 	if (options->parts.precision_or_zero_pad == NULL)
 		options->parts.precision_or_zero_pad = ft_empty_str();
 	set_space_pad(options);
-	if (ft_putstr(options->parts.left_pad) == -1)
+}
+
+ssize_t	print_options(t_options *options)
+{
+	if (pft_putstr(options->parts.left_pad, &options->len) < 0)
 		return (-1);
-	options->len += ft_strlen(options->parts.left_pad);
-	if (ft_putstr(options->parts.prefix) == -1)
+	if (pft_putstr(options->parts.prefix, &options->len) < 0)
 		return (-1);
-	options->len += ft_strlen(options->parts.prefix);
-	if (ft_putstr(options->parts.precision_or_zero_pad) == -1)
+	if (pft_putstr(options->parts.precision_or_zero_pad, &options->len) < 0)
 		return (-1);
-	options->len += ft_strlen(options->parts.precision_or_zero_pad);
 	if (options->type == 'c')
-		options->len += (size_t)ft_putchar_fd(options->parts.base_str[0], STDOUT_FILENO); // TODO: Use ft_putchar
-	else
-		options->len += (size_t)ft_putstr(options->parts.base_str);
-	options->len += (size_t)ft_putstr(options->parts.right_pad);
+	{
+		if (pft_putchr(options->parts.base_str[0], &options->len) < 0)
+			return (-1);
+	}
+	else if (pft_putstr(options->parts.base_str, &options->len) < 0)
+		return (-1);
+	if (pft_putstr(options->parts.right_pad, &options->len) < 0)
+		return (-1);
 	return (0);
 }
 
@@ -277,6 +306,7 @@ int	ft_printf(const char *format, ...)
 		format++;
 		parse_format(&format, &options);
 		parse_argument(&options, arg_ptr);
+		fill_parts(&options);
 		if (print_options(&options) == -1)
 			return (-1);
 		chrs_printed += options.len;
