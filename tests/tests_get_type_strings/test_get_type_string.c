@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/03 12:44:11 by sbos          #+#    #+#                 */
-/*   Updated: 2022/02/25 18:51:26 by sbos          ########   odam.nl         */
+/*   Updated: 2022/02/28 14:21:26 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,8 @@ void	test_get_type_string(t_base_and_prefix_fn get_type_string,
 	va_start(arg_ptr, expected);
 	get_type_string(arg_ptr, &options);
 	massert(options.parts.base_str, expected);
-	free(options.parts.base_str);
 	massert(options.parts.prefix, prefix);
-	free(options.parts.prefix);
+	free_parts(&options.parts);
 	va_end(arg_ptr);
 }
 

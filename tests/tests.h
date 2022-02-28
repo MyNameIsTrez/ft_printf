@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/20 11:42:16 by sbos          #+#    #+#                 */
-/*   Updated: 2022/02/25 18:52:31 by sbos          ########   odam.nl         */
+/*   Updated: 2022/02/28 14:12:47 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,8 @@ extern t_list	*g_tests_lst;
 	get_output(ft_printf(__VA_ARGS__), ft_buf, ft_ret);							\
 	massert(buf, ft_buf);														\
 	massert(ret, ft_ret);														\
+	free(buf);																	\
+	free(ft_buf);																\
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -98,6 +100,7 @@ void	parse_field_width(const char **format, t_options *options);
 void	parse_flags(const char **format, t_options *options);
 void	parse_format(const char **format, t_options *options);
 void	parse_precision(const char **format, t_options *options);
+void	free_parts(t_parts *parts);
 
 ////////////////////////////////////////////////////////////////////////////////
 
