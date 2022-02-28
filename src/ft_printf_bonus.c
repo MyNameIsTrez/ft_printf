@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/15 13:05:27 by sbos          #+#    #+#                 */
-/*   Updated: 2022/02/28 13:55:31 by sbos          ########   odam.nl         */
+/*   Updated: 2022/02/28 14:03:19 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,12 +159,9 @@ ssize_t	print_options(t_options *options)
 	return (0);
 }
 
-// TODO: Let this return the result of accessing the table instead.
-const t_base_and_prefix_fn	*get_options_table(void)
+// TODO: After changing get_options_table so it returns the result of accessing the table, update this function.
+void	parse_argument(t_options *options, va_list arg_ptr)
 {
-	// TODO: Which one should be used?
-	// static const t_base_and_prefix_fn	options_table[] = {
-	// t_base_and_prefix_fn static	options_table[] = {
 	const static t_base_and_prefix_fn	options_table[] = {
 	['c'] = get_char,
 	['s'] = get_string,
@@ -176,14 +173,6 @@ const t_base_and_prefix_fn	*get_options_table(void)
 	['X'] = get_hex_upper,
 	['%'] = get_percent,
 	};
-
-	return (options_table);
-}
-
-// TODO: After changing get_options_table so it returns the result of accessing the table, update this function.
-void	parse_argument(t_options *options, va_list arg_ptr)
-{
-	const t_base_and_prefix_fn	*options_table = get_options_table();
 
 	options_table[options->type](arg_ptr, options);
 }
