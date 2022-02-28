@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/15 13:05:27 by sbos          #+#    #+#                 */
-/*   Updated: 2022/02/28 14:03:19 by sbos          ########   odam.nl         */
+/*   Updated: 2022/02/28 14:47:00 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,19 +21,20 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void	free_options(t_options *options)
+void	free_parts(t_parts *parts)
 {
-	free(options->parts.left_pad);
-	free(options->parts.prefix);
-	free(options->parts.precision_or_zero_pad);
-	free(options->parts.base_str);
-	free(options->parts.right_pad);
+	free(parts->left_pad);
+	free(parts->prefix);
+	free(parts->precision_or_zero_pad);
+	free(parts->base_str);
+	free(parts->right_pad);
 }
 
 void	set_left_right_pad(t_options *options, char *pad)
 {
 	if (options->flags.zero_fill)
 	{
+		free(pad);
 		options->parts.left_pad = ft_empty_str();
 		options->parts.right_pad = ft_empty_str();
 	}
@@ -299,7 +300,7 @@ int	ft_printf(const char *format, ...)
 		if (print_options(&options) == -1)
 			return (-1);
 		chrs_printed += options.len;
-		free_options(&options);
+		free_parts(&options.parts);
 		format++;
 		non_format_start = format;
 	}
