@@ -12,7 +12,10 @@
 * Free all mallocs.
 * Use the leaks program.
 * Replace hardcoded mentions of -1 with some sort #define error name.
+* Add tests for every combination of flags.
+* Remove reference to bonus in filenames.
 
 # Before evalling
 * Check that no forbidden functions are being called (search all calls using '('?)
 * Run ft_printf_test on a clone (and maybe another tester?)
+* UNCAPITALIZE STATIC (and remove from header)

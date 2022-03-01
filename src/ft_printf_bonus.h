@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/15 13:05:22 by sbos          #+#    #+#                 */
-/*   Updated: 2022/02/25 19:56:10 by sbos          ########   odam.nl         */
+/*   Updated: 2022/03/01 17:32:46 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,10 @@
 
 #ifndef FT_PRINTF_BONUS_H
 # define FT_PRINTF_BONUS_H
+
+////////////////////////////////////////////////////////////////////////////////
+
+# define STATIC
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -68,6 +72,20 @@ typedef struct s_options
 	unsigned char	type;
 	size_t			len;
 }	t_options;
+
+////////////////////////////////////////////////////////////////////////////////
+
+void	fill_parts(t_options *options);
+void	fix_priorities(t_options *options);
+void	initialize_options(t_options *options);
+void	parse_argument(t_options *options, va_list arg_ptr);
+void	parse_format(const char **format, t_options *options);
+
+ssize_t	accumulate(ssize_t ret, size_t *acc);
+ssize_t	pft_putstr(char *str, size_t *acc);
+ssize_t	pft_putchr(char chr, size_t *acc);
+ssize_t	pft_put_substr(char *start, char *end, size_t *acc);
+void	free_parts(t_parts *parts);
 
 ////////////////////////////////////////////////////////////////////////////////
 

@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/23 17:56:28 by sbos          #+#    #+#                 */
-/*   Updated: 2022/02/25 16:36:20 by sbos          ########   odam.nl         */
+/*   Updated: 2022/03/01 17:10:25 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,9 @@ Test(ft_printf)
 		compare_printfs("%1%");
 		compare_printfs("%5%");
 		compare_printfs("%-5%");
+		compare_printfs("%#5%");
+		compare_printfs("% 5%");
+		compare_printfs("%+5%");
 	}
 	{
 		compare_printfs("");

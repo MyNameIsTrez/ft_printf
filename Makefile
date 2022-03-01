@@ -6,7 +6,7 @@
 #    By: trez <trez@student.codam.nl>                 +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/01/10 13:54:36 by trez          #+#    #+#                  #
-#    Updated: 2022/02/09 18:45:10 by sbos          ########   odam.nl          #
+#    Updated: 2022/03/01 17:27:48 by sbos          ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,13 @@ SOURCES :=									\
 	src/get_type_strings/get_percent.c		\
 	src/get_type_strings/get_pointer.c		\
 	src/get_type_strings/get_string.c		\
-	src/get_type_strings/get_unsigned.c
+	src/get_type_strings/get_unsigned.c		\
+	src/fill_parts.c						\
+	src/fix_priorities.c					\
+	src/initialize_options.c				\
+	src/parse_argument.c					\
+	src/parse_format.c						\
+	src/utils.c
 
 HEADERS :=									\
 	src/get_type_strings/get_type_strings.h	\
