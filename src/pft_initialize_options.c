@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   initialize_options.c                               :+:    :+:            */
+/*   pft_initialize_options.c                           :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/01 17:05:23 by sbos          #+#    #+#                 */
-/*   Updated: 2022/03/01 17:30:17 by sbos          ########   odam.nl         */
+/*   Updated: 2022/03/01 18:32:10 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 ////////////////////////////////////////////////////////////////////////////////
 
-#include "ft_printf_bonus.h"
+#include "ft_printf.h"
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -28,7 +28,7 @@ STATIC void	initialize_parts(t_parts *parts)
 STATIC void	initialize_flags(t_flags *flags)
 {
 	flags->alternate = false;
-	flags->zero_fill = false;
+	flags->zero_pad = false;
 	flags->pad_right = false;
 	flags->plus_space = false;
 	flags->plus_sign = false;
@@ -36,7 +36,7 @@ STATIC void	initialize_flags(t_flags *flags)
 
 // precision is -1 by default instead of 0 cause:
 // printf("'%d'\n", 0) -> '0' but printf("'%.d'\n", 0) -> ''
-void	initialize_options(t_options *options)
+void	pft_initialize_options(t_options *options)
 {
 	initialize_flags(&options->flags);
 	initialize_parts(&options->parts);

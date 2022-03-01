@@ -6,7 +6,7 @@
 #    By: trez <trez@student.codam.nl>                 +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/01/10 13:54:36 by trez          #+#    #+#                  #
-#    Updated: 2022/03/01 17:27:48 by sbos          ########   odam.nl          #
+#    Updated: 2022/03/01 18:31:19 by sbos          ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,26 +19,26 @@ CC := cc
 
 CFLAGS := -Wall -Wextra -Werror
 
-SOURCES :=									\
-	src/ft_printf_bonus.c					\
-	src/get_type_strings/get_char.c			\
-	src/get_type_strings/get_decimal.c		\
-	src/get_type_strings/get_hex_lower.c	\
-	src/get_type_strings/get_hex_upper.c	\
-	src/get_type_strings/get_percent.c		\
-	src/get_type_strings/get_pointer.c		\
-	src/get_type_strings/get_string.c		\
-	src/get_type_strings/get_unsigned.c		\
-	src/fill_parts.c						\
-	src/fix_priorities.c					\
-	src/initialize_options.c				\
-	src/parse_argument.c					\
-	src/parse_format.c						\
-	src/utils.c
+SOURCES :=										\
+	src/ft_printf.c								\
+	src/get_type_strings/pft_get_char.c			\
+	src/get_type_strings/pft_get_decimal.c		\
+	src/get_type_strings/pft_get_hex_lower.c	\
+	src/get_type_strings/pft_get_hex_upper.c	\
+	src/get_type_strings/pft_get_percent.c		\
+	src/get_type_strings/pft_get_pointer.c		\
+	src/get_type_strings/pft_get_string.c		\
+	src/get_type_strings/pft_get_unsigned.c		\
+	src/pft_fill_parts.c						\
+	src/pft_fix_priorities.c					\
+	src/pft_initialize_options.c				\
+	src/pft_parse_argument.c					\
+	src/pft_parse_format.c						\
+	src/pft_utils.c
 
-HEADERS :=									\
-	src/get_type_strings/get_type_strings.h	\
-	src/ft_printf_bonus.h
+HEADERS :=										\
+	src/get_type_strings/pft_get_type_strings.h	\
+	src/ft_printf.h
 
 CLEANED_FILES := obj
 FCLEANED_FILES := $(NAME)

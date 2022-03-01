@@ -1,43 +1,52 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   get_decimal.c                                      :+:    :+:            */
+/*   pft_utils.c                                        :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2022/01/18 16:43:29 by sbos          #+#    #+#                 */
-/*   Updated: 2022/02/25 20:18:01 by sbos          ########   odam.nl         */
+/*   Created: 2022/03/01 17:14:58 by sbos          #+#    #+#                 */
+/*   Updated: 2022/03/01 18:32:10 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 ////////////////////////////////////////////////////////////////////////////////
 
-#include "ft_printf_bonus.h"
+#include "ft_printf.h"
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void	get_decimal(va_list arg_ptr, t_options *options)
+ssize_t	pft_accumulate(ssize_t ret, size_t *acc)
 {
-	int const	nbr = va_arg(arg_ptr, int);
+	if (ret < 0)
+		return (ret);
+	if (acc != NULL)
+		(*acc) += (size_t)ret;
+	return (ret);
+}
 
-	if (nbr < 0)
-	{
-		options->parts.base_str = ft_nbr_to_str(-(intmax_t)nbr, 10);
-		options->parts.prefix = ft_strdup("-");
-	}
-	else
-	{
-		if (nbr == 0 && options->precision == 0)
-			options->parts.base_str = ft_empty_str();
-		else
-			options->parts.base_str = ft_nbr_to_str((intmax_t)nbr, 10);
-		if (options->flags.plus_space)
-			options->parts.prefix = ft_strdup(" ");
-		else if (options->flags.plus_sign)
-			options->parts.prefix = ft_strdup("+");
-		else
-			options->parts.prefix = ft_empty_str();
-	}
+ssize_t	pft_putstr(char *str, size_t *acc)
+{
+	return (pft_accumulate(ft_putstr(str), acc));
+}
+
+ssize_t	pft_putchr(char chr, size_t *acc)
+{
+	return (pft_accumulate(ft_putchar(chr), acc));
+}
+
+ssize_t	pft_put_substr(char *start, char *end, size_t *acc)
+{
+	return (pft_accumulate(ft_put_substr(start, end), acc));
+}
+
+void	pft_free_parts(t_parts *parts)
+{
+	free(parts->left_pad);
+	free(parts->prefix);
+	free(parts->precision_or_zero_pad);
+	free(parts->base_str);
+	free(parts->right_pad);
 }
 
 ////////////////////////////////////////////////////////////////////////////////

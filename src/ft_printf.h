@@ -1,27 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_printf_bonus.h                                  :+:    :+:            */
+/*   ft_printf.h                                        :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/15 13:05:22 by sbos          #+#    #+#                 */
-/*   Updated: 2022/03/01 17:32:46 by sbos          ########   odam.nl         */
+/*   Updated: 2022/03/01 18:33:53 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 ////////////////////////////////////////////////////////////////////////////////
 
-#ifndef FT_PRINTF_BONUS_H
-# define FT_PRINTF_BONUS_H
+#ifndef FT_PRINTF_H
+# define FT_PRINTF_H
 
 ////////////////////////////////////////////////////////////////////////////////
 
-# define STATIC
+# define STATIC static
 
 ////////////////////////////////////////////////////////////////////////////////
 
-# include "get_type_strings.h"
+# include "pft_get_type_strings.h"
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -35,7 +35,6 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 # define FLAGS " -+#0"
-// # define CONVERSION_TYPES "cspdiuxX%" // TODO: Remove?
 # define PRECISION_TYPES "pdiuxX"
 # define ZERO_PAD_TYPES "pdiuxX%"
 
@@ -48,7 +47,7 @@ typedef void	(*t_base_and_prefix_fn)(va_list arg_ptr, t_options *options);
 typedef struct s_flags
 {
 	bool	alternate;
-	bool	zero_fill; // TODO: Rename to zero_pad?
+	bool	zero_pad;
 	bool	pad_right;
 	bool	plus_space;
 	bool	plus_sign;
@@ -75,17 +74,17 @@ typedef struct s_options
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void	fill_parts(t_options *options);
-void	fix_priorities(t_options *options);
-void	initialize_options(t_options *options);
-void	parse_argument(t_options *options, va_list arg_ptr);
-void	parse_format(const char **format, t_options *options);
+void	pft_fill_parts(t_options *options);
+void	pft_fix_priorities(t_options *options);
+void	pft_initialize_options(t_options *options);
+void	pft_parse_argument(t_options *options, va_list arg_ptr);
+void	pft_parse_format(const char **format, t_options *options);
 
-ssize_t	accumulate(ssize_t ret, size_t *acc);
+ssize_t	pft_accumulate(ssize_t ret, size_t *acc);
 ssize_t	pft_putstr(char *str, size_t *acc);
 ssize_t	pft_putchr(char chr, size_t *acc);
 ssize_t	pft_put_substr(char *start, char *end, size_t *acc);
-void	free_parts(t_parts *parts);
+void	pft_free_parts(t_parts *parts);
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -103,7 +102,7 @@ void	free_parts(t_parts *parts);
  * (excluding the null terminator).
  * If an output error is encountered, a negative value is returned.
  */
-int	ft_printf(const char *format, ...);
+int		ft_printf(const char *format, ...);
 
 ////////////////////////////////////////////////////////////////////////////////
 

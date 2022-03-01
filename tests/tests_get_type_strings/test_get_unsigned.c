@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/20 11:34:27 by sbos          #+#    #+#                 */
-/*   Updated: 2022/02/24 13:50:47 by sbos          ########   odam.nl         */
+/*   Updated: 2022/03/01 18:09:27 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,12 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Test(get_unsigned)
+Test(pft_get_unsigned)
 {
-	test_get_type_string(get_unsigned, "", "0", 0);
-	test_get_type_string(get_unsigned, "", "1", 1);
-	test_get_type_string(get_unsigned, "", "4294967295", -1);
-	test_get_type_string(get_unsigned, "", "10", 10);
+	test_get_type_string(pft_get_unsigned, "", "0", 0);
+	test_get_type_string(pft_get_unsigned, "", "1", 1);
+	test_get_type_string(pft_get_unsigned, "", "4294967295", -1);
+	test_get_type_string(pft_get_unsigned, "", "10", 10);
 }
 
 ////////////////////////////////////////////////////////////////////////////////

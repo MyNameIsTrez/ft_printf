@@ -1,24 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   fill_parts.c                                       :+:    :+:            */
+/*   pft_fill_parts.c                                   :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/01 17:16:42 by sbos          #+#    #+#                 */
-/*   Updated: 2022/03/01 17:30:17 by sbos          ########   odam.nl         */
+/*   Updated: 2022/03/01 18:32:10 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 ////////////////////////////////////////////////////////////////////////////////
 
-#include "ft_printf_bonus.h"
+#include "ft_printf.h"
 
 ////////////////////////////////////////////////////////////////////////////////
 
 STATIC void	set_left_right_pad(t_options *options, char *pad)
 {
-	if (options->flags.zero_fill)
+	if (options->flags.zero_pad)
 	{
 		free(pad);
 		options->parts.left_pad = ft_empty_str();
@@ -42,9 +42,10 @@ STATIC void	set_space_pad(t_options *options)
 	size_t		len;
 	size_t		pad_len;
 
-	if (!options->flags.zero_fill)
+	if (!options->flags.zero_pad)
 	{
-		len = ft_strlen(options->parts.prefix) + ft_strlen(options->parts.precision_or_zero_pad)
+		len = ft_strlen(options->parts.prefix)
+			+ ft_strlen(options->parts.precision_or_zero_pad)
 			+ ft_strlen(options->parts.base_str);
 		if (options->type == 'c' && ft_str_eq(options->parts.base_str, ""))
 			len++;
@@ -66,7 +67,8 @@ STATIC void	set_zero_pad(t_options *options)
 
 	if (ft_strchr(ZERO_PAD_TYPES, options->type) != NULL)
 	{
-		len = ft_strlen(options->parts.prefix) + ft_strlen(options->parts.base_str);
+		len = ft_strlen(options->parts.prefix)
+			+ ft_strlen(options->parts.base_str);
 		if (options->field_width > len)
 		{
 			pad_len = options->field_width - len;
@@ -86,16 +88,17 @@ STATIC void	set_precision_str(t_options *options)
 		if (options->precision > (ssize_t)base_len)
 		{
 			precision_len = (size_t)options->precision - base_len;
-			options->parts.precision_or_zero_pad = ft_chr_repeat('0', precision_len);
+			options->parts.precision_or_zero_pad = ft_chr_repeat('0',
+					precision_len);
 		}
 	}
 }
 
-void	fill_parts(t_options *options)
+void	pft_fill_parts(t_options *options)
 {
 	if (options->precision >= 0)
 		set_precision_str(options);
-	else if (options->flags.zero_fill)
+	else if (options->flags.zero_pad)
 		set_zero_pad(options);
 	if (options->parts.precision_or_zero_pad == NULL)
 		options->parts.precision_or_zero_pad = ft_empty_str();

@@ -6,13 +6,9 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/15 13:05:05 by sbos          #+#    #+#                 */
-/*   Updated: 2022/02/28 14:56:13 by sbos          ########   odam.nl         */
+/*   Updated: 2022/03/01 18:32:47 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
-
-////////////////////////////////////////////////////////////////////////////////
-
-#include "ft_printf_bonus.h"
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -79,7 +75,7 @@ int	main(void)
 	(void)run_tests_include;
 	printf("Running tests...\n");
 	char *exclude_tests[] = {
-		// "get_pointer",
+		// "pft_get_pointer",
 	};
 	run_tests_exclude(exclude_tests, sizeof(exclude_tests));
 	// char *include_tests[] = {

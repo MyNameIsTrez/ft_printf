@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_printf_bonus.c                                  :+:    :+:            */
+/*   ft_printf.c                                        :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/15 13:05:27 by sbos          #+#    #+#                 */
-/*   Updated: 2022/03/01 17:30:17 by sbos          ########   odam.nl         */
+/*   Updated: 2022/03/01 18:31:30 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 ////////////////////////////////////////////////////////////////////////////////
 
-#include "ft_printf_bonus.h"
+#include "ft_printf.h"
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -41,7 +41,8 @@ STATIC ssize_t	print_options(t_options *options)
 	return ((ssize_t)options->len);
 }
 
-STATIC ssize_t	ft_printf_routine(char *format, t_options *options, va_list arg_ptr)
+STATIC ssize_t	ft_printf_routine(char *format, t_options *options,
+									va_list arg_ptr)
 {
 	size_t	chrs_printed;
 	char	*non_format_start;
@@ -56,12 +57,12 @@ STATIC ssize_t	ft_printf_routine(char *format, t_options *options, va_list arg_p
 		if (pft_put_substr(non_format_start, format, &chrs_printed) < 0)
 			return (-1);
 		format++;
-		parse_format((const char **)&format, options);
-		parse_argument(options, arg_ptr);
-		fill_parts(options);
-		if (accumulate(print_options(options), &chrs_printed) < 0)
+		pft_parse_format((const char **)&format, options);
+		pft_parse_argument(options, arg_ptr);
+		pft_fill_parts(options);
+		if (pft_accumulate(print_options(options), &chrs_printed) < 0)
 			return (-1);
-		free_parts(&options->parts);
+		pft_free_parts(&options->parts);
 		format++;
 		non_format_start = format;
 	}

@@ -28,8 +28,7 @@ MASSERT_DIR := libmassert
 TESTER := tester
 # TODO: Why are the Makefile's headers also included in this tester.mk?
 TESTER_HEADERS :=											\
-	src/ft_printf_bonus.h									\
-	src/get_type_strings/get_type_strings.h					\
+	$(HEADERS)												\
 	tests/tests_get_type_strings/test_get_type_strings.h	\
 	$(TESTS_DIR)/tests.h									\
 	$(MASSERT_DIR)/massert.h

@@ -1,36 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   parse_argument.c                                   :+:    :+:            */
+/*   pft_get_hex_upper.c                                :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2022/03/01 17:21:46 by sbos          #+#    #+#                 */
-/*   Updated: 2022/03/01 17:22:12 by sbos          ########   odam.nl         */
+/*   Created: 2022/01/18 16:43:29 by sbos          #+#    #+#                 */
+/*   Updated: 2022/03/01 18:32:10 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 ////////////////////////////////////////////////////////////////////////////////
 
-#include "ft_printf_bonus.h"
+#include "ft_printf.h"
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void	parse_argument(t_options *options, va_list arg_ptr)
+void	pft_get_hex_upper(va_list arg_ptr, t_options *options)
 {
-	const static t_base_and_prefix_fn	options_table[] = {
-	['c'] = get_char,
-	['s'] = get_string,
-	['p'] = get_pointer,
-	['d'] = get_decimal,
-	['i'] = get_decimal,
-	['u'] = get_unsigned,
-	['x'] = get_hex_lower,
-	['X'] = get_hex_upper,
-	['%'] = get_percent,
-	};
-
-	options_table[options->type](arg_ptr, options);
+	pft_get_hex_lower(arg_ptr, options);
+	ft_str_upper(options->parts.base_str);
+	ft_str_upper(options->parts.prefix);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
