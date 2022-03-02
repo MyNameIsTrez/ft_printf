@@ -5,8 +5,7 @@
 #                                                      +:+                     #
 #    By: sbos <sbos@student.codam.nl>                 +#+                      #
 #                                                    +#+                       #
-#    Created: 2022/01/20 16:07:18 by sbos          #+#    #+#                  #
-#    Updated: 2022/02/25 19:25:13 by sbos          ########   odam.nl          #
+#    Created: 2022/01/20 16:07:18 by sbos          #+#    #+#                  #    Updated: 2022/03/01 18:14:56 by sbos          ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,14 +24,15 @@ TESTS_OBJ_DIR := obj_tests
 
 MASSERT_DIR := libmassert
 
+TESTER_LIBS := ./libmassert/libmassert.a ./libftprintf.a
+
 TESTER := tester
-# TODO: Why are the Makefile's headers also included in this tester.mk?
+
 TESTER_HEADERS :=											\
 	$(HEADERS)												\
 	tests/tests_get_type_strings/test_get_type_strings.h	\
 	$(TESTS_DIR)/tests.h									\
 	$(MASSERT_DIR)/massert.h
-TESTER_LIBS := -L$(MASSERT_DIR) -lmassert -L. -lftprintf
 
 ################################################################################
 
@@ -41,10 +41,12 @@ TESTER_OBJECTS := $(patsubst $(TESTS_DIR)/%,$(TESTS_OBJ_DIR)/%,$(TESTER_SOURCES:
 
 TESTER_INCLUDES := $(sort $(addprefix -I, $(dir $(TESTER_HEADERS))))
 
+TESTER_LIB_FLAGS := $(sort $(addprefix -L,$(dir $(TESTER_LIBS)))) $(sort $(patsubst lib%,-l%,$(basename $(notdir $(TESTER_LIBS)))))
+
 ################################################################################
 
 $(TESTER): bonus $(MASSERT_DIR)/libmassert.a $(TESTER_OBJECTS)
-	$(CC) $(CFLAGS) $(TESTER_INCLUDES) -g3 $(TESTER_OBJECTS) $(TESTER_LIBS) -o $(TESTER)
+	$(CC) $(CFLAGS) $(TESTER_INCLUDES) -g3 $(TESTER_OBJECTS) $(TESTER_LIB_FLAGS) -o $(TESTER)
 
 $(TESTS_OBJ_DIR)/%.o: $(TESTS_DIR)/%.c $(TESTER_HEADERS)
 	@mkdir -p $(@D)
