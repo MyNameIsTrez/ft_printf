@@ -24,3 +24,9 @@
 
 # Allow documentation
 !DOCUMENTATION.txt
+
+# Remove stuff that doesn't belong in evalutions
+testers
+tests
+advanced_printf_tester.c
+tester.mk
