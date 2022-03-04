@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/15 13:05:22 by sbos          #+#    #+#                 */
-/*   Updated: 2022/03/01 18:33:53 by sbos          ########   odam.nl         */
+/*   Updated: 2022/03/04 18:21:17 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 
-# define STATIC static
+# include "../../libft/libft.h"
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -25,12 +25,12 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 
-# include "../../libft/libft.h"
+# include <stdbool.h>	// bool
+# include <sys/types.h>	// ssize_t
 
 ////////////////////////////////////////////////////////////////////////////////
 
-# include <stdbool.h>	// bool
-# include <sys/types.h>	// ssize_t
+# define STATIC //static
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -40,7 +40,7 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 
-typedef void	(*t_base_and_prefix_fn)(va_list arg_ptr, t_options *options);
+typedef t_success	(*t_base_and_prefix_fn)(va_list arg_ptr, t_options *options);
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -74,17 +74,17 @@ typedef struct s_options
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void	pft_fill_parts(t_options *options);
-void	pft_fix_priorities(t_options *options);
-void	pft_initialize_options(t_options *options);
-void	pft_parse_argument(t_options *options, va_list arg_ptr);
-void	pft_parse_format(const char **format, t_options *options);
+t_success	pft_fill_parts(t_options *options);
+void		pft_fix_priorities(t_options *options);
+void		pft_initialize_options(t_options *options);
+ssize_t		pft_parse_argument(t_options *options, va_list arg_ptr);
+void		pft_parse_format(char const **format, t_options *options);
 
-ssize_t	pft_accumulate(ssize_t ret, size_t *acc);
-ssize_t	pft_putstr(char *str, size_t *acc);
-ssize_t	pft_putchr(char chr, size_t *acc);
-ssize_t	pft_put_substr(char *start, char *end, size_t *acc);
-void	pft_free_parts(t_parts *parts);
+ssize_t		pft_accumulate(ssize_t ret, size_t *acc);
+ssize_t		pft_putstr(char *str, size_t *acc);
+ssize_t		pft_putchr(char chr, size_t *acc);
+ssize_t		pft_put_substr(char *start, char *end, size_t *acc);
+void		pft_free_parts(t_parts *parts);
 
 ////////////////////////////////////////////////////////////////////////////////
 

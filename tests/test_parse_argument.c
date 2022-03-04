@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/20 11:34:27 by sbos          #+#    #+#                 */
-/*   Updated: 2022/03/01 18:09:27 by sbos          ########   odam.nl         */
+/*   Updated: 2022/03/04 18:29:08 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@
 void	foo(char *prefix, char *expected, const char *format, ...)
 {
 	t_options	options;
-	va_list	arg_ptr;
+	va_list		arg_ptr;
 
 	pft_initialize_options(&options);
-	parse_options_type(&format, &options);
+	parse_options_type(&format, &options.type);
 	pft_fix_priorities(&options);
 
 	va_start(arg_ptr, format);

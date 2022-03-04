@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/20 11:42:16 by sbos          #+#    #+#                 */
-/*   Updated: 2022/03/01 18:32:25 by sbos          ########   odam.nl         */
+/*   Updated: 2022/03/04 18:28:04 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,14 +92,13 @@ extern t_list	*g_tests_lst;
 // that aren't in bonus/src/ft_printf_bonus.h as they are normally private.
 
 void	pft_fix_priorities(t_options *options);
-const t_base_and_prefix_fn	*get_options_table(void);
 void	pft_initialize_options(t_options *options);
-void	pft_parse_argument(t_options *options, va_list arg_ptr);
-void	parse_options_type(const char **format, t_options *options);
-void	parse_field_width(const char **format, t_options *options);
-void	parse_flags(const char **format, t_options *options);
+ssize_t	pft_parse_argument(t_options *options, va_list arg_ptr);
+void	parse_options_type(const char **format, unsigned char *type);
+void	parse_field_width(const char **format, size_t *field_width);
+void	parse_flags(const char **format, t_flags *flags);
 void	pft_parse_format(const char **format, t_options *options);
-void	parse_precision(const char **format, t_options *options);
+void	parse_precision(const char **format, ssize_t *precision);
 void	pft_free_parts(t_parts *parts);
 
 ////////////////////////////////////////////////////////////////////////////////

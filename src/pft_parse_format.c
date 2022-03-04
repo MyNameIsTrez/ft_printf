@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/01 17:12:45 by sbos          #+#    #+#                 */
-/*   Updated: 2022/03/01 18:32:10 by sbos          ########   odam.nl         */
+/*   Updated: 2022/03/02 16:49:10 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,58 +16,58 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 
-STATIC void	parse_options_type(const char **format, t_options *options)
+STATIC void	parse_options_type(char const **format, unsigned char *type)
 {
-	options->type = (unsigned char)**format;
+	*type = (unsigned char)**format;
 }
 
-STATIC void	parse_precision(const char **format, t_options *options)
+STATIC void	parse_precision(char const **format, ssize_t *precision)
 {
 	if (**format == '.')
 	{
-		options->precision = 0;
+		*precision = 0;
 		(*format)++;
 	}
 	if (ft_isdigit(**format))
 	{
-		options->precision = ft_atoi(*format);
+		*precision = ft_atoi(*format);
 		while (ft_isdigit(**format))
 			(*format)++;
 	}
 }
 
-STATIC void	parse_field_width(const char **format, t_options *options)
+STATIC void	parse_field_width(char const **format, size_t *field_width)
 {
-	options->field_width = (size_t)ft_atoi(*format);
-	if (options->field_width != 0)
-		(*format) += ft_get_digit_count((intmax_t)options->field_width);
+	*field_width = (size_t)ft_atoi(*format);
+	if (*field_width != 0)
+		(*format) += ft_get_digit_count((intmax_t)(*field_width));
 }
 
-STATIC void	parse_flags(const char **format, t_options *options)
+STATIC void	parse_flags(char const **format, t_flags *flags)
 {
 	while (**format != '\0' && ft_strchr(FLAGS, **format) != NULL)
 	{
 		if (**format == '#')
-			options->flags.alternate = true;
+			flags->alternate = true;
 		else if (**format == '0')
-			options->flags.zero_pad = true;
+			flags->zero_pad = true;
 		else if (**format == '-')
-			options->flags.pad_right = true;
+			flags->pad_right = true;
 		else if (**format == ' ')
-			options->flags.plus_space = true;
+			flags->plus_space = true;
 		else if (**format == '+')
-			options->flags.plus_sign = true;
+			flags->plus_sign = true;
 		(*format)++;
 	}
 }
 
-void	pft_parse_format(const char **format, t_options *options)
+void	pft_parse_format(char const **format, t_options *options)
 {
 	pft_initialize_options(options);
-	parse_flags(format, options);
-	parse_field_width(format, options);
-	parse_precision(format, options);
-	parse_options_type(format, options);
+	parse_flags(format, &options->flags);
+	parse_field_width(format, &options->field_width);
+	parse_precision(format, &options->precision);
+	parse_options_type(format, &options->type);
 	pft_fix_priorities(options);
 }
 

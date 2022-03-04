@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/20 11:34:27 by sbos          #+#    #+#                 */
-/*   Updated: 2022/03/01 17:38:06 by sbos          ########   odam.nl         */
+/*   Updated: 2022/03/04 18:30:11 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ Test(parse_flags)
 		const char *format = "#0- +42d";
 		t_options	options;
 
-		parse_flags(&format, &options);
+		parse_flags(&format, &options.flags);
 
 		massert(options.flags.alternate, (bool)true);
 		massert(options.flags.zero_pad, (bool)true);

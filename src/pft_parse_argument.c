@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/01 17:21:46 by sbos          #+#    #+#                 */
-/*   Updated: 2022/03/01 18:32:10 by sbos          ########   odam.nl         */
+/*   Updated: 2022/03/04 17:48:33 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void	pft_parse_argument(t_options *options, va_list arg_ptr)
+ssize_t	pft_parse_argument(t_options *options, va_list arg_ptr)
 {
-	const static t_base_and_prefix_fn	options_table[] = {
+	t_base_and_prefix_fn const static	options_table[] = {
 	['c'] = pft_get_char,
 	['s'] = pft_get_string,
 	['p'] = pft_get_pointer,
@@ -30,7 +30,7 @@ void	pft_parse_argument(t_options *options, va_list arg_ptr)
 	['%'] = pft_get_percent,
 	};
 
-	options_table[options->type](arg_ptr, options);
+	return (options_table[options->type](arg_ptr, options));
 }
 
 ////////////////////////////////////////////////////////////////////////////////

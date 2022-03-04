@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/20 11:34:27 by sbos          #+#    #+#                 */
-/*   Updated: 2022/03/01 18:09:27 by sbos          ########   odam.nl         */
+/*   Updated: 2022/03/04 18:30:36 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ Test(parse_precision)
 		t_options	options;
 
 		pft_initialize_options(&options);
-		parse_precision(&format, &options);
+		parse_precision(&format, &options.precision);
 
 		// printf("'%7.42d'\n",  0) -> '000000000000000000000000000000000000000000'
 		// printf("'%7.42d'\n", 42) -> '000000000000000000000000000000000000000042'
@@ -44,7 +44,7 @@ Test(parse_precision)
 		t_options	options;
 
 		pft_initialize_options(&options);
-		parse_precision(&format, &options);
+		parse_precision(&format, &options.precision);
 
 		// printf("%.1d",  0) -> '0'
 		// printf("%.1d", 42) -> '42'
@@ -57,7 +57,7 @@ Test(parse_precision)
 		t_options	options;
 
 		pft_initialize_options(&options);
-		parse_precision(&format, &options);
+		parse_precision(&format, &options.precision);
 
 		// printf("%.0d",  0) -> ''
 		// printf("%.0d", 42) -> '42'
@@ -70,7 +70,7 @@ Test(parse_precision)
 		t_options	options;
 
 		pft_initialize_options(&options);
-		parse_precision(&format, &options);
+		parse_precision(&format, &options.precision);
 
 		// printf("%.d",  0) -> ''
 		// printf("%.d", 42) -> '42'
@@ -83,7 +83,7 @@ Test(parse_precision)
 		t_options	options;
 
 		pft_initialize_options(&options);
-		parse_precision(&format, &options);
+		parse_precision(&format, &options.precision);
 
 		// printf("'%d'\n" , 0) -> '0'
 		// printf("'%.0d'\n", 0) -> ''
