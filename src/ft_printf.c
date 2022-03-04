@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/15 13:05:27 by sbos          #+#    #+#                 */
-/*   Updated: 2022/03/04 18:38:17 by sbos          ########   odam.nl         */
+/*   Updated: 2022/03/04 18:49:30 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ STATIC ssize_t	ft_printf_routine(char *format, t_options *options,
 		if (pft_put_substr(non_format_start, format, &chrs_printed) < 0)
 			return (ERROR);
 		format++;
-		pft_parse_format((char const **)&format, options);
+		pft_parse_format(&format, options);
 		if (ft_error(pft_parse_argument(options, arg_ptr)))
 			return (ERROR);
 		if (ft_error(pft_fill_parts(options)))

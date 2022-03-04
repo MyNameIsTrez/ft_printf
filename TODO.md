@@ -1,13 +1,3 @@
-# General
-* Let printf return -1 if write returns NULL.
-* Use the leaks program.
-* Add tests for every combination of flags.
-* Remove reference to bonus in filenames.
-* Add comments saying what is used from includes.
-* Don't initialize things to const when it can be confusing to others.
-* CHECK IF THERE IS ANY ft_empty_str_assign_fail or ft_str_assign_fail CALL
-  THAT HAS A FIRST ARGUMENT THAT DOESN'T START WITH A &
-
 # Before evalling
 * Fix all TODOs.
 * Check that no forbidden functions are being called (search all calls using '('?)
@@ -16,6 +6,8 @@
 * Run norminette on both printf and libft.
 
 # At some later point
+* Add tests for every combination of flags.
+* Add comments saying what is used from includes.
 * Try to figure out the exact rules for multi-line variable tabbing, cause it isn't always 2!
   Then once I know how that works, consider applying those same rules to multi-line function argument tabbing.
 * Consistently use && on the line *before* or *at the start of* the line of a second argument.

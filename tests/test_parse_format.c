@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/20 11:34:27 by sbos          #+#    #+#                 */
-/*   Updated: 2022/03/01 18:09:18 by sbos          ########   odam.nl         */
+/*   Updated: 2022/03/04 18:51:54 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 
-static t_options	foo(const char	**format, ...)
+static t_options	foo(char **format, ...)
 {
 	t_options	options;
 
@@ -27,7 +27,7 @@ static t_options	foo(const char	**format, ...)
 Test(pft_parse_format)
 {
 	{
-		const char	*format = "#0- +42d";
+		char	*format = "#0- +42d";
 		t_options	options = foo(&format, 1337);
 
 		massert(options.flags.alternate, (bool)true);
@@ -42,7 +42,7 @@ Test(pft_parse_format)
 	}
 
 	{
-		const char	*format = "42d";
+		char	*format = "42d";
 		t_options	options = foo(&format, 1337);
 
 		massert(options.flags.alternate, (bool)false);
@@ -57,7 +57,7 @@ Test(pft_parse_format)
 	}
 
 	{
-		const char	*format = "d";
+		char	*format = "d";
 		t_options	options = foo(&format, 1337);
 
 		massert(options.flags.alternate, (bool)false);
@@ -72,7 +72,7 @@ Test(pft_parse_format)
 	}
 
 	{
-		const char	*format = "0d";
+		char	*format = "0d";
 		t_options	options = foo(&format, 1337);
 
 		massert(options.flags.alternate, (bool)false);

@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/20 11:34:27 by sbos          #+#    #+#                 */
-/*   Updated: 2022/03/04 18:29:35 by sbos          ########   odam.nl         */
+/*   Updated: 2022/03/04 18:53:17 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 Test(parse_field_width)
 {
 	{
-		const char *format = "42d";
+		char *format = "42d";
 		t_options	options;
 
 		pft_initialize_options(&options);
@@ -30,7 +30,7 @@ Test(parse_field_width)
 	}
 
 	{
-		const char *format = "d";
+		char *format = "d";
 		t_options	options;
 
 		pft_initialize_options(&options);

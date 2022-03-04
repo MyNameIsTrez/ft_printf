@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/20 11:34:27 by sbos          #+#    #+#                 */
-/*   Updated: 2022/03/04 18:30:36 by sbos          ########   odam.nl         */
+/*   Updated: 2022/03/04 18:53:43 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ or the maximum number of characters to be printed from a string for s optionss.
 Test(parse_precision)
 {
 	{
-		const char *format = ".42d";
+		char	*format = ".42d";
 		t_options	options;
 
 		pft_initialize_options(&options);
@@ -40,7 +40,7 @@ Test(parse_precision)
 	}
 
 	{
-		const char *format = ".1d";
+		char	*format = ".1d";
 		t_options	options;
 
 		pft_initialize_options(&options);
@@ -53,7 +53,7 @@ Test(parse_precision)
 	}
 
 	{
-		const char *format = ".0d";
+		char	*format = ".0d";
 		t_options	options;
 
 		pft_initialize_options(&options);
@@ -66,7 +66,7 @@ Test(parse_precision)
 	}
 
 	{
-		const char *format = ".d";
+		char	*format = ".d";
 		t_options	options;
 
 		pft_initialize_options(&options);
@@ -79,7 +79,7 @@ Test(parse_precision)
 	}
 
 	{
-		const char *format = "d";
+		char	*format = "d";
 		t_options	options;
 
 		pft_initialize_options(&options);

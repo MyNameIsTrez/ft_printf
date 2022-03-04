@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/01 17:12:45 by sbos          #+#    #+#                 */
-/*   Updated: 2022/03/02 16:49:10 by sbos          ########   odam.nl         */
+/*   Updated: 2022/03/04 18:49:25 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,12 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 
-STATIC void	parse_options_type(char const **format, unsigned char *type)
+STATIC void	parse_options_type(char **format, unsigned char *type)
 {
 	*type = (unsigned char)**format;
 }
 
-STATIC void	parse_precision(char const **format, ssize_t *precision)
+STATIC void	parse_precision(char **format, ssize_t *precision)
 {
 	if (**format == '.')
 	{
@@ -36,14 +36,14 @@ STATIC void	parse_precision(char const **format, ssize_t *precision)
 	}
 }
 
-STATIC void	parse_field_width(char const **format, size_t *field_width)
+STATIC void	parse_field_width(char **format, size_t *field_width)
 {
 	*field_width = (size_t)ft_atoi(*format);
 	if (*field_width != 0)
 		(*format) += ft_get_digit_count((intmax_t)(*field_width));
 }
 
-STATIC void	parse_flags(char const **format, t_flags *flags)
+STATIC void	parse_flags(char **format, t_flags *flags)
 {
 	while (**format != '\0' && ft_strchr(FLAGS, **format) != NULL)
 	{
@@ -61,7 +61,7 @@ STATIC void	parse_flags(char const **format, t_flags *flags)
 	}
 }
 
-void	pft_parse_format(char const **format, t_options *options)
+void	pft_parse_format(char **format, t_options *options)
 {
 	pft_initialize_options(options);
 	parse_flags(format, &options->flags);

@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/20 11:34:27 by sbos          #+#    #+#                 */
-/*   Updated: 2022/03/04 18:29:08 by sbos          ########   odam.nl         */
+/*   Updated: 2022/03/04 18:53:04 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void	foo(char *prefix, char *expected, const char *format, ...)
+void	foo(char *prefix, char *expected, char *format, ...)
 {
 	t_options	options;
 	va_list		arg_ptr;

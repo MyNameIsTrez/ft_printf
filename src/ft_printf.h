@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/15 13:05:22 by sbos          #+#    #+#                 */
-/*   Updated: 2022/03/04 18:21:17 by sbos          ########   odam.nl         */
+/*   Updated: 2022/03/04 18:50:07 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ t_success	pft_fill_parts(t_options *options);
 void		pft_fix_priorities(t_options *options);
 void		pft_initialize_options(t_options *options);
 ssize_t		pft_parse_argument(t_options *options, va_list arg_ptr);
-void		pft_parse_format(char const **format, t_options *options);
+void		pft_parse_format(char **format, t_options *options);
 
 ssize_t		pft_accumulate(ssize_t ret, size_t *acc);
 ssize_t		pft_putstr(char *str, size_t *acc);
