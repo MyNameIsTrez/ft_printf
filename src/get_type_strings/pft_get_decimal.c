@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/18 16:43:29 by sbos          #+#    #+#                 */
-/*   Updated: 2022/03/04 18:17:36 by sbos          ########   odam.nl         */
+/*   Updated: 2022/03/04 19:14:15 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,34 @@
 #include "ft_printf.h"
 
 ////////////////////////////////////////////////////////////////////////////////
+
+STATIC t_success	negative_decimal(int const nbr, t_options *options)
+{
+	if (nbr == 0 && options->precision == 0)
+	{
+		if (ft_empty_str_assign_fail(&options->parts.base_str))
+			return (ERROR);
+	}
+	else
+		if (ft_str_assign_fail(&options->parts.base_str,
+				ft_nbr_to_str((intmax_t)nbr, 10)))
+			return (ERROR);
+	if (options->flags.plus_space)
+	{
+		if (ft_str_assign_fail(&options->parts.prefix,
+				ft_strdup(" ")))
+			return (ERROR);
+	}
+	else if (options->flags.plus_sign)
+	{
+		if (ft_str_assign_fail(&options->parts.prefix,
+				ft_strdup("+")))
+			return (ERROR);
+	}
+	else if (ft_empty_str_assign_fail(&options->parts.prefix))
+		return (ERROR);
+	return (SUCCESS);
+}
 
 t_success	pft_get_decimal(va_list arg_ptr, t_options *options)
 {
@@ -28,33 +56,8 @@ t_success	pft_get_decimal(va_list arg_ptr, t_options *options)
 		if (ft_str_assign_fail(&options->parts.prefix, ft_strdup("-")))
 			return (ERROR);
 	}
-	else
-	{
-		if (nbr == 0 && options->precision == 0)
-		{
-			if (ft_empty_str_assign_fail(&options->parts.base_str))
-				return (ERROR);
-		}
-		else
-			if (ft_str_assign_fail(&options->parts.base_str,
-					ft_nbr_to_str((intmax_t)nbr, 10)))
-				return (ERROR);
-		if (options->flags.plus_space)
-		{
-			if (ft_str_assign_fail(&options->parts.prefix,
-					ft_strdup(" ")))
-				return (ERROR);
-		}
-		else if (options->flags.plus_sign)
-		{
-			if (ft_str_assign_fail(&options->parts.prefix,
-					ft_strdup("+")))
-				return (ERROR);
-		}
-		else
-			if (ft_empty_str_assign_fail(&options->parts.prefix))
-				return (ERROR);
-	}
+	else if (ft_error(negative_decimal(nbr, options)))
+		return (ERROR);
 	return (SUCCESS);
 }
 

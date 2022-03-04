@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/15 13:05:22 by sbos          #+#    #+#                 */
-/*   Updated: 2022/03/04 18:50:07 by sbos          ########   odam.nl         */
+/*   Updated: 2022/03/04 19:09:48 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,8 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 
-typedef t_success	(*t_base_and_prefix_fn)(va_list arg_ptr, t_options *options);
+typedef t_success	(*t_base_and_prefix_fn)\
+		(va_list arg_ptr, t_options *options);
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -102,7 +103,7 @@ void		pft_free_parts(t_parts *parts);
  * (excluding the null terminator).
  * If an output error is encountered, a negative value is returned.
  */
-int		ft_printf(const char *format, ...);
+int			ft_printf(const char *format, ...);
 
 ////////////////////////////////////////////////////////////////////////////////
 

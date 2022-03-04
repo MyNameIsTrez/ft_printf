@@ -1,9 +1,9 @@
 # Before evalling
-* Fix all TODOs.
-* Check that no forbidden functions are being called (search all calls using '('?)
-* Run ft_printf_test on a clone (and maybe another tester?)
-* UNCAPITALIZE STATIC (and remove from header)
+* Uncomment "static" from header so STATIC works.
 * Run norminette on both printf and libft.
+* Copy the symlink libft into a regular folder.
+* git clone to test if everything works.
+* Run ft_printf_test on a clone (and maybe another tester?)
 
 # At some later point
 * Add tests for every combination of flags.
@@ -13,6 +13,7 @@
 * Consistently use && on the line *before* or *at the start of* the line of a second argument.
 * Consider using *bool* to show that an error occurred, instead of ssize_t.
 * Make sure all ssize_t are included from <sys/types.h>
+* Move includes of stuff like size_t from headers into .c files that need them.
 
 These use malloc:
 ft_char_to_str|ft_lstnew|ft_calloc|ft_split_str|ft_split|ft_substr|pft_get_char|ft_lst_new_back|ft_lst_new_front|ft_lstmap|ft_stralloc|ft_str_replace|ft_strtrim|pft_get_string|pft_parse_argument|ft_nbr_to_str|ft_unsigned_nbr_to_str|ft_chr_repeat|ft_rejoin_split|ft_str_repeat|ft_strdup|ft_strjoin|ft_strmapi|ft_print_fd|ft_strtrim_whitespace|ft_printf|ft_itoa|pft_get_decimal|pft_get_hex_lower|pft_get_pointer|pft_get_unsigned|pft_fill_parts|ft_empty_str|pft_get_percent|ft_print|pft_get_hex_upper

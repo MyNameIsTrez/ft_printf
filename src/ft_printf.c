@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/15 13:05:27 by sbos          #+#    #+#                 */
-/*   Updated: 2022/03/04 18:49:30 by sbos          ########   odam.nl         */
+/*   Updated: 2022/03/04 19:07:44 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,20 +41,18 @@ STATIC ssize_t	print_options(t_options *options)
 	return ((ssize_t)options->len);
 }
 
-STATIC ssize_t	ft_printf_routine(char *format, t_options *options,
-									va_list arg_ptr)
+STATIC ssize_t	ft_printf_routine(char *format, char **non_format_start,
+									t_options *options, va_list arg_ptr)
 {
 	size_t	chrs_printed;
-	char	*non_format_start;
 
 	chrs_printed = 0;
-	non_format_start = format;
 	while (*format != '\0')
 	{
 		format = ft_strchr(format, '%');
 		if (format == NULL)
 			break ;
-		if (pft_put_substr(non_format_start, format, &chrs_printed) < 0)
+		if (pft_put_substr(*non_format_start, format, &chrs_printed) < 0)
 			return (ERROR);
 		format++;
 		pft_parse_format(&format, options);
@@ -66,10 +64,8 @@ STATIC ssize_t	ft_printf_routine(char *format, t_options *options,
 			return (ERROR);
 		pft_free_parts(&options->parts);
 		format++;
-		non_format_start = format;
+		*non_format_start = format;
 	}
-	if (pft_putstr(non_format_start, (size_t *)&chrs_printed) < 0)
-		return (ERROR);
 	return ((ssize_t)chrs_printed);
 }
 
@@ -78,9 +74,15 @@ int	ft_printf(const char *format, ...)
 	t_options	options;
 	int			chrs_printed;
 	va_list		arg_ptr;
+	char		*non_format_start;
 
+	non_format_start = (char *)format;
 	va_start(arg_ptr, format);
-	chrs_printed = (int)ft_printf_routine((char *)format, &options, arg_ptr);
+	chrs_printed = (int)ft_printf_routine((char *)format,
+			&non_format_start, &options, arg_ptr);
+	if (chrs_printed >= 0
+		&& pft_putstr(non_format_start, (size_t *)&chrs_printed) < 0)
+		return (ERROR);
 	va_end(arg_ptr);
 	return (chrs_printed);
 }
