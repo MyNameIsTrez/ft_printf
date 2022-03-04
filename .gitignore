@@ -30,3 +30,5 @@ testers
 tests
 advanced_printf_tester.c
 tester.mk
+.vscode
+DOCUMENTATION.txt
