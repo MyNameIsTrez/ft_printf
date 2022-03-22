@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/15 13:05:22 by sbos          #+#    #+#                 */
-/*   Updated: 2022/03/22 11:11:57 by sbos          ########   odam.nl         */
+/*   Updated: 2022/03/22 11:56:03 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 
-# define STATIC static
+# define STATIC //static
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -78,7 +78,7 @@ typedef struct s_options
 t_success	pft_fill_parts(t_options *options);
 void		pft_fix_priorities(t_options *options);
 void		pft_initialize_options(t_options *options);
-ssize_t		pft_parse_argument(t_options *options, va_list arg_ptr);
+t_success	pft_parse_argument(t_options *options, va_list arg_ptr);
 void		pft_parse_format(char **format, t_options *options);
 
 ssize_t		pft_accumulate(ssize_t ret, size_t *acc);

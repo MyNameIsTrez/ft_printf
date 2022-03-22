@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/01 17:16:42 by sbos          #+#    #+#                 */
-/*   Updated: 2022/03/04 18:16:57 by sbos          ########   odam.nl         */
+/*   Updated: 2022/03/22 11:54:13 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,7 @@ STATIC t_success	set_space_pad(t_options *options)
 	}
 	if (pad == NULL && ft_empty_str_assign_fail(&pad))
 		return (ERROR);
-	set_left_right_pad(options, pad);
-	return (SUCCESS);
+	return (set_left_right_pad(options, pad));
 }
 
 STATIC t_success	set_zero_pad(t_options *options)
@@ -110,14 +109,19 @@ STATIC t_success	set_precision_str(t_options *options)
 t_success	pft_fill_parts(t_options *options)
 {
 	if (options->precision >= 0)
-		set_precision_str(options);
+	{
+		if (ft_error(set_precision_str(options)))
+			return (ERROR);
+	}
 	else if (options->flags.zero_pad)
-		set_zero_pad(options);
+	{
+		if (ft_error(set_zero_pad(options)))
+			return (ERROR);
+	}
 	if (options->parts.precision_or_zero_pad == NULL
 		&& ft_empty_str_assign_fail(&options->parts.precision_or_zero_pad))
 		return (ERROR);
-	set_space_pad(options);
-	return (SUCCESS);
+	return (set_space_pad(options));
 }
 
 ////////////////////////////////////////////////////////////////////////////////

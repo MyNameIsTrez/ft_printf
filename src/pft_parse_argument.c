@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/01 17:21:46 by sbos          #+#    #+#                 */
-/*   Updated: 2022/03/04 17:48:33 by sbos          ########   odam.nl         */
+/*   Updated: 2022/03/22 11:51:06 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 
-ssize_t	pft_parse_argument(t_options *options, va_list arg_ptr)
+t_success	pft_parse_argument(t_options *options, va_list arg_ptr)
 {
 	t_base_and_prefix_fn const static	options_table[] = {
 	['c'] = pft_get_char,

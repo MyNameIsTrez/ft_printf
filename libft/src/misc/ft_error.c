@@ -6,26 +6,26 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/04 17:15:49 by sbos          #+#    #+#                 */
-/*   Updated: 2022/03/04 17:33:18 by sbos          ########   odam.nl         */
+/*   Updated: 2022/03/22 11:55:43 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 ////////////////////////////////////////////////////////////////////////////////
 
 #include <stdbool.h>	// bool
-#include <stdint.h>		// intmax_t
+#include "helper.h"		// t_success
 
 ////////////////////////////////////////////////////////////////////////////////
 
 /**
- * @brief Returns true when @p status is lower than 0.
+ * @brief Returns true when @p status is not SUCCESS.
  *
  * @param status
  * @return
  */
-bool	ft_error(intmax_t status)
+bool	ft_error(t_success status)
 {
-	return (status < 0);
+	return (status != SUCCESS);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
