@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/15 13:05:27 by sbos          #+#    #+#                 */
-/*   Updated: 2022/03/04 19:07:44 by sbos          ########   odam.nl         */
+/*   Updated: 2022/03/22 11:11:46 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,19 @@ STATIC ssize_t	ft_printf_routine(char *format, char **non_format_start,
 	return ((ssize_t)chrs_printed);
 }
 
+/**
+ * @brief This is a recreation of printf() from libc.
+ * It doesn’t implement the buffer management of the original printf().
+ * It handles the following conversions: "cspdiuxX%" .
+ * It handles any combination of the following flags: "-0.# +"
+ * and the minimum field width.
+ *
+ * @param format See "man 3 printf".
+ *
+ * @return If successful, returns the number of characters printed
+ * (excluding the null terminator).
+ * If an output error is encountered, a negative value is returned.
+ */
 int	ft_printf(const char *format, ...)
 {
 	t_options	options;
