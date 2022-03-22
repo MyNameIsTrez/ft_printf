@@ -1,0 +1,37 @@
+# Ignore everything
+*
+
+# Allow folders
+!*/
+
+# Allow .c and .h files
+!*.[ch]
+
+# Allow Makefiles
+!Makefile
+
+# Allow tester
+!tester.mk
+
+# Allow gitignore
+!.gitignore
+
+# Allow libft submodule
+# !libft
+
+# Allow .vscode settings
+!.vscode/*
+
+# Allow documentation
+!DOCUMENTATION.txt
+
+# Remove stuff that doesn't belong in evalutions
+testers
+# libmassert
+# tests
+# advanced_printf_tester.c
+# tester.mk
+# .vscode
+# DOCUMENTATION.txt
+# .gitignore
+# README.md
