@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/15 13:05:22 by sbos          #+#    #+#                 */
-/*   Updated: 2022/03/22 10:40:50 by sbos          ########   odam.nl         */
+/*   Updated: 2022/03/22 10:57:21 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,9 +93,8 @@ void		pft_free_parts(t_parts *parts);
  * @brief This is a recreation of printf() from libc.
  * It doesn’t implement the buffer management of the original printf().
  * It handles the following conversions: "cspdiuxX%" .
- * It handles any combination of the following flags: "-0."
- * and the field minimum width under all conversions.
- * It handles all the following flags: "# +" (yes, one of them is a space).
+ * It handles any combination of the following flags: "-0.# +"
+ * and the minimum field width.
  *
  * @param format See "man 3 printf".
  *
