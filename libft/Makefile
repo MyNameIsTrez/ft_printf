@@ -6,7 +6,7 @@
 #    By: sbos <sbos@student.codam.nl>                 +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/02/04 14:13:55 by sbos          #+#    #+#                  #
-#    Updated: 2022/03/04 22:02:47 by sbos          ########   odam.nl          #
+#    Updated: 2022/03/22 14:52:40 by sbos          ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -149,7 +149,7 @@ ifdef SAN
 CFLAGS += -fsanitize=address
 endif
 
-OBJECT_PATHS := $(patsubst $(SRC_DIR)/%,$(OBJ_DIR)/%,$(SOURCES:.c=.o))
+OBJECT_PATHS := $(addprefix $(OBJ_DIR)/,$(SOURCES:.c=.o))
 
 # sort removes duplicates
 INCLUDES := $(addprefix -I, $(sort $(dir $(HEADERS))))
@@ -170,7 +170,7 @@ $(NAME): $(OBJECT_PATHS)
 	ar rcs $(NAME) $(OBJECT_PATHS)
 	@echo "$(MAKE_DATA)" > $(DATA_FILE)
 
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(HEADERS)
+$(OBJ_DIR)/%.o: %.c $(HEADERS)
 	@mkdir -p $(@D)
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 

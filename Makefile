@@ -6,7 +6,7 @@
 #    By: trez <trez@student.codam.nl>                 +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/01/10 13:54:36 by trez          #+#    #+#                  #
-#    Updated: 2022/03/22 10:41:21 by sbos          ########   odam.nl          #
+#    Updated: 2022/03/22 14:52:45 by sbos          ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,7 +59,7 @@ endif
 
 ################################################################################
 
-OBJECT_PATHS := $(patsubst $(SRC_DIR)/%,$(OBJ_DIR)/%,$(SOURCES:.c=.o))
+OBJECT_PATHS := $(addprefix $(OBJ_DIR)/,$(SOURCES:.c=.o))
 
 INCLUDES := $(addprefix -I, $(sort $(dir $(HEADERS))))
 
@@ -71,7 +71,7 @@ $(NAME): $(OBJECT_PATHS) $(LIBFT_PATH)
 	cp $(LIBFT_PATH) $(NAME)
 	ar rs $(NAME) $(OBJECT_PATHS)
 
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(HEADERS)
+$(OBJ_DIR)/%.o: %.c $(HEADERS)
 	@mkdir -p $(@D)
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
