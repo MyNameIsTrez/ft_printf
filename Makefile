@@ -6,7 +6,7 @@
 #    By: trez <trez@student.codam.nl>                 +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/01/10 13:54:36 by trez          #+#    #+#                  #
-#    Updated: 2022/03/22 14:52:45 by sbos          ########   odam.nl          #
+#    Updated: 2022/03/22 16:21:12 by sbos          ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,7 +39,8 @@ SOURCES :=										\
 HEADERS :=										\
 	src/get_type_strings/pft_get_type_strings.h	\
 	src/ft_printf.h								\
-	libft/libft.h
+	libft/libft.h								\
+	libft/helper-headers/success.h
 
 CLEANED_FILES := obj
 FCLEANED_FILES := $(NAME)
@@ -86,11 +87,11 @@ bonus: all
 
 clean:
 	rm -rf $(CLEANED_FILES)
-	@$(MAKE) -C $(LIBFT_DIR) clean
+	$(MAKE) -C $(LIBFT_DIR) clean
 
 fclean: clean
 	rm -f $(FCLEANED_FILES)
-	@$(MAKE) -C $(LIBFT_DIR) fclean
+	$(MAKE) -C $(LIBFT_DIR) fclean
 
 re: fclean all
 
