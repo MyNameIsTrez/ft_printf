@@ -45,6 +45,8 @@ TESTER_LIB_FLAGS := $(sort $(addprefix -L,$(dir $(TESTER_LIBS)))) $(sort $(patsu
 
 ################################################################################
 
+all: $(TESTER)
+
 $(TESTER): bonus $(MASSERT_DIR)/libmassert.a $(TESTER_OBJECTS)
 	$(CC) $(CFLAGS) $(TESTER_INCLUDES) -g3 $(TESTER_OBJECTS) $(TESTER_LIB_FLAGS) -o $(TESTER)
 

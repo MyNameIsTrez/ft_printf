@@ -6,7 +6,7 @@
 #    By: trez <trez@student.codam.nl>                 +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/01/10 13:54:36 by trez          #+#    #+#                  #
-#    Updated: 2022/03/22 16:36:54 by sbos          ########   odam.nl          #
+#    Updated: 2022/03/29 17:26:43 by sbos          ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,10 +37,9 @@ SOURCES :=										\
 	src/pft_utils.c
 
 HEADERS :=										\
-	src/get_type_strings/pft_get_type_strings.h	\
-	src/ft_printf.h								\
 	libft/libft.h								\
-	libft/helper-headers/success.h
+	src/get_type_strings/pft_get_type_strings.h	\
+	src/ft_printf.h
 
 CLEANED_FILES := obj
 FCLEANED_FILES := $(NAME)
