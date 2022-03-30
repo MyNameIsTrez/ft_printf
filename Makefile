@@ -6,7 +6,7 @@
 #    By: trez <trez@student.codam.nl>                 +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/01/10 13:54:36 by trez          #+#    #+#                  #
-#    Updated: 2022/03/29 17:26:43 by sbos          ########   odam.nl          #
+#    Updated: 2022/03/30 13:13:15 by sbos          ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,10 +36,14 @@ SOURCES :=										\
 	src/pft_parse_format.c						\
 	src/pft_utils.c
 
-HEADERS :=										\
-	libft/libft.h								\
-	src/get_type_strings/pft_get_type_strings.h	\
-	src/ft_printf.h
+HEADERS :=											\
+	libft/libft.h									\
+	libft/helper_headers/boolean_operators.h		\
+	libft/helper_headers/shared_system_headers.h	\
+	libft/helper_headers/success.h					\
+	libft/helper_headers/whitespace.h				\
+	src/ft_printf.h									\
+	src/get_type_strings/pft_get_type_strings.h
 
 CLEANED_FILES := obj
 FCLEANED_FILES := $(NAME)
@@ -67,7 +71,7 @@ INCLUDES := $(addprefix -I, $(sort $(dir $(HEADERS))))
 
 all: $(NAME)
 
-$(NAME): $(OBJECT_PATHS) $(LIBFT_PATH)
+$(NAME): $(LIBFT_PATH) $(OBJECT_PATHS)
 	cp $(LIBFT_PATH) $(NAME)
 	ar rs $(NAME) $(OBJECT_PATHS)
 
