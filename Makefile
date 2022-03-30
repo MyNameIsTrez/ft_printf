@@ -6,7 +6,7 @@
 #    By: trez <trez@student.codam.nl>                 +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/01/10 13:54:36 by trez          #+#    #+#                  #
-#    Updated: 2022/03/30 13:13:15 by sbos          ########   odam.nl          #
+#    Updated: 2022/03/30 18:02:21 by sbos          ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,7 +57,7 @@ LIBFT_DIR := libft
 
 ifdef DEBUG
 CFLAGS += -g3 -Wconversion
-# CFLAGS += -fsanitize=address # Not compatible with "leaks" program.
+CFLAGS += -fsanitize=address # Not compatible with "leaks" program.
 FCLEANED_FILES += tester
 endif
 

@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/15 13:05:27 by sbos          #+#    #+#                 */
-/*   Updated: 2022/03/29 17:27:27 by sbos          ########   odam.nl         */
+/*   Updated: 2022/03/30 16:53:06 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,12 @@ STATIC ssize_t	print_options(t_options *options)
 	return ((ssize_t)options->len);
 }
 
+STATIC ssize_t	pft_free_error(t_parts *parts)
+{
+	pft_free_parts(parts);
+	return (ERROR);
+}
+
 STATIC ssize_t	ft_printf_routine(char *format, char **non_format_start,
 									t_options *options, va_list arg_ptr)
 {
@@ -52,11 +58,11 @@ STATIC ssize_t	ft_printf_routine(char *format, char **non_format_start,
 		format++;
 		pft_parse_format(&format, options);
 		if (ft_error(pft_parse_argument(options, arg_ptr)))
-			return (ERROR);
+			return (pft_free_error(&options->parts));
 		if (ft_error(pft_fill_parts(options)))
-			return (ERROR);
+			return (pft_free_error(&options->parts));
 		if (pft_accumulate(print_options(options), &chrs_printed) < 0)
-			return (ERROR);
+			return (pft_free_error(&options->parts));
 		pft_free_parts(&options->parts);
 		format++;
 		*non_format_start = format;
@@ -80,17 +86,17 @@ STATIC ssize_t	ft_printf_routine(char *format, char **non_format_start,
 int	ft_printf(const char *format, ...)
 {
 	t_options	options;
-	int			chrs_printed;
+	ssize_t		chrs_printed;
 	va_list		arg_ptr;
 	char		*non_format_start;
 
 	non_format_start = (char *)format;
 	va_start(arg_ptr, format);
-	chrs_printed = (int)ft_printf_routine((char *)format,
+	chrs_printed = ft_printf_routine((char *)format,
 			&non_format_start, &options, arg_ptr);
 	if (chrs_printed >= 0
 		&& pft_putstr(non_format_start, (size_t *)&chrs_printed) < 0)
 		return (ERROR);
 	va_end(arg_ptr);
-	return (chrs_printed);
+	return ((int)chrs_printed);
 }

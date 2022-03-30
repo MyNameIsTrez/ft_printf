@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/01 17:16:42 by sbos          #+#    #+#                 */
-/*   Updated: 2022/03/22 11:54:13 by sbos          ########   odam.nl         */
+/*   Updated: 2022/03/30 17:04:49 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ STATIC t_success	set_left_right_pad(t_options *options, char *pad)
 	}
 	else if (options->flags.pad_right)
 	{
+		options->parts.right_pad = pad;
 		if (ft_empty_str_assign_fail(&options->parts.left_pad))
 			return (ERROR);
-		options->parts.right_pad = pad;
 	}
 	else
 	{

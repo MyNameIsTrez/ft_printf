@@ -3,6 +3,7 @@
 
 # Allow folders
 !*/
+!libft/*
 
 # Allow .c and .h files
 !*.[ch]
