@@ -6,7 +6,7 @@
 #    By: sbos <sbos@student.codam.nl>                 +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/02/04 14:13:55 by sbos          #+#    #+#                  #
-#    Updated: 2022/03/31 14:49:29 by sbos          ########   odam.nl          #
+#    Updated: 2022/03/31 18:07:20 by sbos          ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -77,6 +77,7 @@ SOURCES +=							\
 
 # nbr
 SOURCES +=										\
+	src/nbr/ft_atoi_range.c						\
 	src/nbr/ft_atoi_safe.c						\
 	src/nbr/ft_atoi.c							\
 	src/nbr/ft_digit_to_char_base.c				\
@@ -154,6 +155,9 @@ FCLEANED_FILES := $(NAME)
 
 # DEBUG is set to 1 when tester.mk includes this file
 ifdef DEBUG
+ifdef NO_STATIC
+CFLAGS += -DSTATIC=
+endif
 CFLAGS += -g3 -Wconversion
 CFLAGS += -Wno-nullability-completeness # Needed for intercepting stdlib.h
 FCLEANED_FILES += $(TEST_NAME)
@@ -183,16 +187,16 @@ all: $(PRE_RULES) $(NAME)
 
 $(NAME): $(OBJECT_PATHS)
 	ar rcs $(NAME) $(OBJECT_PATHS)
-	echo "$(MAKE_DATA)" > $(DATA_FILE)
+	@echo "$(MAKE_DATA)" > $(DATA_FILE)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(HEADERS)
-	mkdir -p $(@D)
+	@mkdir -p $(@D)
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 bonus: # This is just here so libftTester doesn't throw an error.
 
 debug:
-	$(MAKE) DEBUG=1 all
+	@$(MAKE) DEBUG=1 all
 
 clean:
 	rm -rf $(OBJ_DIR)
