@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/01 17:12:45 by sbos          #+#    #+#                 */
-/*   Updated: 2022/03/04 18:49:25 by sbos          ########   odam.nl         */
+/*   Updated: 2022/04/04 16:34:51 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,6 @@ STATIC void	parse_flags(char **format, t_flags *flags)
 
 void	pft_parse_format(char **format, t_options *options)
 {
-	pft_initialize_options(options);
 	parse_flags(format, &options->flags);
 	parse_field_width(format, &options->field_width);
 	parse_precision(format, &options->precision);

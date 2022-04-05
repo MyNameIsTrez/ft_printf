@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/01 17:05:23 by sbos          #+#    #+#                 */
-/*   Updated: 2022/03/01 18:32:10 by sbos          ########   odam.nl         */
+/*   Updated: 2022/04/04 16:39:50 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ void	pft_initialize_options(t_options *options)
 	options->field_width = 0;
 	options->precision = -1;
 	options->type = '\0';
-	options->len = 0;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
