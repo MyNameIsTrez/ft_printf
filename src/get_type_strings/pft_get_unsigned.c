@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/18 16:43:29 by sbos          #+#    #+#                 */
-/*   Updated: 2022/04/05 16:00:00 by sbos          ########   odam.nl         */
+/*   Updated: 2022/04/05 16:03:35 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 
-STATIC t_success	add_prefix(t_options *options)
+STATIC t_success	pft_add_prefix(t_options *options)
 {
 	if (options->flags.plus_space)
 	{
@@ -49,7 +49,7 @@ t_success	pft_get_unsigned(va_list arg_ptr, t_options *options)
 		if (ft_str_assign(&options->parts.base_str,
 				ft_unsigned_nbr_to_str((uintmax_t)nbr, 10)) != SUCCESS)
 			return (ERROR);
-	if (add_prefix(options) != SUCCESS)
+	if (pft_add_prefix(options) != SUCCESS)
 		return (ERROR);
 	return (SUCCESS);
 }

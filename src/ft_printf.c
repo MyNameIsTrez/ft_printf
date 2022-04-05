@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/15 13:05:27 by sbos          #+#    #+#                 */
-/*   Updated: 2022/04/05 15:04:51 by sbos          ########   odam.nl         */
+/*   Updated: 2022/04/05 17:05:38 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 
-STATIC t_success	print_options(t_options *options)
+STATIC t_success	pft_print_options(t_options *options)
 {
 	if (pft_putstr(options->parts.left_pad, &options->len) < 0)
 		return (ERROR);
@@ -26,7 +26,7 @@ STATIC t_success	print_options(t_options *options)
 		return (ERROR);
 	if (options->type == 'c')
 	{
-		if (pft_putchr(options->parts.base_str[0], &options->len) < 0)
+		if (pft_putchar(options->parts.base_str[0], &options->len) < 0)
 			return (ERROR);
 	}
 	else if (pft_putstr(options->parts.base_str, &options->len) < 0)
@@ -36,10 +36,9 @@ STATIC t_success	print_options(t_options *options)
 	return (SUCCESS);
 }
 
-STATIC void	ft_printf_routine(char *format, char **non_format_start,
+STATIC void	pft_printf_loop(char *format, char **non_format_start,
 									t_options *options, va_list arg_ptr)
 {
-	// pft_initialize_options(options);
 	while (*format != '\0')
 	{
 		pft_initialize_options(options);
@@ -54,14 +53,12 @@ STATIC void	ft_printf_routine(char *format, char **non_format_start,
 			return (pft_free_parts(&options->parts));
 		if (pft_fill_parts(options) != SUCCESS)
 			return (pft_free_parts(&options->parts));
-		if (print_options(options) != SUCCESS)
+		if (pft_print_options(options) != SUCCESS)
 			return (pft_free_parts(&options->parts));
 		pft_free_parts(&options->parts);
 		format++;
 		*non_format_start = format;
 	}
-	// TODO: This is also reached with the break above, is that wanted?
-	pft_putstr(*non_format_start, &options->len);
 }
 
 /**
@@ -87,7 +84,8 @@ int	ft_printf(const char *format, ...)
 	non_format_start = (char *)format;
 	va_start(arg_ptr, format);
 	// TODO: Should this really be passing &non_format_start instead of non_format_string?
-	ft_printf_routine((char *)format, &non_format_start, &options, arg_ptr);
+	pft_printf_loop((char *)format, &non_format_start, &options, arg_ptr);
+	pft_putstr(non_format_start, &options.len);
 	va_end(arg_ptr);
 	return ((int)options.len);
 }

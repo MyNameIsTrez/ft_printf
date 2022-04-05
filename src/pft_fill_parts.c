@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/01 17:16:42 by sbos          #+#    #+#                 */
-/*   Updated: 2022/04/05 16:00:00 by sbos          ########   odam.nl         */
+/*   Updated: 2022/04/05 16:05:44 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 
-STATIC t_success	set_left_right_pad(t_options *options, char *pad)
+STATIC t_success	pft_set_left_right_pad(t_options *options, char *pad)
 {
 	if (options->flags.zero_pad)
 	{
@@ -41,7 +41,7 @@ STATIC t_success	set_left_right_pad(t_options *options, char *pad)
 	return (SUCCESS);
 }
 
-STATIC t_success	set_space_pad(t_options *options)
+STATIC t_success	pft_set_space_pad(t_options *options)
 {
 	char	*pad;
 	size_t	len;
@@ -64,10 +64,10 @@ STATIC t_success	set_space_pad(t_options *options)
 	}
 	if (pad == NULL && ft_empty_str_assign(&pad) != SUCCESS)
 		return (ERROR);
-	return (set_left_right_pad(options, pad));
+	return (pft_set_left_right_pad(options, pad));
 }
 
-STATIC t_success	set_zero_pad(t_options *options)
+STATIC t_success	pft_set_zero_pad(t_options *options)
 {
 	size_t	len;
 	size_t	pad_len;
@@ -87,7 +87,7 @@ STATIC t_success	set_zero_pad(t_options *options)
 	return (SUCCESS);
 }
 
-STATIC t_success	set_precision_str(t_options *options)
+STATIC t_success	pft_set_precision_str(t_options *options)
 {
 	size_t	base_len;
 	size_t	precision_len;
@@ -110,18 +110,18 @@ t_success	pft_fill_parts(t_options *options)
 {
 	if (options->precision >= 0)
 	{
-		if (set_precision_str(options) != SUCCESS)
+		if (pft_set_precision_str(options) != SUCCESS)
 			return (ERROR);
 	}
 	else if (options->flags.zero_pad)
 	{
-		if (set_zero_pad(options) != SUCCESS)
+		if (pft_set_zero_pad(options) != SUCCESS)
 			return (ERROR);
 	}
 	if (options->parts.precision_or_zero_pad == NULL
 		&& ft_empty_str_assign(&options->parts.precision_or_zero_pad) != SUCCESS)
 		return (ERROR);
-	return (set_space_pad(options));
+	return (pft_set_space_pad(options));
 }
 
 ////////////////////////////////////////////////////////////////////////////////

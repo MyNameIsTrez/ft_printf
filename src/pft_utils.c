@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/01 17:14:58 by sbos          #+#    #+#                 */
-/*   Updated: 2022/04/05 14:45:04 by sbos          ########   odam.nl         */
+/*   Updated: 2022/04/05 16:07:01 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ t_success	pft_putstr(char *str, size_t *acc)
 	return (pft_accumulate(ft_putstr(str), acc));
 }
 
-t_success	pft_putchr(char chr, size_t *acc)
+t_success	pft_putchar(char chr, size_t *acc)
 {
 	return (pft_accumulate(ft_putchar(chr), acc));
 }

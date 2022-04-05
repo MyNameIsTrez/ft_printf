@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/01 17:05:23 by sbos          #+#    #+#                 */
-/*   Updated: 2022/04/04 16:39:50 by sbos          ########   odam.nl         */
+/*   Updated: 2022/04/05 16:06:02 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 
-STATIC void	initialize_parts(t_parts *parts)
+STATIC void	pft_initialize_parts(t_parts *parts)
 {
 	parts->left_pad = NULL;
 	parts->prefix = NULL;
@@ -25,7 +25,7 @@ STATIC void	initialize_parts(t_parts *parts)
 	parts->right_pad = NULL;
 }
 
-STATIC void	initialize_flags(t_flags *flags)
+STATIC void	pft_initialize_flags(t_flags *flags)
 {
 	flags->alternate = false;
 	flags->zero_pad = false;
@@ -38,8 +38,8 @@ STATIC void	initialize_flags(t_flags *flags)
 // printf("'%d'\n", 0) -> '0' but printf("'%.d'\n", 0) -> ''
 void	pft_initialize_options(t_options *options)
 {
-	initialize_flags(&options->flags);
-	initialize_parts(&options->parts);
+	pft_initialize_flags(&options->flags);
+	pft_initialize_parts(&options->parts);
 	options->field_width = 0;
 	options->precision = -1;
 	options->type = '\0';
