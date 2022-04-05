@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/15 13:05:27 by sbos          #+#    #+#                 */
-/*   Updated: 2022/04/04 16:58:32 by sbos          ########   odam.nl         */
+/*   Updated: 2022/04/05 15:04:51 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,11 @@ STATIC void	ft_printf_routine(char *format, char **non_format_start,
 			return;
 		format++;
 		pft_parse_format(&format, options);
-		if (ft_error(pft_parse_argument(options, arg_ptr)))
+		if (pft_parse_argument(options, arg_ptr) != SUCCESS)
 			return (pft_free_parts(&options->parts));
-		if (ft_error(pft_fill_parts(options)))
+		if (pft_fill_parts(options) != SUCCESS)
 			return (pft_free_parts(&options->parts));
-		if (ft_error(print_options(options)))
+		if (print_options(options) != SUCCESS)
 			return (pft_free_parts(&options->parts));
 		pft_free_parts(&options->parts);
 		format++;

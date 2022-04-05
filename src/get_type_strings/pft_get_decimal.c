@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/18 16:43:29 by sbos          #+#    #+#                 */
-/*   Updated: 2022/03/04 19:14:15 by sbos          ########   odam.nl         */
+/*   Updated: 2022/04/05 15:04:12 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ t_success	pft_get_decimal(va_list arg_ptr, t_options *options)
 		if (ft_str_assign_fail(&options->parts.prefix, ft_strdup("-")))
 			return (ERROR);
 	}
-	else if (ft_error(negative_decimal(nbr, options)))
+	else if (negative_decimal(nbr, options) != SUCCESS)
 		return (ERROR);
 	return (SUCCESS);
 }

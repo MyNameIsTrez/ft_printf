@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/01 17:16:42 by sbos          #+#    #+#                 */
-/*   Updated: 2022/03/30 17:04:49 by sbos          ########   odam.nl         */
+/*   Updated: 2022/04/05 15:05:06 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,12 +110,12 @@ t_success	pft_fill_parts(t_options *options)
 {
 	if (options->precision >= 0)
 	{
-		if (ft_error(set_precision_str(options)))
+		if (set_precision_str(options) != SUCCESS)
 			return (ERROR);
 	}
 	else if (options->flags.zero_pad)
 	{
-		if (ft_error(set_zero_pad(options)))
+		if (set_zero_pad(options) != SUCCESS)
 			return (ERROR);
 	}
 	if (options->parts.precision_or_zero_pad == NULL
