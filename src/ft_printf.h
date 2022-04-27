@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/15 13:05:22 by sbos          #+#    #+#                 */
-/*   Updated: 2022/04/05 16:07:01 by sbos          ########   odam.nl         */
+/*   Updated: 2022/04/27 19:02:23 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@
 # define FLAGS " -+#0"
 # define PRECISION_TYPES "pdiuxX"
 # define ZERO_PAD_TYPES "pdiuxX%"
+# define FORMAT_TYPES "cspdiuxX%"
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -82,7 +83,7 @@ t_success	pft_accumulate(ssize_t ret, size_t *acc);
 t_success	pft_putstr(char *str, size_t *acc);
 t_success	pft_putchar(char chr, size_t *acc);
 t_success	pft_put_substr(char *start, char *end, size_t *acc);
-void		pft_free_parts(t_parts *parts);
+t_success	pft_free_parts(t_parts *parts);
 
 ////////////////////////////////////////////////////////////////////////////////
 

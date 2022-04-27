@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/15 13:05:27 by sbos          #+#    #+#                 */
-/*   Updated: 2022/04/05 17:05:38 by sbos          ########   odam.nl         */
+/*   Updated: 2022/04/27 18:59:09 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ STATIC t_success	pft_print_options(t_options *options)
 	return (SUCCESS);
 }
 
-STATIC void	pft_printf_loop(char *format, char **non_format_start,
+STATIC t_success	pft_printf_loop(char *format, char **non_format_start,
 									t_options *options, va_list arg_ptr)
 {
 	while (*format != '\0')
@@ -46,7 +46,7 @@ STATIC void	pft_printf_loop(char *format, char **non_format_start,
 		if (format == NULL)
 			break ;
 		if (pft_put_substr(*non_format_start, format, &options->len) < 0)
-			return;
+			return (ERROR);
 		format++;
 		pft_parse_format(&format, options);
 		if (pft_parse_argument(options, arg_ptr) != SUCCESS)
@@ -59,6 +59,7 @@ STATIC void	pft_printf_loop(char *format, char **non_format_start,
 		format++;
 		*non_format_start = format;
 	}
+	return (SUCCESS);
 }
 
 /**
@@ -84,8 +85,10 @@ int	ft_printf(const char *format, ...)
 	non_format_start = (char *)format;
 	va_start(arg_ptr, format);
 	// TODO: Should this really be passing &non_format_start instead of non_format_string?
-	pft_printf_loop((char *)format, &non_format_start, &options, arg_ptr);
-	pft_putstr(non_format_start, &options.len);
+	if (pft_printf_loop((char *)format, &non_format_start, &options, arg_ptr) != SUCCESS)
+		return (-1);
+	if (pft_putstr(non_format_start, &options.len) != SUCCESS)
+		return (-1);
 	va_end(arg_ptr);
 	return ((int)options.len);
 }

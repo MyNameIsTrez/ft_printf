@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/01 17:21:46 by sbos          #+#    #+#                 */
-/*   Updated: 2022/03/22 14:19:10 by sbos          ########   odam.nl         */
+/*   Updated: 2022/04/27 19:04:58 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,9 @@ t_success	pft_parse_argument(t_options *options, va_list arg_ptr)
 	['%'] = pft_get_percent,
 	};
 
-	return (options_table[options->type](arg_ptr, options));
+	if (options->type != '\0' && ft_strchr(FORMAT_TYPES, options->type) != NULL)
+		return (options_table[options->type](arg_ptr, options));
+	return (ERROR);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
