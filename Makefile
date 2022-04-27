@@ -6,7 +6,7 @@
 #    By: trez <trez@student.codam.nl>                 +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/01/10 13:54:36 by trez          #+#    #+#                  #
-#    Updated: 2022/03/31 16:41:31 by sbos          ########   odam.nl          #
+#    Updated: 2022/04/08 15:51:52 by sbos          ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,11 +56,10 @@ LIBFT_DIR := libft
 ################################################################################
 
 ifdef DEBUG
-ifdef NO_STATIC
 CFLAGS += -DSTATIC=
-endif
 CFLAGS += -g3 -Wconversion
-CFLAGS += -fsanitize=address # Not compatible with "leaks" program.
+CFLAGS += -Wno-nullability-completeness # Needed for intercepting stdlib.h
+# CFLAGS += -fsanitize=address # Not compatible with "leaks" program.
 FCLEANED_FILES += tester
 endif
 
