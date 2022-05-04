@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/15 13:05:27 by sbos          #+#    #+#                 */
-/*   Updated: 2022/04/27 18:59:09 by sbos          ########   odam.nl         */
+/*   Updated: 2022/05/04 15:44:06 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,20 +18,20 @@
 
 STATIC t_success	pft_print_options(t_options *options)
 {
-	if (pft_putstr(options->parts.left_pad, &options->len) < 0)
+	if (pft_putstr(options->parts.left_pad, &options->len) != SUCCESS)
 		return (ERROR);
-	if (pft_putstr(options->parts.prefix, &options->len) < 0)
+	if (pft_putstr(options->parts.prefix, &options->len) != SUCCESS)
 		return (ERROR);
-	if (pft_putstr(options->parts.precision_or_zero_pad, &options->len) < 0)
+	if (pft_putstr(options->parts.precision_or_zero_pad, &options->len) != SUCCESS)
 		return (ERROR);
 	if (options->type == 'c')
 	{
-		if (pft_putchar(options->parts.base_str[0], &options->len) < 0)
+		if (pft_putchar(options->parts.base_str[0], &options->len) != SUCCESS)
 			return (ERROR);
 	}
-	else if (pft_putstr(options->parts.base_str, &options->len) < 0)
+	else if (pft_putstr(options->parts.base_str, &options->len) != SUCCESS)
 		return (ERROR);
-	if (pft_putstr(options->parts.right_pad, &options->len) < 0)
+	if (pft_putstr(options->parts.right_pad, &options->len) != SUCCESS)
 		return (ERROR);
 	return (SUCCESS);
 }
@@ -45,7 +45,7 @@ STATIC t_success	pft_printf_loop(char *format, char **non_format_start,
 		format = ft_strchr(format, '%');
 		if (format == NULL)
 			break ;
-		if (pft_put_substr(*non_format_start, format, &options->len) < 0)
+		if (pft_put_substr(*non_format_start, format, &options->len) != SUCCESS)
 			return (ERROR);
 		format++;
 		pft_parse_format(&format, options);
