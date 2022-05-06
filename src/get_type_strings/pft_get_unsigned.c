@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/18 16:43:29 by sbos          #+#    #+#                 */
-/*   Updated: 2022/04/05 16:03:35 by sbos          ########   odam.nl         */
+/*   Updated: 2022/05/04 17:40:16 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,12 @@ STATIC t_success	pft_add_prefix(t_options *options)
 {
 	if (options->flags.plus_space)
 	{
-		if (ft_str_assign(&options->parts.prefix,
-				ft_strdup(" ")) != SUCCESS)
+		if (ft_str_assign(&options->parts.prefix, ft_strdup(" ")) != SUCCESS)
 			return (ERROR);
 	}
 	else if (options->flags.plus_space)
 	{
-		if (ft_str_assign(&options->parts.prefix,
-				ft_strdup("+")) != SUCCESS)
+		if (ft_str_assign(&options->parts.prefix, ft_strdup("+")) != SUCCESS)
 			return (ERROR);
 	}
 	else
