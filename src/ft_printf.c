@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/15 13:05:27 by sbos          #+#    #+#                 */
-/*   Updated: 2022/05/04 15:44:06 by sbos          ########   odam.nl         */
+/*   Updated: 2022/05/17 14:34:45 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ STATIC t_success	pft_print_options(t_options *options)
 		return (ERROR);
 	if (pft_putstr(options->parts.prefix, &options->len) != SUCCESS)
 		return (ERROR);
-	if (pft_putstr(options->parts.precision_or_zero_pad, &options->len) != SUCCESS)
+	if (pft_putstr(options->parts.precision_or_zero_pad,
+			&options->len) != SUCCESS)
 		return (ERROR);
 	if (options->type == 'c')
 	{
@@ -84,8 +85,8 @@ int	ft_printf(const char *format, ...)
 	options.len = 0;
 	non_format_start = (char *)format;
 	va_start(arg_ptr, format);
-	// TODO: Should this really be passing &non_format_start instead of non_format_string?
-	if (pft_printf_loop((char *)format, &non_format_start, &options, arg_ptr) != SUCCESS)
+	if (pft_printf_loop((char *)format, &non_format_start, &options, arg_ptr)
+		!= SUCCESS)
 		return (-1);
 	if (pft_putstr(non_format_start, &options.len) != SUCCESS)
 		return (-1);

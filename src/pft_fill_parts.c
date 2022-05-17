@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/01 17:16:42 by sbos          #+#    #+#                 */
-/*   Updated: 2022/04/05 16:05:44 by sbos          ########   odam.nl         */
+/*   Updated: 2022/05/17 14:35:25 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,8 @@ t_success	pft_fill_parts(t_options *options)
 			return (ERROR);
 	}
 	if (options->parts.precision_or_zero_pad == NULL
-		&& ft_empty_str_assign(&options->parts.precision_or_zero_pad) != SUCCESS)
+		&& ft_empty_str_assign(&options->parts.precision_or_zero_pad)
+		!= SUCCESS)
 		return (ERROR);
 	return (pft_set_space_pad(options));
 }
