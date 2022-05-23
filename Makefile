@@ -6,7 +6,7 @@
 #    By: trez <trez@student.codam.nl>                 +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/01/10 13:54:36 by trez          #+#    #+#                  #
-#    Updated: 2022/04/08 15:51:52 by sbos          ########   odam.nl          #
+#    Updated: 2022/05/19 13:29:11 by sbos          ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,30 +19,30 @@ CC := cc
 
 CFLAGS := -Wall -Wextra -Werror
 
-SOURCES :=										\
-	src/ft_printf.c								\
-	src/get_type_strings/pft_get_char.c			\
-	src/get_type_strings/pft_get_decimal.c		\
-	src/get_type_strings/pft_get_hex_lower.c	\
-	src/get_type_strings/pft_get_hex_upper.c	\
-	src/get_type_strings/pft_get_percent.c		\
-	src/get_type_strings/pft_get_pointer.c		\
-	src/get_type_strings/pft_get_string.c		\
-	src/get_type_strings/pft_get_unsigned.c		\
-	src/pft_fill_parts.c						\
-	src/pft_fix_priorities.c					\
-	src/pft_initialize_options.c				\
-	src/pft_parse_argument.c					\
-	src/pft_parse_format.c						\
+SOURCES :=\
+	src/ft_printf.c\
+	src/get_type_strings/pft_get_char.c\
+	src/get_type_strings/pft_get_decimal.c\
+	src/get_type_strings/pft_get_hex_lower.c\
+	src/get_type_strings/pft_get_hex_upper.c\
+	src/get_type_strings/pft_get_percent.c\
+	src/get_type_strings/pft_get_pointer.c\
+	src/get_type_strings/pft_get_string.c\
+	src/get_type_strings/pft_get_unsigned.c\
+	src/pft_fill_parts.c\
+	src/pft_fix_priorities.c\
+	src/pft_initialize_options.c\
+	src/pft_parse_argument.c\
+	src/pft_parse_format.c\
 	src/pft_utils.c
 
-HEADERS :=											\
-	libft/libft.h									\
-	libft/helper_headers/boolean_operators.h		\
-	libft/helper_headers/shared_system_headers.h	\
-	libft/helper_headers/success.h					\
-	libft/helper_headers/whitespace.h				\
-	src/ft_printf.h									\
+HEADERS :=\
+	libft/libft.h\
+	libft/helper_headers/boolean_operators.h\
+	libft/helper_headers/shared_system_headers.h\
+	libft/helper_headers/success.h\
+	libft/helper_headers/whitespace.h\
+	src/ft_printf.h\
 	src/get_type_strings/pft_get_type_strings.h
 
 CLEANED_FILES := obj

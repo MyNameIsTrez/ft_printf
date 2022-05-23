@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/01 17:19:54 by sbos          #+#    #+#                 */
-/*   Updated: 2022/03/04 16:31:02 by sbos          ########   odam.nl         */
+/*   Updated: 2022/05/23 15:44:58 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ void	pft_fix_priorities(t_options *options)
 		options->flags.zero_pad = false;
 	if (options->flags.zero_pad && options->flags.pad_right)
 		options->flags.zero_pad = false;
+	if (options->flags.plus_sign && options->flags.plus_space)
+		options->flags.plus_space = false;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
