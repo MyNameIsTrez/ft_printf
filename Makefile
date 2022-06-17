@@ -6,7 +6,7 @@
 #    By: trez <trez@student.codam.nl>                 +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/01/10 13:54:36 by trez          #+#    #+#                  #
-#    Updated: 2022/05/19 13:29:11 by sbos          ########   odam.nl          #
+#    Updated: 2022/06/17 14:41:00 by sbos          ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ CC := cc
 CFLAGS := -Wall -Wextra -Werror
 
 SOURCES :=\
-	src/ft_printf.c\
+	src/0_ft_printf.c\
 	src/get_type_strings/pft_get_char.c\
 	src/get_type_strings/pft_get_decimal.c\
 	src/get_type_strings/pft_get_hex_lower.c\
@@ -29,11 +29,11 @@ SOURCES :=\
 	src/get_type_strings/pft_get_pointer.c\
 	src/get_type_strings/pft_get_string.c\
 	src/get_type_strings/pft_get_unsigned.c\
-	src/pft_fill_parts.c\
-	src/pft_fix_priorities.c\
-	src/pft_initialize_options.c\
-	src/pft_parse_argument.c\
-	src/pft_parse_format.c\
+	src/1_pft_initialize_options.c\
+	src/2_pft_parse_format.c\
+	src/3_pft_fix_priorities.c\
+	src/4_pft_parse_argument.c\
+	src/5_pft_fill_parts.c\
 	src/pft_utils.c
 
 HEADERS :=\
