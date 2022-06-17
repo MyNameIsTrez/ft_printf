@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/15 13:05:22 by sbos          #+#    #+#                 */
-/*   Updated: 2022/04/27 19:02:23 by sbos          ########   odam.nl         */
+/*   Updated: 2022/05/25 17:18:06 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,10 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 
-# define FLAGS " -+#0"
-# define PRECISION_TYPES "pdiuxX"
-# define ZERO_PAD_TYPES "pdiuxX%"
-# define FORMAT_TYPES "cspdiuxX%"
+# define FLAGS				" -+#0"
+# define PRECISION_TYPES	"pdiuxX"
+# define ZERO_PAD_TYPES		"pdiuxX%"
+# define FORMAT_TYPES		"cspdiuxX%"
 
 ////////////////////////////////////////////////////////////////////////////////
 
