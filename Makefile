@@ -6,7 +6,7 @@
 #    By: trez <trez@student.codam.nl>                 +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/01/10 13:54:36 by trez          #+#    #+#                  #
-#    Updated: 2022/06/17 14:41:00 by sbos          ########   odam.nl          #
+#    Updated: 2022/06/20 14:05:03 by sbos          ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -71,6 +71,7 @@ INCLUDES := $(addprefix -I, $(sort $(dir $(HEADERS))))
 
 ################################################################################
 
+.PHONY: all
 all: $(NAME)
 
 $(NAME): $(LIBFT_PATH) $(OBJECT_PATHS)
@@ -84,22 +85,19 @@ $(OBJ_DIR)/%.o: %.c $(HEADERS)
 $(LIBFT_PATH):
 	@$(MAKE) -C $(LIBFT_DIR)
 
-.PHONY: all
-
 ################################################################################
 
-bonus: all
-
+.PHONY: clean
 clean:
 	rm -rf $(CLEANED_FILES)
 	@$(MAKE) -C $(LIBFT_DIR) clean
 
+.PHONY: fclean
 fclean: clean
 	rm -f $(FCLEANED_FILES)
 	@$(MAKE) -C $(LIBFT_DIR) fclean
 
+.PHONY: re
 re: fclean all
-
-.PHONY: bonus clean fclean re
 
 ################################################################################
