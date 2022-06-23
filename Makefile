@@ -6,7 +6,7 @@
 #    By: trez <trez@student.codam.nl>                 +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/01/10 13:54:36 by trez          #+#    #+#                  #
-#    Updated: 2022/06/20 14:05:03 by sbos          ########   odam.nl          #
+#    Updated: 2022/06/23 14:57:20 by sbos          ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,10 +38,6 @@ SOURCES :=\
 
 HEADERS :=\
 	libft/libft.h\
-	libft/helper_headers/boolean_operators.h\
-	libft/helper_headers/shared_system_headers.h\
-	libft/helper_headers/success.h\
-	libft/helper_headers/whitespace.h\
 	src/ft_printf.h\
 	src/get_type_strings/pft_get_type_strings.h
 
