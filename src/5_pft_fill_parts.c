@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/01 17:16:42 by sbos          #+#    #+#                 */
-/*   Updated: 2022/05/25 17:13:50 by sbos          ########   odam.nl         */
+/*   Updated: 2022/06/29 12:49:36 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,32 +16,32 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 
-STATIC t_success	pft_set_left_right_pad(t_options *options, char *pad)
+STATIC t_status	pft_set_left_right_pad(t_options *options, char *pad)
 {
 	if (options->flags.zero_pad)
 	{
 		free(pad);
-		if (ft_empty_str_assign(&options->parts.left_pad) != SUCCESS)
+		if (ft_empty_str_assign(&options->parts.left_pad) != OK)
 			return (ERROR);
-		if (ft_empty_str_assign(&options->parts.right_pad) != SUCCESS)
+		if (ft_empty_str_assign(&options->parts.right_pad) != OK)
 			return (ERROR);
 	}
 	else if (options->flags.pad_right)
 	{
 		options->parts.right_pad = pad;
-		if (ft_empty_str_assign(&options->parts.left_pad) != SUCCESS)
+		if (ft_empty_str_assign(&options->parts.left_pad) != OK)
 			return (ERROR);
 	}
 	else
 	{
 		options->parts.left_pad = pad;
-		if (ft_empty_str_assign(&options->parts.right_pad) != SUCCESS)
+		if (ft_empty_str_assign(&options->parts.right_pad) != OK)
 			return (ERROR);
 	}
-	return (SUCCESS);
+	return (OK);
 }
 
-STATIC t_success	pft_set_space_pad(t_options *options)
+STATIC t_status	pft_set_space_pad(t_options *options)
 {
 	char	*pad;
 	size_t	len;
@@ -58,16 +58,16 @@ STATIC t_success	pft_set_space_pad(t_options *options)
 		if (options->field_width > len)
 		{
 			pad_len = options->field_width - len;
-			if (ft_str_assign(&pad, ft_chr_repeat(' ', pad_len)) != SUCCESS)
+			if (ft_str_assign(&pad, ft_chr_repeat(' ', pad_len)) != OK)
 				return (ERROR);
 		}
 	}
-	if (pad == NULL && ft_empty_str_assign(&pad) != SUCCESS)
+	if (pad == NULL && ft_empty_str_assign(&pad) != OK)
 		return (ERROR);
 	return (pft_set_left_right_pad(options, pad));
 }
 
-STATIC t_success	pft_set_zero_pad(t_options *options)
+STATIC t_status	pft_set_zero_pad(t_options *options)
 {
 	size_t	len;
 	size_t	pad_len;
@@ -80,14 +80,14 @@ STATIC t_success	pft_set_zero_pad(t_options *options)
 		{
 			pad_len = options->field_width - len;
 			if (ft_str_assign(&options->parts.precision_or_zero_pad,
-					ft_chr_repeat('0', pad_len)) != SUCCESS)
+					ft_chr_repeat('0', pad_len)) != OK)
 				return (ERROR);
 		}
 	}
-	return (SUCCESS);
+	return (OK);
 }
 
-STATIC t_success	pft_set_precision_str(t_options *options)
+STATIC t_status	pft_set_precision_str(t_options *options)
 {
 	size_t	base_len;
 	size_t	precision_len;
@@ -99,28 +99,28 @@ STATIC t_success	pft_set_precision_str(t_options *options)
 		{
 			precision_len = (size_t)options->precision - base_len;
 			if (ft_str_assign(&options->parts.precision_or_zero_pad,
-					ft_chr_repeat('0', precision_len)) != SUCCESS)
+					ft_chr_repeat('0', precision_len)) != OK)
 				return (ERROR);
 		}
 	}
-	return (SUCCESS);
+	return (OK);
 }
 
-t_success	pft_fill_parts(t_options *options)
+t_status	pft_fill_parts(t_options *options)
 {
 	if (options->precision >= 0)
 	{
-		if (pft_set_precision_str(options) != SUCCESS)
+		if (pft_set_precision_str(options) != OK)
 			return (ERROR);
 	}
 	else if (options->flags.zero_pad)
 	{
-		if (pft_set_zero_pad(options) != SUCCESS)
+		if (pft_set_zero_pad(options) != OK)
 			return (ERROR);
 	}
 	if (options->parts.precision_or_zero_pad == NULL
 		&& ft_empty_str_assign(&options->parts.precision_or_zero_pad)
-		!= SUCCESS)
+		!= OK)
 		return (ERROR);
 	return (pft_set_space_pad(options));
 }

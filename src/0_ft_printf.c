@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/15 13:05:27 by sbos          #+#    #+#                 */
-/*   Updated: 2022/05/25 17:13:34 by sbos          ########   odam.nl         */
+/*   Updated: 2022/06/29 12:49:36 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,28 +16,28 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 
-STATIC t_success	pft_print_options(t_options *options)
+STATIC t_status	pft_print_options(t_options *options)
 {
-	if (pft_putstr(options->parts.left_pad, &options->len) != SUCCESS)
+	if (pft_putstr(options->parts.left_pad, &options->len) != OK)
 		return (ERROR);
-	if (pft_putstr(options->parts.prefix, &options->len) != SUCCESS)
+	if (pft_putstr(options->parts.prefix, &options->len) != OK)
 		return (ERROR);
 	if (pft_putstr(options->parts.precision_or_zero_pad,
-			&options->len) != SUCCESS)
+			&options->len) != OK)
 		return (ERROR);
 	if (options->type == 'c')
 	{
-		if (pft_putchar(options->parts.base_str[0], &options->len) != SUCCESS)
+		if (pft_putchar(options->parts.base_str[0], &options->len) != OK)
 			return (ERROR);
 	}
-	else if (pft_putstr(options->parts.base_str, &options->len) != SUCCESS)
+	else if (pft_putstr(options->parts.base_str, &options->len) != OK)
 		return (ERROR);
-	if (pft_putstr(options->parts.right_pad, &options->len) != SUCCESS)
+	if (pft_putstr(options->parts.right_pad, &options->len) != OK)
 		return (ERROR);
-	return (SUCCESS);
+	return (OK);
 }
 
-STATIC t_success	pft_printf_loop(char *format, char **non_format_start,
+STATIC t_status	pft_printf_loop(char *format, char **non_format_start,
 									t_options *options, va_list arg_ptr)
 {
 	while (*format != '\0')
@@ -46,21 +46,21 @@ STATIC t_success	pft_printf_loop(char *format, char **non_format_start,
 		format = ft_strchr(format, '%');
 		if (format == NULL)
 			break ;
-		if (pft_put_substr(*non_format_start, format, &options->len) != SUCCESS)
+		if (pft_put_substr(*non_format_start, format, &options->len) != OK)
 			return (ERROR);
 		format++;
 		pft_parse_format(&format, options);
-		if (pft_parse_argument(options, arg_ptr) != SUCCESS)
+		if (pft_parse_argument(options, arg_ptr) != OK)
 			return (pft_free_parts(&options->parts));
-		if (pft_fill_parts(options) != SUCCESS)
+		if (pft_fill_parts(options) != OK)
 			return (pft_free_parts(&options->parts));
-		if (pft_print_options(options) != SUCCESS)
+		if (pft_print_options(options) != OK)
 			return (pft_free_parts(&options->parts));
 		pft_free_parts(&options->parts);
 		format++;
 		*non_format_start = format;
 	}
-	return (SUCCESS);
+	return (OK);
 }
 
 /**
@@ -86,9 +86,9 @@ int	ft_printf(const char *format, ...)
 	non_format_start = (char *)format;
 	va_start(arg_ptr, format);
 	if (pft_printf_loop((char *)format, &non_format_start, &options, arg_ptr)
-		!= SUCCESS)
+		!= OK)
 		return (-1);
-	if (pft_putstr(non_format_start, &options.len) != SUCCESS)
+	if (pft_putstr(non_format_start, &options.len) != OK)
 		return (-1);
 	va_end(arg_ptr);
 	return ((int)options.len);

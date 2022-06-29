@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/18 16:43:29 by sbos          #+#    #+#                 */
-/*   Updated: 2022/04/05 15:04:32 by sbos          ########   odam.nl         */
+/*   Updated: 2022/06/29 12:49:36 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,13 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 
-t_success	pft_get_hex_upper(va_list arg_ptr, t_options *options)
+t_status	pft_get_hex_upper(va_list arg_ptr, t_options *options)
 {
-	if (pft_get_hex_lower(arg_ptr, options) != SUCCESS)
+	if (pft_get_hex_lower(arg_ptr, options) != OK)
 		return (ERROR);
 	ft_str_upper(options->parts.base_str);
 	ft_str_upper(options->parts.prefix);
-	return (SUCCESS);
+	return (OK);
 }
 
 ////////////////////////////////////////////////////////////////////////////////

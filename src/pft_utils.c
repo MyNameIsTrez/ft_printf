@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/01 17:14:58 by sbos          #+#    #+#                 */
-/*   Updated: 2022/05/25 17:14:15 by sbos          ########   odam.nl         */
+/*   Updated: 2022/06/29 12:49:36 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,31 +16,31 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 
-t_success	pft_accumulate(ssize_t ret, size_t *acc)
+t_status	pft_accumulate(ssize_t ret, size_t *acc)
 {
 	if (ret < 0)
 		return (ERROR);
 	if (acc != NULL)
 		(*acc) += (size_t)ret;
-	return (SUCCESS);
+	return (OK);
 }
 
-t_success	pft_putstr(char *str, size_t *acc)
+t_status	pft_putstr(char *str, size_t *acc)
 {
 	return (pft_accumulate(ft_putstr(str), acc));
 }
 
-t_success	pft_putchar(char chr, size_t *acc)
+t_status	pft_putchar(char chr, size_t *acc)
 {
 	return (pft_accumulate(ft_putchar(chr), acc));
 }
 
-t_success	pft_put_substr(char *start, char *end, size_t *acc)
+t_status	pft_put_substr(char *start, char *end, size_t *acc)
 {
 	return (pft_accumulate(ft_put_substr(start, end), acc));
 }
 
-t_success	pft_free_parts(t_parts *parts)
+t_status	pft_free_parts(t_parts *parts)
 {
 	free(parts->left_pad);
 	free(parts->prefix);
