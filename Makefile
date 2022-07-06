@@ -6,7 +6,7 @@
 #    By: trez <trez@student.codam.nl>                 +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/01/10 13:54:36 by trez          #+#    #+#                  #
-#    Updated: 2022/06/23 14:57:20 by sbos          ########   odam.nl          #
+#    Updated: 2022/07/06 16:41:37 by sbos          ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,8 +55,11 @@ ifdef DEBUG
 CFLAGS += -DSTATIC=
 CFLAGS += -g3 -Wconversion
 CFLAGS += -Wno-nullability-completeness # Needed for intercepting stdlib.h
-# CFLAGS += -fsanitize=address # Not compatible with "leaks" program.
 FCLEANED_FILES += tester
+endif
+
+ifdef SAN
+CFLAGS += -fsanitize=address # Not compatible with "leaks" program.
 endif
 
 ################################################################################
