@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/15 13:05:22 by sbos          #+#    #+#                 */
-/*   Updated: 2022/06/29 12:49:12 by sbos          ########   odam.nl         */
+/*   Updated: 2022/07/14 14:55:17 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ typedef struct s_options
 	t_parts			parts;
 	size_t			field_width;
 	ssize_t			precision;
-	unsigned char	type;
+	t_u8	type;
 	size_t			len;
 }	t_options;
 

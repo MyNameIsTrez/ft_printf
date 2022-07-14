@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/01 17:12:45 by sbos          #+#    #+#                 */
-/*   Updated: 2022/05/25 17:13:38 by sbos          ########   odam.nl         */
+/*   Updated: 2022/07/14 14:55:17 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 
-STATIC void	pft_parse_options_type(char **format, unsigned char *type)
+STATIC void	pft_parse_options_type(char **format, t_u8 *type)
 {
-	*type = (unsigned char)**format;
+	*type = (t_u8)**format;
 }
 
 STATIC void	pft_parse_precision(char **format, ssize_t *precision)
