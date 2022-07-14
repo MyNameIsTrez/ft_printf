@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/18 16:43:29 by sbos          #+#    #+#                 */
-/*   Updated: 2022/07/14 14:57:54 by sbos          ########   odam.nl         */
+/*   Updated: 2022/07/14 16:43:45 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,9 @@ STATIC t_status	pft_negative_decimal(t_i32 const nbr, t_options *options)
 
 t_status	pft_get_decimal(va_list arg_ptr, t_options *options)
 {
-	t_i32 const	nbr = va_arg(arg_ptr, t_i32);
+	t_i32	nbr;
 
+	nbr = va_arg(arg_ptr, t_i32);
 	if (nbr < 0)
 	{
 		if (ft_str_assign(&options->parts.base_str,
