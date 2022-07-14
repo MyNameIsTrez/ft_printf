@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/15 13:05:27 by sbos          #+#    #+#                 */
-/*   Updated: 2022/06/29 12:49:36 by sbos          ########   odam.nl         */
+/*   Updated: 2022/07/14 14:57:54 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ STATIC t_status	pft_printf_loop(char *format, char **non_format_start,
  * (excluding the null terminator).
  * If an output error is encountered, a negative value is returned.
  */
-int	ft_printf(const char *format, ...)
+t_i32	ft_printf(const char *format, ...)
 {
 	t_options	options;
 	va_list		arg_ptr;
@@ -91,5 +91,5 @@ int	ft_printf(const char *format, ...)
 	if (pft_putstr(non_format_start, &options.len) != OK)
 		return (-1);
 	va_end(arg_ptr);
-	return ((int)options.len);
+	return ((t_i32)options.len);
 }

@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/18 16:43:29 by sbos          #+#    #+#                 */
-/*   Updated: 2022/06/29 12:49:36 by sbos          ########   odam.nl         */
+/*   Updated: 2022/07/14 14:57:54 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 
-STATIC t_status	pft_negative_decimal(int const nbr, t_options *options)
+STATIC t_status	pft_negative_decimal(t_i32 const nbr, t_options *options)
 {
 	if (nbr == 0 && options->precision == 0)
 	{
@@ -46,7 +46,7 @@ STATIC t_status	pft_negative_decimal(int const nbr, t_options *options)
 
 t_status	pft_get_decimal(va_list arg_ptr, t_options *options)
 {
-	int const	nbr = va_arg(arg_ptr, int);
+	t_i32 const	nbr = va_arg(arg_ptr, t_i32);
 
 	if (nbr < 0)
 	{
