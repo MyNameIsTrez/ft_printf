@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/01 17:16:42 by sbos          #+#    #+#                 */
-/*   Updated: 2022/06/29 12:49:36 by sbos          ########   odam.nl         */
+/*   Updated: 2022/07/22 21:36:39 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ STATIC t_status	pft_set_left_right_pad(t_options *options, char *pad)
 {
 	if (options->flags.zero_pad)
 	{
-		free(pad);
+		ft_free(&pad);
 		if (ft_empty_str_assign(&options->parts.left_pad) != OK)
 			return (ERROR);
 		if (ft_empty_str_assign(&options->parts.right_pad) != OK)

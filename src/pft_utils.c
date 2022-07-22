@@ -6,7 +6,7 @@
 /*   By: sbos <sbos@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/01 17:14:58 by sbos          #+#    #+#                 */
-/*   Updated: 2022/06/29 12:49:36 by sbos          ########   odam.nl         */
+/*   Updated: 2022/07/22 21:36:47 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,11 @@ t_status	pft_put_substr(char *start, char *end, size_t *acc)
 
 t_status	pft_free_parts(t_parts *parts)
 {
-	free(parts->left_pad);
-	free(parts->prefix);
-	free(parts->precision_or_zero_pad);
-	free(parts->base_str);
-	free(parts->right_pad);
+	ft_free(&parts->left_pad);
+	ft_free(&parts->prefix);
+	ft_free(&parts->precision_or_zero_pad);
+	ft_free(&parts->base_str);
+	ft_free(&parts->right_pad);
 	return (ERROR);
 }
 
