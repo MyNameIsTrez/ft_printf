@@ -6,7 +6,7 @@
 #    By: trez <trez@student.codam.nl>                 +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/01/10 13:54:36 by trez          #+#    #+#                  #
-#    Updated: 2022/07/06 16:41:37 by sbos          ########   odam.nl          #
+#    Updated: 2022/07/25 11:31:13 by sbos          ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,20 @@ LIBFT_PATH := libft/libft.a
 CC := cc
 
 CFLAGS := -Wall -Wextra -Werror
+
+CLEANED_FILES := obj
+FCLEANED_FILES := $(NAME)
+
+SRC_DIR := src
+OBJ_DIR := obj
+
+LIBFT_DIR := libft
+
+INCLUDES_HEADERS :=\
+	src/ft_printf.h\
+	libft/libft.h
+
+################################################################################
 
 SOURCES :=\
 	src/0_ft_printf.c\
@@ -36,18 +50,10 @@ SOURCES :=\
 	src/5_pft_fill_parts.c\
 	src/pft_utils.c
 
+################################################################################
+
 HEADERS :=\
-	libft/libft.h\
-	src/ft_printf.h\
-	src/get_type_strings/pft_get_type_strings.h
-
-CLEANED_FILES := obj
-FCLEANED_FILES := $(NAME)
-
-SRC_DIR := src
-OBJ_DIR := obj
-
-LIBFT_DIR := libft
+	src/get_type_strings/get_type_strings.h
 
 ################################################################################
 
@@ -66,7 +72,9 @@ endif
 
 OBJECT_PATHS := $(addprefix $(OBJ_DIR)/,$(SOURCES:.c=.o))
 
-INCLUDES := $(addprefix -I, $(sort $(dir $(HEADERS))))
+HEADERS += $(INCLUDES_HEADERS)
+
+INCLUDES := $(addprefix -I, $(sort $(dir $(INCLUDES_HEADERS))))
 
 ################################################################################
 
