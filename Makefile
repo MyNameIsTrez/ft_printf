@@ -6,7 +6,7 @@
 #    By: trez <trez@student.codam.nl>                 +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/01/10 13:54:36 by trez          #+#    #+#                  #
-#    Updated: 2022/07/25 15:53:06 by sbos          ########   odam.nl          #
+#    Updated: 2022/08/18 15:03:45 by sbos          ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ LIBFT_PATH := libft/libft.a
 
 CC := cc
 
-CFLAGS := -Wall -Wextra -Werror
+CFLAGS := -Wall -Wextra -Werror -Wconversion -Wpedantic -Werror-pointer-arith
 
 CLEANED_FILES := obj
 FCLEANED_FILES := $(NAME)
@@ -59,7 +59,7 @@ HEADERS :=\
 
 ifdef DEBUG
 CFLAGS += -DSTATIC=
-CFLAGS += -g3 -Wconversion
+CFLAGS += -g3
 CFLAGS += -Wno-nullability-completeness # Needed for intercepting stdlib.h
 FCLEANED_FILES += tester
 endif
