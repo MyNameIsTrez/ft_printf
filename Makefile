@@ -6,7 +6,7 @@
 #    By: trez <trez@student.codam.nl>                 +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/01/10 13:54:36 by trez          #+#    #+#                  #
-#    Updated: 2022/08/18 15:03:45 by sbos          ########   odam.nl          #
+#    Updated: 2022/08/31 15:02:52 by sbos          ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -81,16 +81,27 @@ INCLUDES := $(addprefix -I, $(sort $(dir $(INCLUDES_HEADERS))))
 .PHONY: all
 all: $(NAME)
 
-$(NAME): $(LIBFT_PATH) $(OBJECT_PATHS)
+$(NAME): GIT $(LIBFT_PATH) $(OBJECT_PATHS)
 	cp $(LIBFT_PATH) $(NAME)
 	ar rs $(NAME) $(OBJECT_PATHS)
+
+################################################################################
+
+.PHONY: GIT
+GIT:
+	git submodule update --init --recursive
+
+################################################################################
+
+.PHONY: $(LIBFT_PATH)
+$(LIBFT_PATH):
+	@$(MAKE) -C $(LIBFT_DIR)
+
+################################################################################
 
 $(OBJ_DIR)/%.o: %.c $(HEADERS)
 	@mkdir -p $(@D)
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
-
-$(LIBFT_PATH):
-	@$(MAKE) -C $(LIBFT_DIR)
 
 ################################################################################
 
@@ -100,7 +111,7 @@ clean:
 	@$(MAKE) -C $(LIBFT_DIR) clean
 
 .PHONY: fclean
-fclean: clean
+fclean: clean GIT
 	rm -f $(FCLEANED_FILES)
 	@$(MAKE) -C $(LIBFT_DIR) fclean
 
