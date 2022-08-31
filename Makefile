@@ -6,7 +6,7 @@
 #    By: trez <trez@student.codam.nl>                 +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/01/10 13:54:36 by trez          #+#    #+#                  #
-#    Updated: 2022/08/31 15:02:52 by sbos          ########   odam.nl          #
+#    Updated: 2022/08/31 16:26:35 by sbos          ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -81,20 +81,15 @@ INCLUDES := $(addprefix -I, $(sort $(dir $(INCLUDES_HEADERS))))
 .PHONY: all
 all: $(NAME)
 
-$(NAME): GIT $(LIBFT_PATH) $(OBJECT_PATHS)
+$(NAME): $(LIBFT_PATH) $(OBJECT_PATHS)
 	cp $(LIBFT_PATH) $(NAME)
 	ar rs $(NAME) $(OBJECT_PATHS)
 
 ################################################################################
 
-.PHONY: GIT
-GIT:
-	git submodule update --init --recursive
-
-################################################################################
-
 .PHONY: $(LIBFT_PATH)
 $(LIBFT_PATH):
+	git submodule update --init --recursive
 	@$(MAKE) -C $(LIBFT_DIR)
 
 ################################################################################
@@ -111,7 +106,8 @@ clean:
 	@$(MAKE) -C $(LIBFT_DIR) clean
 
 .PHONY: fclean
-fclean: clean GIT
+fclean: clean
+	git submodule update --init --recursive
 	rm -f $(FCLEANED_FILES)
 	@$(MAKE) -C $(LIBFT_DIR) fclean
 
